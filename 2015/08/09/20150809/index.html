@@ -51,9 +51,9 @@
 <meta property="og:description" content="这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
 （本文主要是对这篇文章进行了一些解释、翻译和拓展，其中一些地方进行了更正，并且加入了一些digitalocean的特色设置，在此声明）
 原因我们为什么会有这样一个想法呢？当我们拥有了自己的域名以后，很显然的就会去想，如果我有一个以我的域名命名的邮箱该有多么cool啊！比如我拥有的域名中有一个是zhangzhen.me，那么我想拥有一个邮箱形如xx">
-<meta property="og:image" content="http://imzhen.com/note/img/20150809/pic1.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150809/pic2.png">
-<meta property="og:updated_time" content="2015-09-29T07:08:28.000Z">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150809/pic1.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150809/pic2.png">
+<meta property="og:updated_time" content="2015-10-16T17:57:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VPS 折腾系列（二）-- mail server">
 <meta name="twitter:description" content="这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
@@ -337,8 +337,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo netstat -antu --program | grep <span class="number">587</span></span><br></pre></td></tr></table></figure>
 <h1 id="Step_4:_配置Gmail">Step 4: 配置Gmail</h1><p>这里好像不需要解释，如果你按照之前的步骤来做的话，这里直接套用就可以了。</p>
 <p>首先找到Gmail–settings–Accounts and Import– Add another email address you own。</p>
-<p><img src="/img/20150809/pic1.png" alt="Gmail1"></p>
-<p><img src="/img/20150809/pic2.png" alt="Gmail2"></p>
+<p><img src="/note/img/20150809/pic1.png" alt="Gmail1"></p>
+<p><img src="/note/img/20150809/pic2.png" alt="Gmail2"></p>
 <p>如果一切正常，你就会到输入验证码的界面了。这时候进入我们在/etc/postfix/virtual指定的收件箱，就可以看见验证码了。</p>
 <h1 id="Step_5:_配置DKIM">Step 5: 配置DKIM</h1><p>到这里，我们的邮箱已经可以在Gmail上正常使用了。然而这还不够，因为我们要保证我们的邮件不能被收件系统扔到垃圾箱里面。所以我们需要配置DKIM。</p>
 <p>DKIM (DomainKeys Identified Mail)，是一种验证机制。它表示发邮件的一方对邮件进行签名，而接受方通过公钥对其进行验证。</p>
@@ -451,7 +451,7 @@
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
@@ -489,7 +489,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
               </span>
             
           

@@ -47,8 +47,8 @@
 <meta property="og:url" content="http://imzhen.com/note/2015/10/16/20151016/index.html">
 <meta property="og:site_name" content="Zhen Zhang's Blog">
 <meta property="og:description" content="After logistic regression, it is time to move on the Neural Network Algorithm since we also need to use gradient descent here. So I will first introduce the basic logic first, and then calculate the m">
-<meta property="og:image" content="http://imzhen.com/note/img/20151016/neuralNetwork.png">
-<meta property="og:updated_time" content="2015-10-16T17:34:53.000Z">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20151016/neuralNetwork.png">
+<meta property="og:updated_time" content="2015-10-16T17:55:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network Algorithm">
 <meta name="twitter:description" content="After logistic regression, it is time to move on the Neural Network Algorithm since we also need to use gradient descent here. So I will first introduce the basic logic first, and then calculate the m">
@@ -227,7 +227,7 @@
 <h1 id="Basic_Logic">Basic Logic</h1><p>The basic logic behind this algorithm is layers. The first layer, namely the input, will calculate its outputs to the next layer based on its own weights as the second layer’s inputs, and the second layer will also calculate its outputs to the third layer based on its own weights as the third layer’s inputs, so on so forth. The first layer is the input layer, the last layer is the output layer, and the middle layers are all hidden layers.</p>
 <p>Inside each layer, there are many nodes. Each node is associated with some nodes in the previous layer except the first layer. Also, each node is associated with some weights that directs them to the next layer.</p>
 <p>Please see the picture below.</p>
-<p><img src="/img/20151016/neuralNetwork.png" alt="neuralNetwork"></p>
+<p><img src="/note/img/20151016/neuralNetwork.png" alt="neuralNetwork"></p>
 <p>So how do we update the weights? The process is, we first confirm the nodes we need and the initial weights, and then calculate the nodes layer by layer, and at the last layer we have both the predicted values and the true values, then use the values to calculate the errors (RSS) layer by layer in a back order. After that we have the RSS values for each layer, we can update the weights in each layer based on the gradient descent algorithm.</p>
 <p>So how to achieve this?</p>
 <h1 id="Theory_Derivation">Theory Derivation</h1><p>Let me first introduce some symbols I will use in this part. $w_{ij}^l$ is the weight, where i points to the next layer node and j points to the current layer node, l is the pointer of the layer number. $a_k^l$ is the predicted value for the kth node in the lth layer. $z_k^l$ is the value for $w_kj^{l-1} * a_j^{l-1}$, usually substitute in the sigmoid function.</p>
@@ -336,7 +336,7 @@
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
@@ -374,7 +374,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
               </span>
             
           

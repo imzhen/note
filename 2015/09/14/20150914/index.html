@@ -47,13 +47,13 @@
 <meta property="og:url" content="http://imzhen.com/note/2015/09/14/20150914/index.html">
 <meta property="og:site_name" content="Zhen Zhang's Blog">
 <meta property="og:description" content="It is very common for us to visualize our results using a map. We can put the data into the map to illuminate the audiences. In this post, I will talk about the basic packages and functions that are u">
-<meta property="og:image" content="http://imzhen.com/note/img/20150914/world.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150914/us1.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150914/us2.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150914/china1.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150914/china2.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150914/Shanghai.png">
-<meta property="og:updated_time" content="2015-09-19T19:43:14.000Z">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150914/world.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150914/us1.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150914/us2.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150914/china1.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150914/china2.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150914/Shanghai.png">
+<meta property="og:updated_time" content="2015-10-16T17:57:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R map part 1 -- introduction">
 <meta name="twitter:description" content="It is very common for us to visualize our results using a map. We can put the data into the map to illuminate the audiences. In this post, I will talk about the basic packages and functions that are u">
@@ -232,16 +232,16 @@
 <p>Note: All the required material used in this series of post are posted on my github account. You can easily download them <a href="https://github.com/imzhen/mapsTutorial" target="_blank" rel="external">here</a>.</p>
 <h1 id="Map_and_mapdata:_the_packages_of_pre-defined_maps">Map and mapdata: the packages of pre-defined maps</h1><p>When we are thinking of maps, what comes to our first thought is that: is there a map that I can use directly? The answer is, yes, and no. By saying yes, I say that there are many maps that can be easily drawn with the help of package “maps” and “mapdata”. By saying no, it means that many maps in these packages are out-dated. If you want a concurrent one, you have to draw it all by yourself.</p>
 <h2 id="Map_of_the_world">Map of the world</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(maps)</span><br><span class="line">map(<span class="string">"world"</span>, fill = <span class="literal">T</span>, col = rainbow(<span class="number">15</span>), mar = c(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150914/world.png" alt="world"></p>
+<p><img src="/note/img/20150914/world.png" alt="world"></p>
 <h2 id="Map_of_the_United_States">Map of the United States</h2><p>First let’s draw the whole map of United States.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map(<span class="string">"state"</span>, fill = <span class="literal">TRUE</span>, col = rainbow(<span class="number">20</span>), mar = c(<span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150914/us1.png" alt="us1"></p>
+<p><img src="/note/img/20150914/us1.png" alt="us1"></p>
 <p>Then what if we only need some states? It can be done by the region option:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">map(<span class="string">"state"</span>, region = c(<span class="string">"california"</span>, <span class="string">"nevada"</span>, <span class="string">"arizona"</span>), fill = <span class="literal">TRUE</span>, col = rainbow(<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150914/us2.png" alt="us2"></p>
+<p><img src="/note/img/20150914/us2.png" alt="us2"></p>
 <h2 id="Map_of_China">Map of China</h2><p>There is no map of China in the package of maps, so we need another package: mapdata.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(mapdata)</span><br><span class="line">map(<span class="string">"china"</span>, col = <span class="string">"gray40"</span>, ylim = c(<span class="number">18</span>,<span class="number">54</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150914/china1.png" alt="china1"></p>
+<p><img src="/note/img/20150914/china1.png" alt="china1"></p>
 <p>Here you can see this map is out-dated: the city of Chongqing is still in the province of Sichuan. Then we may need another way to plot the map.</p>
 <h1 id="MapTools_–_A_powerful_tool_to_parse_shapefile">MapTools – A powerful tool to parse shapefile</h1><h2 id="Introduction">Introduction</h2><p>The <a href="https://en.wikipedia.org/wiki/Shapefile" target="_blank" rel="external">shapefile</a> format is a popular geospatial vector data format for geographic information system (GIS) software.</p>
 <p>There are many ways in R that can read the shapefile, including the package of “maptools”, “rgdal”, “PBSmapping”, “shapefile” and so on. In this post, I will focus on maptools. The format of shapefile is very convenient to find, and here is a resource: <a href="http://gadm.org" target="_blank" rel="external">GADM database of Global Administrative Areas</a>, and you can find the shapefile for every country and every region in the world.</p>
@@ -258,11 +258,11 @@
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">china_map2$NAME &lt;- iconv(china_map2$NAME, from = <span class="string">'GBK'</span>) <span class="comment">## The original coding format is GBK</span></span><br></pre></td></tr></table></figure>
 <h2 id="Draw_the_map">Draw the map</h2><p>It is time to draw!</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot(china_map1)</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150914/china2.png" alt="china2"></p>
+<p><img src="/note/img/20150914/china2.png" alt="china2"></p>
 <p>We can see now the map for China is up-to-data: Chongqing is added!</p>
 <p>We can quickly plot a province by referring to its NAME or ADCODE99 property:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Shanghai = china_map1[china_map1$ADCODE99 == <span class="number">310000</span>,]</span><br><span class="line">plot(Shanghai)</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150914/Shanghai.png" alt="Shanghai"></p>
+<p><img src="/note/img/20150914/Shanghai.png" alt="Shanghai"></p>
 <p>As you can see here, there are 12 polygons in Shanghai.</p>
 <p>Now we have the basic idea of how map works in R, in the next post we will draw the maps with ggplot.</p>
 <h1 id="References">References</h1><ol>
@@ -353,7 +353,7 @@
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
@@ -391,7 +391,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
               </span>
             
           

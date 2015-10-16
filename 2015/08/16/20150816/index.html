@@ -47,11 +47,11 @@
 <meta property="og:url" content="http://imzhen.com/note/2015/08/16/20150816/index.html">
 <meta property="og:site_name" content="Zhen Zhang's Blog">
 <meta property="og:description" content="Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which makes it interactive between the application itse">
-<meta property="og:image" content="http://imzhen.com/note/img/20150816/sidebar-layout1.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150816/run-once.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150816/run-once-per-user.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150816/run-many-times.png">
-<meta property="og:updated_time" content="2015-09-19T19:12:31.000Z">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150816/sidebar-layout1.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150816/run-once.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150816/run-once-per-user.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150816/run-many-times.png">
+<meta property="og:updated_time" content="2015-10-16T17:57:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shiny Introduction Summary">
 <meta name="twitter:description" content="Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which makes it interactive between the application itse">
@@ -256,7 +256,7 @@ runApp(&quot;my_app&quot;)</code></p>
 <h1 id="ui-R">ui.R</h1><h2 id="Basic">Basic</h2><p>The basic structure of ui.R should look like this:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ui.R</span></span><br><span class="line"></span><br><span class="line">shinyUI(fluidPage(</span><br><span class="line">  titlePanel(<span class="string">"title panel"</span>),</span><br><span class="line"></span><br><span class="line">  sidebarLayout(</span><br><span class="line">    sidebarPanel( <span class="string">"sidebar panel"</span>),</span><br><span class="line">    mainPanel(<span class="string">"main panel"</span>)</span><br><span class="line">  )</span><br><span class="line">))</span><br></pre></td></tr></table></figure>
 <p>And the ui will be:</p>
-<p><img src="/img/20150816/sidebar-layout1.png" alt="sidebar-layout1"></p>
+<p><img src="/note/img/20150816/sidebar-layout1.png" alt="sidebar-layout1"></p>
 <p>In case we want to move the sidebarPanel to right, we can add the <code>position = &quot;right&quot;</code> option to <code>siderbarLayout</code> function.</p>
 <h2 id="Style">Style</h2><p>We can modify the style of a html file with a css file, and in shiny, we can just modify them using the tags directly. The only difference is that, compared to the tags we use in html language, we use the corresponding functions, and shiny will convert them into html tags. For example, if you want to use <code>&lt;p&gt; &lt;/p&gt;</code> tag, you can use the function of <code>p()</code> in shiny.</p>
 <p>There are many options for each html tag, and we can use them as options of functions in shiny. For example, the <code>&lt;span&gt; &lt;/span&gt;</code> tag, and if we want to set the style:color option, we can do this by <code>span(&quot;text&quot;,style = &quot;color:blue&quot;)</code>.</p>
@@ -423,9 +423,9 @@ runApp(&quot;my_app&quot;)</code></p>
 <p>Think about this circumstance: you have many inputs, say, 10 inputs. Each time you change one input, all of the inputs will be calculated again. Oh! That’s terrible. We need a way to solve this issue.</p>
 <p>This issue can be called as “dynamic vs static” (defined by me, haha).</p>
 <p>I attached three pictures here downloaded from <a href="http://shiny.rstudio.com/tutorial/lesson5/" target="_blank" rel="external">RStudio</a> to illustrate this point:</p>
-<p><img src="/img/20150816/run-once.png" alt="run-once"></p>
-<p><img src="/img/20150816/run-once-per-user.png" alt="run-once-per-user"></p>
-<p><img src="/img/20150816/run-many-times.png" alt="run-many-times"></p>
+<p><img src="/note/img/20150816/run-once.png" alt="run-once"></p>
+<p><img src="/note/img/20150816/run-once-per-user.png" alt="run-once-per-user"></p>
+<p><img src="/note/img/20150816/run-many-times.png" alt="run-many-times"></p>
 <p>So the device is designed as follows:</p>
 <ul>
 <li><p>the server.R will run each time the application runs</p>
@@ -537,7 +537,7 @@ runApp(&quot;my_app&quot;)</code></p>
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
@@ -575,7 +575,7 @@ runApp(&quot;my_app&quot;)</code></p>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
               </span>
             
           

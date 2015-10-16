@@ -47,11 +47,11 @@
 <meta property="og:url" content="http://imzhen.com/note/2015/09/28/20150928/index.html">
 <meta property="og:site_name" content="Zhen Zhang's Blog">
 <meta property="og:description" content="PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post, I will first introduce the basic logic, then tal">
-<meta property="og:image" content="http://imzhen.com/note/img/20150928/blog-perceptron-update.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150928/PLA1.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150928/PLA2.png">
-<meta property="og:image" content="http://imzhen.com/note/img/20150928/PLA3.png">
-<meta property="og:updated_time" content="2015-09-30T05:35:50.000Z">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150928/blog-perceptron-update.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150928/PLA1.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150928/PLA2.png">
+<meta property="og:image" content="http://imzhen.com/note/note/img/20150928/PLA3.png">
+<meta property="og:updated_time" content="2015-10-16T17:57:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Some thoughts on PLA algorithm">
 <meta name="twitter:description" content="PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post, I will first introduce the basic logic, then tal">
@@ -235,7 +235,7 @@
 <p>$$<br>\begin{align}<br>h(x_i) &amp;= sign((\sum^d_{j=1}w_{ij}x_{ij}) - threshold) \\<br>        &amp;= sign((\sum^d_{j=1}w_{ij}x_{ij}) + (-threshold) * 1) \\<br>        &amp;= sign((\sum^d_{j=0}w_{ij}x_{ij})) \\<br>        &amp;= sign(w^Tx)<br>\end{align}<br>$$</p>
 <p>It is known as the perceptron classifier.</p>
 <h2 id="Pictures">Pictures</h2><p>At first, we will give PLA a initial weight vector $w_0$, and at most times it will not be correct to separate all the data. Then we will correct the mistakes one by one:</p>
-<p><img src="/img/20150928/blog-perceptron-update.png" alt="PLA correction"></p>
+<p><img src="/note/img/20150928/blog-perceptron-update.png" alt="PLA correction"></p>
 <p>(This picture is copied from the lecture slides of the course “Machine larning algorithm” on the platform of coursera)</p>
 <p>It says, when the classifier is false, we can correct as follows: if the result is positive but we give is negative, then we will add the weight vector by the false $x$ vector. In the opposite, we will subtract the false $x$ vector from the weight vector.</p>
 <p>The essence of this approach is that, we will always make our weight vector to be nearer to the mistake classified observation. The best case will be they are overlapped, since our weight vector is served as the normal vector to the region it defines separately.</p>
@@ -252,9 +252,9 @@
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; p_norm</span><br><span class="line"><span class="comment"># [1]  2.058742 -1.431527</span></span><br></pre></td></tr></table></figure>
 <p>Then the PLA will update for three times, if the initial vector is zero vector:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># $num_update</span></span><br><span class="line"><span class="comment"># [1] 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># $w</span></span><br><span class="line"><span class="comment"># [1]  8.1816441 -0.6243856</span></span><br></pre></td></tr></table></figure>
-<p><img src="/img/20150928/PLA1.png" alt="PLA1"></p>
-<p><img src="/img/20150928/PLA2.png" alt="PLA2"></p>
-<p><img src="/img/20150928/PLA3.png" alt="PLA3"></p>
+<p><img src="/note/img/20150928/PLA1.png" alt="PLA1"></p>
+<p><img src="/note/img/20150928/PLA2.png" alt="PLA2"></p>
+<p><img src="/note/img/20150928/PLA3.png" alt="PLA3"></p>
 <p>What if we start with point zero as the initial point? You can draw it, but the result is, the PLA will run for indefinite time, since it will never halt.</p>
 <h1 id="Pocket">Pocket</h1><p>Even if we run the right PLA, we may still cannot find the perfect classifier. That is due to the dataset is not separable. So in this circumstance, We might want to calculate a weight vector which minimize the error proportion. But this has been proved to be a NP problem, so the only way to do this is to try for a number of times, say 100 times, then calculate its error rate, and try another 100 times, calculate again and again…</p>
 </span>
@@ -339,7 +339,7 @@
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
         </div>
         <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
@@ -377,7 +377,7 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
               </span>
             
           
