@@ -1,0 +1,881 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="學須靜也 才須學也" />
+
+
+
+  <meta name="keywords" content="R,Shiny,Stat," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which makes it interactive between the application itse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiny Introduction Summary">
+<meta property="og:url" content="http://imzhen.com/note/2015/08/16/20150816/index.html">
+<meta property="og:site_name" content="Zhen Zhang's Blog">
+<meta property="og:description" content="Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which makes it interactive between the application itse">
+<meta property="og:image" content="http://imzhen.com/note/img/20150816/sidebar-layout1.png">
+<meta property="og:image" content="http://imzhen.com/note/img/20150816/run-once.png">
+<meta property="og:image" content="http://imzhen.com/note/img/20150816/run-once-per-user.png">
+<meta property="og:image" content="http://imzhen.com/note/img/20150816/run-many-times.png">
+<meta property="og:updated_time" content="2015-09-19T19:12:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shiny Introduction Summary">
+<meta name="twitter:description" content="Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which makes it interactive between the application itse">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+
+
+  <title> Shiny Introduction Summary | Zhen Zhang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/note/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Zhen Zhang's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/note/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/note/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4sxUzPGMJ5gc4gm5vQxf','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Shiny Introduction Summary
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-08-16T20:09:33-07:00" content="2015-08-16">
+            2015-08-16
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which makes it interactive between the application itself and the user. Now I will share my reading summary of <a href="http://shiny.rstudio.com/tutorial/lesson1/" target="_blank" rel="external">RStudio’s basic tutorial</a>. This series of tutorial consists of seven parts, and I will mix them up in this article.</p>
+<p><strong>I strongly recommend you read this article after you read the basic tutorials on RStudio. This article is served as a summary and extension, not a tutorial.</strong></p>
+<h1 id="Basic_Structure">Basic Structure</h1><p>Shiny consists of two parts when we are building it:</p>
+<ul>
+<li><p>The user-interface script (ui.R)</p>
+</li>
+<li><p>The server script (server.R)</p>
+</li>
+</ul>
+<p>From their name we can easily know their functions. The ui.R will control the user-interface, will the server.R will control the instructions that the computer needed when we are building. But I think it is not straightforward, since sometime we will include a helper.R script when we need to do some complicated calculations. <em>Since I have read the later parts of the tutorial, I should point out that the server.R file is indeed constructing a bridge between the input and output by listening on their changes.</em> It is confusing now if you first read this, but don’t worry, you will understand it afterwards.</p>
+<p>After you finish writing all the files you need, you can launch it by running:</p>
+<p><code>R
+runApp(&quot;my_app&quot;)</code></p>
+<p>It is noted that the file path inside the runApp function is your R working directory. Then based on your given path, shiny will look for the ui.R file, server.R file, and other files or directories needed to build this application. So in general, a typical directory structure should look like this:</p>
+<p><code>my_App
+├── ui.R
+├── server.R
+├── helper.R
+├── www
+|   ├── pic1
+|   └── pic2
+├── data
+|   ├── dataset1
+|   └── dataset2
+├── ...</code></p>
+<p>The pictures are enclosed in the www folder while the datasets are included in the data folder. Remember, shiny will only see the files within the same directory level of ui.R and server.R.</p>
+<p>There are three ways you can run your shiny app in RStudio: in a separate window of RStudio, in the view panel of RStudio, or in an external web browser of your system. You are free to press “Escape” whenever you want to exit shiny application and return to the R console.</p>
+<h1 id="ui-R">ui.R</h1><h2 id="Basic">Basic</h2><p>The basic structure of ui.R should look like this:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ui.R</span></span><br><span class="line"></span><br><span class="line">shinyUI(fluidPage(</span><br><span class="line">  titlePanel(<span class="string">"title panel"</span>),</span><br><span class="line"></span><br><span class="line">  sidebarLayout(</span><br><span class="line">    sidebarPanel( <span class="string">"sidebar panel"</span>),</span><br><span class="line">    mainPanel(<span class="string">"main panel"</span>)</span><br><span class="line">  )</span><br><span class="line">))</span><br></pre></td></tr></table></figure>
+<p>And the ui will be:</p>
+<p><img src="/img/20150816/sidebar-layout1.png" alt="sidebar-layout1"></p>
+<p>In case we want to move the sidebarPanel to right, we can add the <code>position = &quot;right&quot;</code> option to <code>siderbarLayout</code> function.</p>
+<h2 id="Style">Style</h2><p>We can modify the style of a html file with a css file, and in shiny, we can just modify them using the tags directly. The only difference is that, compared to the tags we use in html language, we use the corresponding functions, and shiny will convert them into html tags. For example, if you want to use <code>&lt;p&gt; &lt;/p&gt;</code> tag, you can use the function of <code>p()</code> in shiny.</p>
+<p>There are many options for each html tag, and we can use them as options of functions in shiny. For example, the <code>&lt;span&gt; &lt;/span&gt;</code> tag, and if we want to set the style:color option, we can do this by <code>span(&quot;text&quot;,style = &quot;color:blue&quot;)</code>.</p>
+<p>For plain text, you can just type “” or use the <code>&lt;p&gt; &lt;/p&gt;</code> tag. The <code>&lt;code&gt; &lt;/code&gt;</code> is free to use. The <code>br()</code> is used to break a line. When it comes to image, we can use <code>image(src=&quot;&quot;,height=x,width=x)</code> to configure it. As I have said, the folder contains image must be named www.</p>
+<p>Between multiple tags, we need to separate them by comma.</p>
+<p>Another Note here: If we want to split the panel into much more complicated parts, we can use options such as fluidRow. This will be talked in the advanced parts.</p>
+<h2 id="Widgets">Widgets</h2><p>The most important feature for shiny is that the user can interact with the application. This function is achieved by the use of widgets. The widgets can listen to the change of the users’s interests, and give the results to the corresponding part of server scripts, then generate the desired output on the user interface.</p>
+<p>Shiny provides a lot of useful built-in widgets. Although we can find it on <a href="http://shiny.rstudio.com/tutorial/lesson3/" target="_blank" rel="external">its website</a>, I will list it here to simplify my own use.</p>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th>widget</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>actionButton</code></td>
+<td>Action Button</td>
+</tr>
+<tr>
+<td><code>checkboxGroupInput</code></td>
+<td>A group of check boxes</td>
+</tr>
+<tr>
+<td><code>checkboxInput</code></td>
+<td>A single check box</td>
+</tr>
+<tr>
+<td><code>dateInput</code></td>
+<td>A calendar to aid date selection</td>
+</tr>
+<tr>
+<td><code>dateRangeInput</code></td>
+<td>A pair of calendars for selecting a date range</td>
+</tr>
+<tr>
+<td><code>fileInput</code></td>
+<td>A file upload control wizard</td>
+</tr>
+<tr>
+<td><code>helpText</code></td>
+<td>Help text that can be added to an input form</td>
+</tr>
+<tr>
+<td><code>numericInput</code></td>
+<td>A field to enter numbers</td>
+</tr>
+<tr>
+<td><code>radioButtons</code></td>
+<td>A set of radio buttons</td>
+</tr>
+<tr>
+<td><code>selectInput</code></td>
+<td>A box with choices to select from</td>
+</tr>
+<tr>
+<td><code>sliderInput</code></td>
+<td>A slider bar</td>
+</tr>
+<tr>
+<td><code>submitButton</code></td>
+<td>A submit button</td>
+</tr>
+<tr>
+<td><code>textInput</code></td>
+<td>A field to enter text</td>
+</tr>
+</tbody>
+</table>
+<p>To configure a widget, we need to specify the following parts:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sliderInput(<span class="string">"name"</span>,label=<span class="string">"label"</span>,<span class="keyword">...</span>)</span><br></pre></td></tr></table></figure>
+<p>The first option, name, is the name used to specify the widget in our script. As we will see later, when we need to use the value of a specific widget, we need to refer to this widget. Then we can use its name. The label option, is used to display the text to the user. Since it is a label, we usually need to make the text bigger, so we can simply write <code>label=h3(&quot;label&quot;)</code> here. Sometimes we can leave it blank, and display the label in other way. The omitted options are variable between widgets.</p>
+<p>If more help is needed when we are using the widgets, we can just refer it to the console by typing <code>?widget</code>.</p>
+<h1 id="server-R">server.R</h1><p>This is another basic script file needed. The basic template is:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># server.R</span></span><br><span class="line"></span><br><span class="line">shinyServer(<span class="keyword">function</span>(input, output) &#123;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>We will talk more about the usage in the next part.</p>
+<h1 id="Interactive">Interactive</h1><h2 id="Output_&amp;_Input">Output &amp; Input</h2><p>It’s time to make our app interactive. The basic idea behind the design is: The server will listen to the input of the user by widget, and process the corresponding data defined by the user, then return the output to the panel which will be seen by the user. Each time the user change his input, the server will recalculate the data only for the changed part.</p>
+<p>For the input part, the widgets constitute the inputs. We can use the value of input by <code>input$nameOfWidget</code>. In other words, our input is a list of inputs. For the widgets with more than one user inputs, we can treat them as vectors.</p>
+<p>The output configuration is much more complicated.</p>
+<p><strong>ui configuration</strong>:</p>
+<p>R is a object oriented programming language. Then UI needs a method to receive the output as an object. In shiny, we have some particular built-in functions. Each of them creates a specific type of output.</p>
+<table>
+<thead>
+<tr>
+<th>Output function</th>
+<th>creates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>htmlOutput</code></td>
+<td>raw HTML</td>
+</tr>
+<tr>
+<td><code>imageOutput</code></td>
+<td>image</td>
+</tr>
+<tr>
+<td><code>plotOutput</code></td>
+<td>plot</td>
+</tr>
+<tr>
+<td><code>tableOutput</code></td>
+<td>table</td>
+</tr>
+<tr>
+<td><code>textOutput</code></td>
+<td>text</td>
+</tr>
+<tr>
+<td><code>uiOutput</code></td>
+<td>raw HTML</td>
+</tr>
+<tr>
+<td><code>verbatimTextOutput</code></td>
+<td>text</td>
+</tr>
+</tbody>
+</table>
+<p>For instance, if we need a text output, we can put the following code in the proper place of ui.R:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textOutput(<span class="string">"text1"</span>)</span><br></pre></td></tr></table></figure>
+<p>The name \”text1\” will be rendered to the output list. The output list has the same property with the input list.</p>
+<p><strong>server configuration</strong>:</p>
+<p>The main task for server is to receive the inputs given by the user, process the data, and then give the outputs. To provide outputs, shiny also provide some built-in functions to achieve this task:</p>
+<table>
+<thead>
+<tr>
+<th>render function</th>
+<th>creates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>renderImage</code></td>
+<td>images (saved as a link to a source file)</td>
+</tr>
+<tr>
+<td><code>renderPlot</code></td>
+<td>plots</td>
+</tr>
+<tr>
+<td><code>renderPrint</code></td>
+<td>any printed output</td>
+</tr>
+<tr>
+<td><code>renderTable</code></td>
+<td>data frame, matrix, other table like structures</td>
+</tr>
+<tr>
+<td><code>renderText</code></td>
+<td>character strings</td>
+</tr>
+<tr>
+<td><code>renderUI</code></td>
+<td>a Shiny tag object or HTML</td>
+</tr>
+</tbody>
+</table>
+<p>This functions will creates the corresponding outputs based on its type. The usage is a little different from other R functions: you need to enclose the contents of the function in {}:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># server.R</span></span><br><span class="line"></span><br><span class="line">shinyServer(</span><br><span class="line">  <span class="keyword">function</span>(input, output) &#123;</span><br><span class="line"></span><br><span class="line">    output$text1 &lt;- renderText(&#123;</span><br><span class="line">      paste(<span class="string">"You have selected"</span>, input$var)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>As is seen, the text1 label needs to match the label provided in the ui.R file. And the input list is used to generate dynamic output.</p>
+<h2 id="dynamic_vs_static">dynamic vs static</h2><p><strong>Split into parts</strong></p>
+<p>Think about this circumstance: you have many inputs, say, 10 inputs. Each time you change one input, all of the inputs will be calculated again. Oh! That’s terrible. We need a way to solve this issue.</p>
+<p>This issue can be called as “dynamic vs static” (defined by me, haha).</p>
+<p>I attached three pictures here downloaded from <a href="http://shiny.rstudio.com/tutorial/lesson5/" target="_blank" rel="external">RStudio</a> to illustrate this point:</p>
+<p><img src="/img/20150816/run-once.png" alt="run-once"></p>
+<p><img src="/img/20150816/run-once-per-user.png" alt="run-once-per-user"></p>
+<p><img src="/img/20150816/run-many-times.png" alt="run-many-times"></p>
+<p>So the device is designed as follows:</p>
+<ul>
+<li><p>the server.R will run each time the application runs</p>
+</li>
+<li><p>the unnamed function contents inside <code>shinyServer()</code> will run once each time a user visits it</p>
+</li>
+<li><p>the R expressions inside render* functions will run many times. Shiny runs them once each time a user changes a widget.</p>
+</li>
+</ul>
+<p>So how do we place the contents in the proper parts? The <code>library()</code> command, and the <code>source()</code> command, some other commands like these, should run only once, then be placed outside the <code>shinyServer()</code> function.</p>
+<p>Server defined objects, should be placed inside <code>shinyServer()</code>, but outside render*.</p>
+<p>Only the codes needed to be run each time should be put into render*.</p>
+<p><strong>Reactive function</strong></p>
+<p>But this is not the end of the story, since our issue is still not solved completely. If only one input is changed, the render* will change, and then all the inputs inside the render* will change as well. So here is a new function: <code>reactive()</code>:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># server.R</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">library</span>(quantmod)</span><br><span class="line"><span class="keyword">source</span>(<span class="string">"helpers.R"</span>)</span><br><span class="line"></span><br><span class="line">shinyServer(<span class="keyword">function</span>(input, output) &#123;</span><br><span class="line"></span><br><span class="line">  dataInput &lt;- reactive(&#123;</span><br><span class="line">    getSymbols(input$symb, src = <span class="string">"yahoo"</span>,</span><br><span class="line">      from = input$dates[<span class="number">1</span>],</span><br><span class="line">      to = input$dates[<span class="number">2</span>],</span><br><span class="line">      auto.assign = <span class="literal">FALSE</span>)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  output$plot &lt;- renderPlot(&#123;    </span><br><span class="line">    chartSeries(dataInput(), theme = chartTheme(<span class="string">"white"</span>),</span><br><span class="line">      type = <span class="string">"line"</span>, log.scale = input$log, TA = <span class="literal">NULL</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>This example can be seen on the webpage of <a href="http://shiny.rstudio.com/tutorial/lesson6/" target="_blank" rel="external">RStudio</a>. Here the <code>input$dates$</code> is out, independent of <code>renderPlot()</code>. Then each time the user changes the value of dates, the <code>dataInput()</code> will be called, but when the user only changes the value of <code>input$log</code>, the value of <code>dataInput()</code> will not change.</p>
+<p>I also recommend to put all inputs outside the render* function, only leave it with the only function: to collect all the inputs, listen to their change, and ready to change itself when one of its inputs is changed. All the inputs should be put into reactive functions. Also, if one input value is determined by another input value, we should first calculate the second one inside reactive function, then calculate the first one inside the reactive function, and at last give them to the render* function.</p>
+<p>To summarize, the reactive function will remember the values calculated last time. Each time it finds that its argument is changed, it will recalculate. All the procedures will be done automatically.</p>
+<p>Now I want to share my thought on the code structure of server.R:</p>
+<ol>
+<li><p>Put <code>library()</code> and <code>source()</code> outside <code>shinyServer()</code>.</p>
+</li>
+<li><p>Put the input generation into <code>reactive()</code>, inside <code>shinyServer()</code> and outside <code>render*()</code>.</p>
+</li>
+<li><p>Put the objects generated by <code>reactive()</code> inside <code>render*()</code>.</p>
+</li>
+</ol>
+<h1 id="Publishing">Publishing</h1><p>Publishing is also an important part to show to clients. But I will not discuss it here, and I will talk about this part in subsequent articles about advanced shiny.</p>
+<p>It’s time to finish this summary. I hope you get a much clear picture about shiny basics.</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/note/tags/R/" rel="tag">#R</a>
+          
+            <a href="/note/tags/Shiny/" rel="tag">#Shiny</a>
+          
+            <a href="/note/tags/Stat/" rel="tag">#Stat</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2015/08/18/20150818/" rel="prev">Mac上R作图中文字体的处理</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2015/08/09/20150809/" rel="next">VPS 折腾系列（二）-- mail server</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/note/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/note/tags">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic_Structure"><span class="nav-number">1.</span> <span class="nav-text">Basic Structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ui-R"><span class="nav-number">2.</span> <span class="nav-text">ui.R</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">2.1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Style"><span class="nav-number">2.2.</span> <span class="nav-text">Style</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Widgets"><span class="nav-number">2.3.</span> <span class="nav-text">Widgets</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#server-R"><span class="nav-number">3.</span> <span class="nav-text">server.R</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interactive"><span class="nav-number">4.</span> <span class="nav-text">Interactive</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Output_&_Input"><span class="nav-number">4.1.</span> <span class="nav-text">Output & Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dynamic_vs_static"><span class="nav-number">4.2.</span> <span class="nav-text">dynamic vs static</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Publishing"><span class="nav-number">5.</span> <span class="nav-text">Publishing</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/note/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/note/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

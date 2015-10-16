@@ -1,0 +1,795 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="學須靜也 才須學也" />
+
+
+
+  <meta name="keywords" content="CS,VPS,self-study," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
+（本文主要是对这篇文章进行了一些解释、翻译和拓展，其中一些地方进行了更正，并且加入了一些digitalocean的特色设置，在此声明）
+原因我们为什么会有这样一个想法呢？当我们拥有了自己的域名以后，很显然的就会去想，如果我有一个以我的域名命名的邮箱该有多么cool啊！比如我拥有的域名中有一个是zhangzhen.me，那么我想拥有一个邮箱形如xx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPS 折腾系列（二）-- mail server">
+<meta property="og:url" content="http://imzhen.com/note/2015/08/09/20150809/index.html">
+<meta property="og:site_name" content="Zhen Zhang's Blog">
+<meta property="og:description" content="这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
+（本文主要是对这篇文章进行了一些解释、翻译和拓展，其中一些地方进行了更正，并且加入了一些digitalocean的特色设置，在此声明）
+原因我们为什么会有这样一个想法呢？当我们拥有了自己的域名以后，很显然的就会去想，如果我有一个以我的域名命名的邮箱该有多么cool啊！比如我拥有的域名中有一个是zhangzhen.me，那么我想拥有一个邮箱形如xx">
+<meta property="og:image" content="http://imzhen.com/note/img/20150809/pic1.png">
+<meta property="og:image" content="http://imzhen.com/note/img/20150809/pic2.png">
+<meta property="og:updated_time" content="2015-09-29T07:08:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VPS 折腾系列（二）-- mail server">
+<meta name="twitter:description" content="这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
+（本文主要是对这篇文章进行了一些解释、翻译和拓展，其中一些地方进行了更正，并且加入了一些digitalocean的特色设置，在此声明）
+原因我们为什么会有这样一个想法呢？当我们拥有了自己的域名以后，很显然的就会去想，如果我有一个以我的域名命名的邮箱该有多么cool啊！比如我拥有的域名中有一个是zhangzhen.me，那么我想拥有一个邮箱形如xx">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+
+
+  <title> VPS 折腾系列（二）-- mail server | Zhen Zhang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/note/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Zhen Zhang's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/note/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/note/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4sxUzPGMJ5gc4gm5vQxf','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              VPS 折腾系列（二）-- mail server
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-08-09T22:07:44-07:00" content="2015-08-09">
+            2015-08-09
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>这篇教程我们主要来讨论怎么利用VPS来搭建服务器。</p>
+<p>（本文主要是对<a href="http://seasonofcode.com/posts/custom-domain-e-mails-with-postfix-and-gmail-the-missing-tutorial.html" target="_blank" rel="external">这篇文章</a>进行了一些解释、翻译和拓展，其中一些地方进行了更正，并且加入了一些digitalocean的特色设置，在此声明）</p>
+<h1 id="原因">原因</h1><p>我们为什么会有这样一个想法呢？当我们拥有了自己的域名以后，很显然的就会去想，如果我有一个以我的域名命名的邮箱该有多么cool啊！比如我拥有的域名中有一个是zhangzhen.me，那么我想拥有一个邮箱形如xxx@zhangzhen.me。</p>
+<p>这其实有很多种方式可以去实现：</p>
+<ol>
+<li><p>使用google Apps for enterprise，这也应该是最好的方案。然而这个需要我们每个月支付5dollars，一年下来也是一笔不小的开支。当然，如果你在2012年12月7日之前就注册了免费版，那么恭喜你，这篇教程可以直接跳过了，因为我们的终极目的也是想用gmail来收发我们的域名邮箱。</p>
+</li>
+<li><p>使用腾讯企业邮、网易企业邮等国内的免费版，或者Zoho企业邮的免费版。前者经常收不到邮件（这个经常上v2ex的攻城狮应该都知道他们被吐槽成什么样了），而后者的管理界面一直感觉很别扭。</p>
+</li>
+<li><p>自己搭建服务器。这也是本文将要讨论的问题。</p>
+</li>
+</ol>
+<p>所以，我们的目的已经很明确了：使用自己的VPS来搭建一个mail server进行邮件的收发，并且最后达到能够用gmail来管理我们自己创建的域名邮箱的目标。</p>
+<p>在这里我们使用的VPS是digital ocean的最便宜套餐，系统是Ubuntu 14 x86。</p>
+<p>开始吧。</p>
+<h1 id="Step_0:_准备">Step 0: 准备</h1><p>在搭建mail server之前，我们需要保证一下几点：</p>
+<ol>
+<li><p>有自己的VPS，且运行Linux系统；</p>
+</li>
+<li><p>有自己的域名，如zhangzhen.me；</p>
+</li>
+</ol>
+<p>并且，我们假设:</p>
+<ol>
+<li><p>我们的域名为example.domain;</p>
+</li>
+<li><p>我们的mail server地址是myserver.example.domain;</p>
+</li>
+<li><p>我们的gmail目标邮箱是myname@gmail.com;</p>
+</li>
+</ol>
+<h1 id="Step_1:_设置相关DNS记录">Step 1: 设置相关DNS记录</h1><ol>
+<li><p>MX记录：这里要将MX记录指向myserver.example.domain，这相当于告诉全网络，所有给@example.domain发的邮件都将会被发送到myserver.example.domain服务器上；</p>
+</li>
+<li><p>A记录：将myserver.example.domain指向我们的VPS的IP；</p>
+</li>
+<li><p>PTR记录：将IP地址反向解析到我们的mail server上，也就是myserver.example.domain上。这能够帮主Gmail验证我们域名的合法性。这一项不同于前两项，不能在域名供应商那里设置，应该在VPS供应商那里设置。</p>
+<p> 这里需要注意的是，如果你和我一样使用的是digital ocean的VPS的话，我们的PTR记录就是我们droplet的名称。换句话说，如果我想让我的mail server的名称是myserver.example.domain的话，我的droplet也必须叫这个名字。我们可以通过host IP来检测我们的PTR记录。</p>
+</li>
+<li><p>TXT记录：这里创建的TXT记录，值为“v=spf1 mx ~all”，直接指向example.domain。</p>
+</li>
+</ol>
+<h1 id="Step_2:_邮件的接收">Step 2: 邮件的接收</h1><h2 id="Step_2-1:_Postfix基本设置">Step 2.1: Postfix基本设置</h2><p>我们这里主要是通过<a href="http://www.postfix.org" target="_blank" rel="external">Postfix</a>这一工具完成的。</p>
+<p>首先是他的安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo DEBIAN_FRONTEND=noninteractive apt-get install postfix</span><br></pre></td></tr></table></figure>
+<p>这里我们选择了使用DEBIAN_FRONTEND=noninteractive，是因为如果我们不这么做的话，我们安装的过程将会有图形界面出现，而那些设置最终都可以在配置文件中调整。</p>
+<p>下一步就是修改配置文件/etc/postfix/main.cf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/postfix/main.cf</span><br></pre></td></tr></table></figure>
+<p>我们的目标是把它修改成这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/postfix/main.cf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Host and site name.</span></span><br><span class="line">myhostname = myserver.example.domain</span><br><span class="line">mydomain = example.domain</span><br><span class="line">myorigin = example.domain</span><br><span class="line"></span><br><span class="line"><span class="comment"># Virtual aliases.</span></span><br><span class="line">virtual_<span class="built_in">alias</span>_domains = example.domain</span><br><span class="line">virtual_<span class="built_in">alias</span>_maps = <span class="built_in">hash</span>:/etc/postfix/virtual</span><br></pre></td></tr></table></figure>
+<p>前面的几行不解释了，最后一行是告诉Postfix，当看到发给xxx@example.domain的时候，将它转发给另一个邮箱，而他的规则在/etc/postfix/virtual文件中指定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/postfix/virtual</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Forwarding mapping, one from-to address pair per line. The format is:</span></span><br><span class="line"><span class="comment">#     &lt;forward-from-addr&gt; &lt;whitespace&gt; &lt;forward-to-addr&gt;</span></span><br><span class="line"></span><br><span class="line">@example.domain        myname@gmail.com</span><br></pre></td></tr></table></figure>
+<p>这里将@example.domain前面留白的原因是，所有发给他的邮件，都转发给对应的gmail。当然这里我们也可以设置多条规则，指定邮箱之间的对应关系。</p>
+<p>现在我们需要让Postfix来认识一下这个规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo postmap /etc/postfix/virtual</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，每次更改了规则，都要相应的去执行这条指令。</p>
+<p>重启Postfix:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo postfix restart</span><br><span class="line">$ sudo postfix reload</span><br></pre></td></tr></table></figure>
+<p>和上面相同，每次更改postfix时候，都要执行这个指令。</p>
+<h2 id="Step_2-2:_测试">Step 2.2: 测试</h2><p>这里我们可以测试一下我们能否对外发邮件了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$&gt; telnet localhost <span class="number">25</span></span><br><span class="line">Trying ::<span class="number">1</span>...</span><br><span class="line">Connected to localhost.</span><br><span class="line">Escape character is <span class="string">'^]'</span>.</span><br><span class="line"><span class="number">220</span> myserver.example.domain ESMTP Postfix</span><br><span class="line">&gt; HELO myserver.example.domain</span><br><span class="line"><span class="number">250</span> myserver.example.domain</span><br><span class="line">&gt; mail from: me@myserver.example.domain</span><br><span class="line"><span class="number">250</span> <span class="number">2.1</span>.<span class="number">0</span> Ok</span><br><span class="line">&gt; rcpt to: myname@gmail.com</span><br><span class="line"><span class="number">250</span> <span class="number">2.1</span>.<span class="number">5</span> Ok</span><br><span class="line">&gt; data</span><br><span class="line"><span class="number">354</span> End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">&gt; subject: Test</span><br><span class="line">&gt;   </span><br><span class="line">&gt; This is a <span class="built_in">test</span> mail</span><br><span class="line">&gt; .</span><br><span class="line">&gt;</span><br><span class="line"><span class="number">250</span> <span class="number">2.0</span>.<span class="number">0</span> Ok: queued as B9AD4204C7</span><br><span class="line">&gt; quit</span><br><span class="line"><span class="number">221</span> <span class="number">2.0</span>.<span class="number">0</span> Bye</span><br></pre></td></tr></table></figure>
+<p>发送完成后，我们的gmail中很可能就会看到这封邮件了。之所以说很可能，是因为他有可能在垃圾箱中。后续我们会解决这一问题。</p>
+<h1 id="Step_3:_发送邮件">Step 3: 发送邮件</h1><h2 id="Step_3-1:_Cyrus_SASL_加密">Step 3.1: Cyrus SASL 加密</h2><p>我们在这里的思路是，Gmail需要一个relay server，这样Gmail和我们的mail server之间可以通过TLS进行加密保护，从而让Gmail发邮件到myserver.example.domain，最后发送到指定地点。</p>
+<p>首先安装Cyrus SASL：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install sasl2-bin libsasl2-modules</span><br></pre></td></tr></table></figure>
+<p>然而我们的目标是仅仅让Gmail可以和我们的mail server进行通讯，其他的垃圾邮件等都不应该能够连接上我们的mail server。这就需要我们进行加密。当然加密有很多手段，比如mySQL，但是我们这里只需要建立一个最简单的文件就可以了。他的默认位置是在/etc/sasldb2：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo saslpasswd2 -c -u example.domain smtp</span><br></pre></td></tr></table></figure>
+<p>这里的smtp是我们的用户名，当然也可以换成其他的。此时我们需要输入密码，并确认密码。</p>
+<p>这之后我们可以这样验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sasldblistusers2</span><br></pre></td></tr></table></figure>
+<p>console中应该输出这样的结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smtp@example.domain: userPassword</span><br></pre></td></tr></table></figure>
+<p>现在我们需要修改文件的权限，这样使得只有Postfix可以读取它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod <span class="number">400</span> /etc/sasldb2</span><br><span class="line">$ sudo chown postfix /etc/sasldb2</span><br></pre></td></tr></table></figure>
+<p>最后，我们告诉Cyrus SASL去使用这个文件进行什么验证。在/etc/postfix/sasl/smtpd.conf建立文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pwcheck_method: auxprop</span><br><span class="line">auxprop_plugin: sasldb</span><br><span class="line">mech_list: PLAIN LOGIN CRAM-MD5 DIGEST-MD5 NTLM</span><br><span class="line"><span class="built_in">log</span>_level: <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<h2 id="Step_3-2_SSL加密">Step 3.2 SSL加密</h2><p>我们需要通过SSL加密来使用TLS。这里使用自签名的证书就已经足够了。这里使用的是RSA加密方式。</p>
+<ol>
+<li><p>生成公钥和私钥。这里需要输入密码。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl genrsa -des3 -out example.key <span class="number">1024</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成CSR文件：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl req -new -key example.key -out example.csr</span><br></pre></td></tr></table></figure>
+<p> 在这里我们需要输入一串信息，除了common name必须输入为myserver.example.domain以外，其余都可以不输入。</p>
+</li>
+<li><p>移除RSA公钥私钥密码：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mv example.key example.key.orig</span><br><span class="line">$ openssl rsa -in example.key.orig -out example.key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成自签名证书。我们设定时间为10年。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ openssl x509 -req -days <span class="number">3650</span> -in example.csr -signkey example.key -out example.crt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成PEM文件：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat example.crt example.key &gt; example.pem</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>移动并保护PEM文件：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv example.pem /etc/postfix/example.pem</span><br><span class="line">$ sudo chmod <span class="number">400</span> /etc/postfix/example.pem</span><br><span class="line">$ sudo chown postfix /etc/postfix/example.pem</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Step_3-3_Relay_Server配置">Step 3.3 Relay Server配置</h2><p>这里我们需要配置/etc/postfix/master.cf：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">submission inet n       -       n       -       -       smtpd</span><br><span class="line">  -o syslog_name=postfix/submission</span><br><span class="line">  -o smtpd_tls_security_level=may</span><br><span class="line">  -o smtpd_tls_cert_file=/etc/postfix/example.pem</span><br><span class="line">  -o smtpd_sasl_auth_<span class="built_in">enable</span>=yes</span><br><span class="line">  -o smtpd_reject_unlisted_recipient=no</span><br><span class="line">  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject</span><br><span class="line">  -o milter_macro_daemon_name=ORIGINATING</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，submission的那一行第三项要设置为n。</p>
+<p>重启Postfix：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service postfix restart</span><br><span class="line">sudo postfix reload</span><br></pre></td></tr></table></figure>
+<p>这里我们就可以监听到587端口了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo netstat -antu --program | grep <span class="number">587</span></span><br></pre></td></tr></table></figure>
+<h1 id="Step_4:_配置Gmail">Step 4: 配置Gmail</h1><p>这里好像不需要解释，如果你按照之前的步骤来做的话，这里直接套用就可以了。</p>
+<p>首先找到Gmail–settings–Accounts and Import– Add another email address you own。</p>
+<p><img src="/img/20150809/pic1.png" alt="Gmail1"></p>
+<p><img src="/img/20150809/pic2.png" alt="Gmail2"></p>
+<p>如果一切正常，你就会到输入验证码的界面了。这时候进入我们在/etc/postfix/virtual指定的收件箱，就可以看见验证码了。</p>
+<h1 id="Step_5:_配置DKIM">Step 5: 配置DKIM</h1><p>到这里，我们的邮箱已经可以在Gmail上正常使用了。然而这还不够，因为我们要保证我们的邮件不能被收件系统扔到垃圾箱里面。所以我们需要配置DKIM。</p>
+<p>DKIM (DomainKeys Identified Mail)，是一种验证机制。它表示发邮件的一方对邮件进行签名，而接受方通过公钥对其进行验证。</p>
+<h2 id="Step_5-1:_DKIM的安装和基本配置">Step 5.1: DKIM的安装和基本配置</h2><p>首先是安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install opendkim opendkim-tools</span><br></pre></td></tr></table></figure>
+<p>然后我们把/etc/opendkim.conf修改成如下形式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OpenDKIM config.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Log to syslog</span></span><br><span class="line">Syslog                  yes</span><br><span class="line">SyslogSuccess           yes</span><br><span class="line">LogWhy                  yes</span><br><span class="line"><span class="comment"># Required to use local socket with MTAs that access the socket as a non-</span></span><br><span class="line"><span class="comment"># privileged user (e.g. Postfix)</span></span><br><span class="line">UMask                   <span class="number">002</span></span><br><span class="line"></span><br><span class="line">Mode                    sv</span><br><span class="line">PidFile                 /var/run/opendkim/opendkim.pid</span><br><span class="line">UserID                  opendkim:opendkim</span><br><span class="line">Socket                  inet:<span class="number">12301</span>@localhost</span><br><span class="line"></span><br><span class="line">Canonicalization        relaxed/simple</span><br><span class="line">SignatureAlgorithm      rsa-sha256</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sign for example.domain with key in /etc/opendkim.d/mail.private using</span></span><br><span class="line"><span class="comment"># selector 'mail' (e.g. mail._domainkey.example.domain)</span></span><br><span class="line">Domain                  example.domain</span><br><span class="line">KeyFile                 /etc/opendkim.d/mail.private</span><br><span class="line">Selector                mail</span><br><span class="line"></span><br><span class="line">ExternalIgnoreList      refile:/etc/opendkim.d/TrustedHosts</span><br><span class="line">InternalHosts           refile:/etc/opendkim.d/TrustedHosts</span><br></pre></td></tr></table></figure>
+<p>之后我们需要建立/etc/opendkim.d/TrustedHosts这个文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/opendkim.d</span><br><span class="line">vi /etc/opendkim.d/TrustedHosts</span><br></pre></td></tr></table></figure>
+<p>并把它配置成如下形式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line">localhost</span><br><span class="line"><span class="number">192.168</span>.<span class="number">0.1</span>/<span class="number">24</span></span><br><span class="line"></span><br><span class="line">*.example.domain</span><br></pre></td></tr></table></figure>
+<p>这个配置文件告诉DKIM，由这些server发出的邮件，都需要进行签名。</p>
+<h2 id="Step_5-2:_密钥对生成">Step 5.2: 密钥对生成</h2><p>下面让我们生成密钥对：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/opendkim.d</span><br><span class="line">$ sudo opendkim-genkey <span class="operator">-s</span> mail <span class="operator">-d</span> example.domain</span><br></pre></td></tr></table></figure>
+<p>这两条指令能够生成一对密钥存放在/etc/opendkim.d中: mail.private (我们的私钥），mail.text （我们的公钥）</p>
+<p>下面我们需要修改私钥的权限，保证只有DKIM能够读取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ chmod <span class="number">600</span> mail.private</span><br><span class="line">$ chown opendkim:opendkim mail.private</span><br></pre></td></tr></table></figure>
+<h2 id="Step_5-3_DNS_TEXT_record_的配置">Step 5.3 DNS TEXT record 的配置</h2><p>我们打开mail.text，就会看到如下形式的文字：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail._domainkey IN      TXT     ( &#34;v=DKIM1; k=rsa; p=&#60;alphabetical soup&#62;&#34; ) ;----- DKIM key mail for example.domain</span><br></pre></td></tr></table></figure>
+<p>我们需要在domain提供商那里更新如下的DNS Text record:</p>
+<p>Hostname: mail._domainkey.example.domain</p>
+<p>Value: v=DKIM1; k=rsa; p=<alphabetical soup=""></alphabetical></p>
+<p>这里需要注意的是，如果你和我一样，如果使用的是NameCheap的话，Hostname应该输入 mail._domainkey 就可以了。</p>
+<h2 id="Step_5-4_最后的配置">Step 5.4 最后的配置</h2><p>此时，我们修改/etc/postfix/main.bash，使他对于发出的邮件进行签名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Milter settings.</span></span><br><span class="line">milter_protocol = <span class="number">2</span></span><br><span class="line">milter_default_action = accept</span><br><span class="line"><span class="comment"># OpenDKIM runs on port 12301.</span></span><br><span class="line">smtpd_milters = inet:localhost:<span class="number">12301</span></span><br><span class="line">non_smtpd_milters = inet:localhost:<span class="number">12301</span></span><br></pre></td></tr></table></figure>
+<p>如果你曾经配置了SpamAssassin，那么你需要将最后两行追加到相应纪录的后面，以分号隔开。</p>
+<p>最后重启相应服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/opendkim start</span><br><span class="line">$ sudo postfix reload</span><br></pre></td></tr></table></figure>
+<p>至此，我们的服务器就基本配置完毕了。</p>
+<h1 id="Step_6:_垃圾邮件测试">Step 6: 垃圾邮件测试</h1><p>我们这里通过一个叫做<a href="http://www.mail-tester.com" target="_blank" rel="external">mailtester</a>的网站来检测我们的邮件是否会被识别为垃圾邮件，如果可以得到满分10分的话，说明我们的mail server已经足够好啦！</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/note/tags/CS/" rel="tag">#CS</a>
+          
+            <a href="/note/tags/VPS/" rel="tag">#VPS</a>
+          
+            <a href="/note/tags/self-study/" rel="tag">#self-study</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2015/08/16/20150816/" rel="prev">Shiny Introduction Summary</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2015/08/07/20150807/" rel="next">VPS 折腾系列（一）-- shadowsocks</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/note/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/note/tags">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_0:_准备"><span class="nav-number">2.</span> <span class="nav-text">Step 0: 准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_1:_设置相关DNS记录"><span class="nav-number">3.</span> <span class="nav-text">Step 1: 设置相关DNS记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_2:_邮件的接收"><span class="nav-number">4.</span> <span class="nav-text">Step 2: 邮件的接收</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_2-1:_Postfix基本设置"><span class="nav-number">4.1.</span> <span class="nav-text">Step 2.1: Postfix基本设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_2-2:_测试"><span class="nav-number">4.2.</span> <span class="nav-text">Step 2.2: 测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_3:_发送邮件"><span class="nav-number">5.</span> <span class="nav-text">Step 3: 发送邮件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_3-1:_Cyrus_SASL_加密"><span class="nav-number">5.1.</span> <span class="nav-text">Step 3.1: Cyrus SASL 加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_3-2_SSL加密"><span class="nav-number">5.2.</span> <span class="nav-text">Step 3.2 SSL加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_3-3_Relay_Server配置"><span class="nav-number">5.3.</span> <span class="nav-text">Step 3.3 Relay Server配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_4:_配置Gmail"><span class="nav-number">6.</span> <span class="nav-text">Step 4: 配置Gmail</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_5:_配置DKIM"><span class="nav-number">7.</span> <span class="nav-text">Step 5: 配置DKIM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_5-1:_DKIM的安装和基本配置"><span class="nav-number">7.1.</span> <span class="nav-text">Step 5.1: DKIM的安装和基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_5-2:_密钥对生成"><span class="nav-number">7.2.</span> <span class="nav-text">Step 5.2: 密钥对生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_5-3_DNS_TEXT_record_的配置"><span class="nav-number">7.3.</span> <span class="nav-text">Step 5.3 DNS TEXT record 的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step_5-4_最后的配置"><span class="nav-number">7.4.</span> <span class="nav-text">Step 5.4 最后的配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step_6:_垃圾邮件测试"><span class="nav-number">8.</span> <span class="nav-text">Step 6: 垃圾邮件测试</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/note/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/note/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>

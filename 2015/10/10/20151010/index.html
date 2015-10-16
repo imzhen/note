@@ -1,0 +1,677 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="學須靜也 才須學也" />
+
+
+
+  <meta name="keywords" content="CS,Machine Learning,Matlab," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logistic Regression">
+<meta property="og:url" content="http://imzhen.com/note/2015/10/10/20151010/index.html">
+<meta property="og:site_name" content="Zhen Zhang's Blog">
+<meta property="og:description" content="Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression a">
+<meta property="og:updated_time" content="2015-10-16T08:21:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Logistic Regression">
+<meta name="twitter:description" content="Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression a">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+
+
+  <title> Logistic Regression | Zhen Zhang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/note/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Zhen Zhang's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/note/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/note/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4sxUzPGMJ5gc4gm5vQxf','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Logistic Regression
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-10-10T00:51:20-07:00" content="2015-10-10">
+            2015-10-10
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression and PLA (perceptron learning algorithm)</p>
+<h1 id="Simple_Linear_Regression">Simple Linear Regression</h1><h2 id="Method">Method</h2><p>First let’s see simple linear regression. The formula is:</p>
+<p>$$Y = X * \beta$$</p>
+<p>Where $Y$, $X$ are all matrix here. I incorporate the intercept into this formula by adding a $(1, 1, …., 1)^T$ column at the left most part of matrix $X$. So the $X$ here is a augmented matrix, and the column from 2 to the end is the variables it will use.</p>
+<p>Of course, we can use as many variables as we want, for instance, we can have interaction terms like $X_1X_2$.</p>
+<h2 id="Implementation">Implementation</h2><p>Here is the matlab code that implements this simple algorithm.</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">matrix</span> = <span class="title">dimExpand</span><span class="params">(x,order)</span></span></span><br><span class="line"><span class="comment">% This is one of the core function in regression. Indeed, what this</span></span><br><span class="line"><span class="comment">% function does is transform the X (independent value) to the desired</span></span><br><span class="line"><span class="comment">% matrix we need to do the regression based on the order. For example, with</span></span><br><span class="line"><span class="comment">% order 0, it will give a vector with ones; with order 1, it will append</span></span><br><span class="line"><span class="comment">% the X itself append to order 0, and so on so forth for higher orders.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% To note, this function has been optimized for matrix calculation, which</span></span><br><span class="line"><span class="comment">% means you can give either an array or a matrix as the input of X.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% This functions maintains two pointers: one for the augment power (t1), and</span></span><br><span class="line"><span class="comment">% the other one for the order we need. By calculating them at an appropriate</span></span><br><span class="line"><span class="comment">% order, we can give this function the magic of accetping a matrix and give an</span></span><br><span class="line"><span class="comment">% augmented matrix as the output.</span></span><br><span class="line">	t1 = <span class="number">0</span>;</span><br><span class="line">	t2 = order;</span><br><span class="line">	<span class="matrix">[r,n]</span> = <span class="built_in">size</span>(x);</span><br><span class="line">	z = <span class="built_in">ones</span>(r, <span class="number">1</span> + n * order);</span><br><span class="line">	<span class="keyword">while</span> t2 &gt; <span class="number">0</span>;</span><br><span class="line">		t1 = t1 + n;</span><br><span class="line">		z(:,t1-n+<span class="number">2</span>:t1+<span class="number">1</span>) = x.^(t1/n);</span><br><span class="line">		t2 = t2 - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	matrix = z;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">coefficient</span> = <span class="title">singlePolyReg</span><span class="params">(x,y,order)</span></span></span><br><span class="line"><span class="comment">% This function implements the algorithm for polynomial regression.</span></span><br><span class="line">	z = dimExpand(x,order);</span><br><span class="line">	coefficient = (transpose(z) * z) \ (transpose(z) * y);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h1 id="Logistic_regression">Logistic regression</h1><h2 id="Method-1">Method</h2><p>While simple linear regression can produce the predicted value, sometimes we do not need the actual result. We only need to separate the predicted value into two categories, which is a binary classfication problem.</p>
+<p>To achieve, we need a simple transformation, which transforms our value to a new value that falls in [0,1] accurately:</p>
+<p>$$y = \frac{1}{1+e^{xw}}$$</p>
+<p>This is called the sigmoid function, and it satisfies our requirement. So suppose our new value Y already falls into [0,1], then we need to calculate the required w. But the question is, how to calculate the exact value of w, like what we have done in the previouly method, simple linear regression?</p>
+<p>It turns out that it is not that easy to calculate the value of w explicitly. So we need to use the optimization method to approximate it.</p>
+<h2 id="Optimization">Optimization</h2><p>There are many optimization method that can be applied to this problem. Here I use one of the most widely used one, gradient descent.</p>
+<p>The gradient descent algorithm will converge to the local optimal point from all dimension simultaneously. This is different from the coordinate descent, which converges to the local optimal point one dimension at a time. Regarding this, we also need to provide a learning rate, that can be used to control the speed to the optimal point. It too high, it will jump over the local optimal point, if too small, we need to do so many times of calculation.</p>
+<p>The formula for gradient descent is:</p>
+<p>$$ \mathbf{w} = \mathbf{w} - \alpha * \frac{\partial RSS}{\partial \mathbf{w}} $$</p>
+<p>RSS is defined as:</p>
+<p>$$ RSS = \frac{1}{2}(\mathbf{y} - sigmoid(\mathbf{X}))^T(\mathbf{y} - sigmoid(\mathbf{X})) $$</p>
+<p>In logistic regression, if we take RSS as a convex function, we can redefine it as:</p>
+<p>$$<br>\begin{align}<br>RSS &amp;= A + B \\<br>A &amp;= - \mathbf{y} * log(sigmoid(\mathbf{X}\mathbf{w})) \\<br>B &amp;= - (1 - \mathbf{y}) * log(1 - sigmoid(\mathbf{X}\mathbf{w}))<br>\end{align}<br>$$</p>
+<p>The first part is the error for $y$ = 1, while the second part is for $y$ = 0.</p>
+<p>By applying conditional likelihood on this formulas (proof omitted here), we have:</p>
+<p>$$ \mathbf{w} = \mathbf{w} - \alpha * (\mathbf{y} - sigmoid(\mathbf{X}\mathbf{w}))^T\mathbf{X} $$</p>
+<p>Where $\alpha$ is learning rate.</p>
+<p>There are two thresholds to stop this optimization. One is, we can define a finite number of times, say 2000 times, then after that the algorithm will stop automatically. Or, we can set the format of RSS or cost function, if the error rate reduced for the cost function is small enough, we will stop either.</p>
+<h2 id="Implementation-1">Implementation</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">sigmoid</span><span class="params">(x,w)</span></span></span><br><span class="line"><span class="comment">% This is the sigmoid function designed for logistic regression.</span></span><br><span class="line">    result = <span class="number">1</span> ./ (<span class="number">1</span> + <span class="built_in">exp</span>(- x * w));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">costFun</span><span class="params">(x,y,w)</span></span></span><br><span class="line"><span class="comment">% This function calculates the cost function related to the logistic</span></span><br><span class="line"><span class="comment">% regression. The definition of cost function is well known, so I will not</span></span><br><span class="line"><span class="comment">% explain it here.</span></span><br><span class="line">    result = <span class="number">0</span>;</span><br><span class="line">    x = dimExpand(x,<span class="number">1</span>);</span><br><span class="line">    <span class="matrix">[n, ~]</span> = <span class="built_in">size</span>(x);</span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:n</span><br><span class="line">        temp = sigmoid(x,w);</span><br><span class="line">        <span class="keyword">if</span> y(k) == <span class="number">1</span></span><br><span class="line">            result = result - <span class="built_in">log</span>(temp);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            result = result - <span class="built_in">log</span>(<span class="number">1</span>-temp);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">categorizeY</span><span class="params">(threshold,y)</span></span></span><br><span class="line"><span class="comment">% This function transforms the Y (dependent value) into two categories</span></span><br><span class="line"><span class="comment">% based on the threshold value given to the function.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% It creates a new array, and will evaluate the value based</span></span><br><span class="line"><span class="comment">% on the corresponding Y value.</span></span><br><span class="line">    <span class="built_in">i</span> = <span class="built_in">length</span>(y);</span><br><span class="line">    result = <span class="built_in">zeros</span>(<span class="built_in">i</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> n = <span class="number">1</span>:<span class="built_in">i</span></span><br><span class="line">        <span class="keyword">if</span> y(n) &gt; threshold</span><br><span class="line">            result(n) = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            result(n) = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">graDescent</span><span class="params">(x,y,w,learnRate)</span></span></span><br><span class="line"><span class="comment">% This is the core function for gradient descent and use it to do logistic</span></span><br><span class="line"><span class="comment">% regression. It main logic is, keep looping, until the error rate is less</span></span><br><span class="line"><span class="comment">% than 0.0001. While looping, it will update the weight vector in all</span></span><br><span class="line"><span class="comment">% dimensions simultaneously, based on the gradient descent algorithm. Then</span></span><br><span class="line"><span class="comment">% at last, return the weight vector.</span></span><br><span class="line">    <span class="matrix">[~,r]</span> = <span class="built_in">size</span>(x);</span><br><span class="line">    z = dimExpand(x,<span class="number">1</span>);</span><br><span class="line">    keep = true;</span><br><span class="line">    cost = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> keep</span><br><span class="line">        temp = <span class="built_in">zeros</span>(r+<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">        temp = temp + z<span class="operator">'</span> * (sigmoid(z,w) - y);</span><br><span class="line">        w = w - learnRate * temp;</span><br><span class="line">        cost\_new = costFun(x,y,w);</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(cost\_new - cost) / cost &lt;= <span class="number">0.0001</span></span><br><span class="line">            keep = false;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        cost = cost\_new;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    result = w;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h1 id="Comparison_between_logistic_regression_and_PLA">Comparison between logistic regression and PLA</h1><p>When looking at this formula:</p>
+<p>$$ \mathbf{w} = \mathbf{w} - \alpha * (\mathbf{y} - sigmoid(\mathbf{X}\mathbf{w}))^T\mathbf{X} $$</p>
+<p>It reminds us of the previous PLA algorithm. The difference is, first, the learning rate is 1, and second, there is only $(\mathbf{y} - \mathbf{\hat{y}})^T\mathbf{X}$, instead of $(\mathbf{y} - sigmoid(\mathbf{X}\mathbf{w}))^T\mathbf{X}$, and the only difference is, in PLA, the predicted result is either 0 or 1, but in logistic regression, the result can be any value in [0,1], and we set a threshold to determine which category it belongs to (usually 0.5 as the threshold).</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/note/tags/CS/" rel="tag">#CS</a>
+          
+            <a href="/note/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+          
+            <a href="/note/tags/Matlab/" rel="tag">#Matlab</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/note/2015/10/16/20151016/" rel="prev">Neural Network Algorithm</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2015/09/28/20150928/" rel="next">Some thoughts on PLA algorithm</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/note/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/note/tags">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://https://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Simple_Linear_Regression"><span class="nav-number">1.</span> <span class="nav-text">Simple Linear Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.1.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic_regression"><span class="nav-number">2.</span> <span class="nav-text">Logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-1"><span class="nav-number">2.1.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization"><span class="nav-number">2.2.</span> <span class="nav-text">Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-1"><span class="nav-number">2.3.</span> <span class="nav-text">Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Comparison_between_logistic_regression_and_PLA"><span class="nav-number">3.</span> <span class="nav-text">Comparison between logistic regression and PLA</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/note/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/note/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
