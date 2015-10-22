@@ -1,0 +1,762 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="學須靜也 才須學也" />
+
+
+
+  <meta name="keywords" content="CS,Python,R," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="These days I read the “Advanced R” Book written by Hadley Wickham. I choose this book since I think I have mastered most of R’s intermediate commands, and can use it freely to do data analysis job now">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Functional Programming Introduction">
+<meta property="og:url" content="http://imzhen.com/note/2015/10/22/20151022/index.html">
+<meta property="og:site_name" content="Zhen Zhang's Blog">
+<meta property="og:description" content="These days I read the “Advanced R” Book written by Hadley Wickham. I choose this book since I think I have mastered most of R’s intermediate commands, and can use it freely to do data analysis job now">
+<meta property="og:updated_time" content="2015-10-22T07:47:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Functional Programming Introduction">
+<meta name="twitter:description" content="These days I read the “Advanced R” Book written by Hadley Wickham. I choose this book since I think I have mastered most of R’s intermediate commands, and can use it freely to do data analysis job now">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+
+
+  <title> Functional Programming Introduction | Zhen Zhang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/note/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Zhen Zhang's Blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/note/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/note/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/note/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            Tags
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '4sxUzPGMJ5gc4gm5vQxf','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Functional Programming Introduction
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          Posted on
+          <time itemprop="dateCreated" datetime="2015-10-22T00:44:41-07:00" content="2015-10-22">
+            2015-10-22
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>These days I read the “Advanced R” Book written by Hadley Wickham. I choose this book since I think I have mastered most of R’s intermediate commands, and can use it freely to do data analysis job now, so I need to gain some knowledge related to R’s architecture in order to write the codes more neatly and think in the language of R, not other language.</p>
+<p>One thing that is very interested to me is the property of functional programming. Previously, I thought R is a objected-oriented programming language like Python. Although it has a informal class definition, say S3, which is most prevalent in R packages, I still categorized it to the OOP group. But as Wickham says: “R, at its heart, is a functional programming (FP) language. This means that it provides many tools for the creation and manipulation of functions.” I did not understand this sentence very well some days before, but as time went on, I read the following chapters and referred to some other resources talking about this topic, evening comparing it with Python, I have a basic understand now.</p>
+<p>In this post, I will display the concepts and knowledge I learnt these days. Since I am the first time learning this topic, I may explain them not very accurately or deeply, but I want to summary it here, and compare to my future notions to make progress. So let’s start.</p>
+<h1 id="Functional_Programming_(FP)">Functional Programming (FP)</h1><p>“In computer science, functional programming is a programming paradigm—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.” (From <a href="https://en.wikipedia.org/wiki/Functional_programming" target="_blank" rel="external">wikipedia</a>).</p>
+<p>The definition is a little bit abstract, so let’s make it clear, talking about some important features that functional programming have:</p>
+<ul>
+<li><p>Immutable Data: A function should have immutable data, for sake of easily maintaining. Then a function with fixed input will have fixed output every time we call it. This kind of function is called a pure function, meaing a function with no side effect. If it is necessary to edit an argument for a function, we need to copy it out of the function and then modify it.</p>
+</li>
+<li><p>First-Class Function: A function that can be used like a variable is called a first-class function. This means that you can create, copy, modify a function like you are doing the same thing to a variable, even transferring it between functions and return it as the final output of another function.</p>
+</li>
+<li><p>Tail Recursion: Usually the recursion we write in Java is calling the stacks of a functions once it is being created. But this will cause a problem named stack overflow if we do not allocate the memory in an appropriate way. With tail recursion and the help of compilor, we can avoid this problem.</p>
+</li>
+</ul>
+<p>In the following parts I will explain it in a detail.</p>
+<h1 id="Functionals">Functionals</h1><h2 id="Anonymous_function">Anonymous function</h2><p>I will first introduce anonymous function although it does not belong to this part. Anonymous function is a function writing standard that enables us to write functions very quickly, without explicitly defining it:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lapply(<span class="number">1</span>:<span class="number">8</span>, <span class="keyword">function</span>(x) x + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_list = [<span class="keyword">lambda</span> x: x ** <span class="number">2</span> + <span class="number">1</span> <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">8</span>)]</span><br></pre></td></tr></table></figure>
+<p>These are the expressions in R and python (<code>lambda</code>) respectively. With this technique, we can write functions more concisely.</p>
+<h2 id="Looping">Looping</h2><p>Loop is widely used in programming. Consider the following program:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">	new_list[i] = i ** <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>This is not a good way, although it is all right. In python, we have another way of doing it: <strong>List Comprehension</strong>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_list = [i ** <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br></pre></td></tr></table></figure>
+<p>The most important advantage of using list comprehension is not about its speed (althought it indeed runs a little faster than looping): we can read the program in a more continuous way. Every time I read a loop, I need to assume myself as the loop pointer to figure out what the loop is really doing, so I am often in such a mess.</p>
+<p>In R, we have apply family functions that can do the same thing:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new_list &lt;- lapply(<span class="number">1</span>:n, <span class="keyword">function</span>(x) x^<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>(The apply family functions play such an important role in R, and maybe I will talk about it in a another post).</p>
+<p>So now I need to dig a little deeper: what is the idea behind these functions?</p>
+<h2 id="Dimension_Reduction">Dimension Reduction</h2><p>Recall functionals are the functions that accepts a function as input and return a value without function. The list comprehension in python and apply family functions in R are all functionals, and they do the same thing: dimension reduction. Think of it: if you want to create a list, you need to fill in elements, and now you are moving from 2-dimension to 1-dimension. This is more clear in R apply functions: for example, the <code>lapply</code> function:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lapply(data, FUN, <span class="keyword">...</span>)</span><br></pre></td></tr></table></figure>
+<p>The data that passed into the function will be the lower level of data rendered in the input field: if the data is a list, then the data into the function is each elements of that list.</p>
+<h2 id="Map,_Reduce_and_Filter">Map, Reduce and Filter</h2><p>These three functions have almost become the identifiers of a functional programming language. Fortunately, Python and R all have such implementations. Here I will use R as the example:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map(<span class="keyword">function</span>(<span class="keyword">...</span>), <span class="keyword">...</span>)</span><br><span class="line">Reduce(<span class="keyword">function</span>(<span class="keyword">...</span>), list)</span><br><span class="line">Filter(<span class="keyword">function</span>, list)</span><br></pre></td></tr></table></figure>
+<p>The <code>Map</code> function will get each elements in the following data and substitute them in the function. The <code>Reduce</code> function will take the first and second elements into the function, get the ouput, then take the output and the third elements into the function, so on so forth. The <code>Filter</code> function will have the function return a logical value, then every element that returns true will remain in the list.</p>
+<p>I will not create examples here, but remember, all of them split the list into lower level data so we can handle them like we are writing a loop.</p>
+<h2 id="Limitations">Limitations</h2><p>This method is very strong, but it still has many limitations:</p>
+<ol>
+<li><p>When modifying in place, there will be some trouble:</p>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new_list &lt;- <span class="number">1</span>:<span class="number">9</span></span><br><span class="line">lapply(new_list, <span class="keyword">function</span>(x) x &lt;- x + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p> This will not return the true value, since all the operations we do in the functions are only visible to the function itself. All variables we modify in the function are not global variables, they are just local variables. The value of local variables will not affect the value of global variables. In this situation, it is better to write a loop. But what is we want to do it in a function?</p>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new_list &lt;- <span class="number">1</span>:<span class="number">9</span></span><br><span class="line">lapply(new_list, <span class="keyword">function</span>(x) x &lt;&lt;- x + <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p> This method can do it, since the <code>&lt;&lt;-</code> operator can modify objects in the global environment. But I do not recommed to do so, since it will cause the variables in a confused state.</p>
+</li>
+<li><p>Recursive relationships</p>
+<p> Consider when we are doing logistic regression. We need gradient descent to update the weights vector:</p>
+<p> $$w_i := w_i - \alpha\frac{\partial RSS}{\partial w_i}$$</p>
+<p> In this case, the program can only be written in the loop format, since the $i+1$ state depends on the $i$ state:</p>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:<span class="number">10000</span>) &#123;</span><br><span class="line">	w &lt;- w - alpha * adjust</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>While loop</p>
+<p> When we are using a while loop, sometimes we do not know when to stop if we define a stopping criterion. So in this time, we can only use a loop.</p>
+</li>
+<li><p>Lazy evaluation</p>
+<p> Lazy evaluation means the value of the arguments will not be evaluated until it is used the first time. In other words, the function does not know the value when the stack is first created, but only know it when the value first appears.</p>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">what_is_love &lt;- <span class="keyword">function</span>(f) &#123;</span><br><span class="line">  <span class="keyword">function</span>(<span class="keyword">...</span>) &#123;</span><br><span class="line">    cat(<span class="string">'f is'</span>, f, <span class="string">'\n'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funs &lt;- lapply(c(<span class="string">'love'</span>, <span class="string">'cherry'</span>), what_is_love)</span><br></pre></td></tr></table></figure>
+<p> When you print the functions in funs, the value will be identical: both are “f is cherry”. It is not a good phenomenon, so how to solve it?</p>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">what_is_love &lt;- <span class="keyword">function</span>(f) &#123;</span><br><span class="line">  force(f)</span><br><span class="line">  <span class="keyword">function</span>(<span class="keyword">...</span>) &#123;</span><br><span class="line">    cat(<span class="string">'f is'</span>, f, <span class="string">'\n'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> The inner function creates an enclosure for f, but the catch is that until you actually use a variable passed to a function, it remains a “promise” and is not actually evaluated. If you want to “capture” the current value of f, then you need to force the evaluation of the promise; you can use the <code>force()</code> function for this.</p>
+<p> But this has been changed in R version 3.2.0: “Higher order functions such as the apply functions and Reduce() now force arguments to the functions they apply in order to eliminate undesirable interactions between lazy evaluation and variable capture in closures.”</p>
+</li>
+</ol>
+<h2 id="Compare_between_OOP_and_FP">Compare between OOP and FP</h2><p>A famous use is the sort method in python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">9</span>]</span><br><span class="line">sort(a)</span><br></pre></td></tr></table></figure>
+<p>But the behavior of sort can be changed by giving a compare method to sort:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def new_sort_method(x, y)</span><br><span class="line">	if x &gt; y:</span><br><span class="line">		return -1</span><br><span class="line">	if x &lt; y:</span><br><span class="line">		return 1</span><br><span class="line">	return 0</span><br><span class="line"></span><br><span class="line">sort(a, new_sort_method)</span><br></pre></td></tr></table></figure>
+<p>We can see now the list is ordered in a descent order. Note that the sort function accepts a user defined sort method as its input. But if I want to implement it in a OOP language, such as Java, what should I do?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparator</span> </span>&#123;</span><br><span class="line">	compareTo(x, y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Integer[] new_list = <span class="keyword">new</span> Integer[<span class="number">8</span>]</span><br><span class="line">new_list.sort(Comparator() &#123;</span><br><span class="line">	compare(o1, o2) &#123;</span><br><span class="line">		<span class="keyword">return</span> o1 - o2</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>Although I use anonymous class here, the implementation is still very long: I need to define an interface that implements the compare method, then the sort method for the list object must accepts a new class instance that implements that interface.</p>
+<h1 id="Function_Operators">Function Operators</h1><h2 id="Return_a_function">Return a function</h2><p>The functionals in the last section all return values as the output. But what if I write a function that return a function as an output?</p>
+<p>This is the definition of function operators. A function operator is a function that takes one (or more) functions as input and returns a function as output.</p>
+<p>In general, the function operator can modify the input, output, inner behavior. In this section, I will first introduce closures,second then partial, then decorator functions.</p>
+<h2 id="Closures">Closures</h2><h3 id="List_of_functions">List of functions</h3><p>Closure is a very important concept in functional programming. Consider this situation: I want to calculate the output of a exponential power. But the question is, I do not know the accurate power. Sometimes it can be one, sometimes two. So do I need to write functions every time I use a different power?</p>
+<p>Of course not. Keep in mind, in functional programming, almost every operation needs to be done once and only once. So this is the situation where closure can solve:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_power</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">inner_cal_power</span><span class="params">(x)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> x ** n</span><br></pre></td></tr></table></figure>
+<p>Then I can reuse it as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">power_one &lt;- cal_power(<span class="number">1</span>)</span><br><span class="line">power_one(<span class="number">4</span>)</span><br><span class="line">power_two &lt;- cal_power(<span class="number">2</span>)</span><br><span class="line">power_two(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>So in this manner, we can view closure as defining a list of functions. Then we can use <code>lapply</code> to quickly return a list of functions by giving the closure a list of inputs.</p>
+<h3 id="Mutable_State">Mutable State</h3><p>Accurately speaking, closure is not really a function. It just behaviors like a function. Also, when we create a closure, the outer function will not disappear: since the closure is using the local variable of the outer function. But here comes another important question: if I can modify the value of local variable in the outer function, then each closure will maintain a unqiue value of that particular local variable since each closure is defined separately.</p>
+<p>Yes. This is the concept of mutable state. With this notion in mind, we can create a counter that counts the time that the function is called:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">counter &lt;- <span class="keyword">function</span>(f) &#123;</span><br><span class="line">	i &lt;- <span class="number">1</span></span><br><span class="line">	<span class="keyword">function</span>(<span class="keyword">...</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (i % <span class="number">8</span>) == <span class="number">0</span> cat(<span class="string">"I have been called 8 times!"</span>)</span><br><span class="line">		f(<span class="keyword">...</span>)</span><br><span class="line">		i &lt;&lt;- i + <span class="number">1</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Here I use the <code>&lt;&lt;-</code> operator to modify the global variable (to the closure). Then the function will print “I have been called 8 times” when it is called for a 8 time in total.</p>
+<h2 id="Partial">Partial</h2><p>Closure can be viewed as the process of creating a function by giving an argument to a function that you create all by yourself, which does not exist before. But, what should I do if I want to creating a function by giving an argument to a function that already exists? It is called partial.</p>
+<p>A partial function can be defined by <code>partial</code> giving the function name and at least one of the function’s argument:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mean_na_rm &lt;- partial(mean, na.rm = <span class="literal">T</span>)</span><br></pre></td></tr></table></figure>
+<p>Then we have <code>mean_na_rm(x)</code> equals to <code>mean(x, na.rm = T)</code>. In other words, it increase the ability of reuse of one particular argument by creating a corresponding function for it.</p>
+<h2 id="Currying">Currying</h2><p>Suppose I have a function <code>f</code> that has so many arguments: <code>f(x, y, z, w...)</code>, then a typical calling format is to give the arguments values f simultaneously. But it can cause confusion. What if I want to supply only one argument each time?</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># One implementation</span></span><br><span class="line">so_long &lt;- f(x, y, z, w...)</span><br><span class="line"><span class="comment"># Another implementation</span></span><br><span class="line">not_so_long &lt;- partial(w, partial(z, partial(y, partial(f, x))))</span><br></pre></td></tr></table></figure>
+<p>The second format is a little wired: why should I do so? This is called currying. By implementing like this, we can encapsulate a function with several arguments to several functions with only one argument for each. Each inner function has been encapsulated as a new function and then acts as input of the next encapsulated partial function. This written type if a little complicated, but what if I write it like this?</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">so_short &lt;- f<span class="list">(<span class="keyword">x</span>)</span><span class="list">(<span class="keyword">y</span>)</span><span class="list">(<span class="keyword">z</span>)</span><span class="list">(<span class="keyword">w</span>)</span></span><br></pre></td></tr></table></figure>
+<p>It is much better now!</p>
+<h2 id="Decorator">Decorator</h2><h3 id="Decorator_without_arguments">Decorator without arguments</h3><p>Now comes the decorator. Decorator can modify the behavior of a function. First let’s see a example:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(f)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">		print(<span class="string">"Hi, I will be called!"</span>)</span><br><span class="line">		f(*args, **kwargs)</span><br><span class="line">		print(<span class="string">"Hi, I have been called!"</span>)</span><br><span class="line">	<span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+<p>The decorator accepts a function as its input, and after that, the function is decorated. It will do the behavior we defined in the decorator:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">"Hello world"</span>)</span><br><span class="line"></span><br><span class="line">hello_world()</span><br><span class="line"></span><br><span class="line">hello_world() = decorator(hello_world)</span><br><span class="line">hello_world()</span><br></pre></td></tr></table></figure>
+<p>Here we can see the output of the function has been changed.</p>
+<p>In python, the decorator is so popular that there is a particular mark to do it:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="decorator">@decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">"Hello world"</span>)</span><br><span class="line"></span><br><span class="line">hello_world()</span><br></pre></td></tr></table></figure>
+<h3 id="Decorator_with_arguments">Decorator with arguments</h3><p>What if I want a decorator with different arguments every time I use it? It is a little hard in the first glimpse, but which function can we use to store the different input afterwards but can be created without knowing them? In other words, the decorator with arguments must remember the argument you first give it, and can generate a list of functions as you want. Yes, it is the closures.</p>
+<p>For this question, we only need to wrap the decorator with closures:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">closure_wrapper</span><span class="params">(x)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">decorator</span><span class="params">(f)</span>:</span></span><br><span class="line">		<span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kargs)</span>:</span></span><br><span class="line">			print(x)</span><br><span class="line">			print(<span class="string">"Hi, I will be called!"</span>)</span><br><span class="line">			f(*args, **kwargs)</span><br><span class="line">			print(<span class="string">"Hi, I have been called!"</span>)</span><br><span class="line">		<span class="keyword">return</span> wrapper</span><br><span class="line">	<span class="keyword">return</span> decorator</span><br></pre></td></tr></table></figure>
+<p>Then we need to first give the argument to the decorator closure, and the result will be served as a decorator.</p>
+<h1 id="Tail_Recursion">Tail Recursion</h1><p>Although python and R do not support for tail recursion, I still want to talk about it, since I am mostly talking about the concept of functional programming.</p>
+<h2 id="tail_call">tail call</h2><p>So what is tail call? The tail call is you call the function at the last of a function, without any other calculations:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> g(x)</span><br></pre></td></tr></table></figure>
+<p>There is one circumstance that are not tail call: with other calculations:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> g(x) + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>But we only need the return function at the end of the calling function, not at the end of the program.</p>
+<p>But why should we focus on this?</p>
+<p>In general, a function call is accompanied with a stack. If one function is calling another without tail call, the new stack will be put on the old stack, which means the length of the initial stack will continue growing until it overflows. But tail call will not encounter this issue: since tail call is the last step of a function call, so the function only needs to remember the tail call stack state, and destroy the initial stack.</p>
+<h2 id="Recursion">Recursion</h2><p>Recursion often creates stacks very long, so it is the time to use tail call as the implementation of tail recursion.</p>
+<p>Here I use fibonacci sequence as the example:</p>
+<p>Normal Recursion:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="keyword">return</span> fibonacci(n - <span class="number">1</span>) + fibonacci(n - <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>Tail Recursion Version:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibonacci</span><span class="params">(n)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">fibonacci_rec</span><span class="params">(a, b, n)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">			<span class="keyword">return</span> a</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="keyword">return</span> fibonacci(b, a + b, n - <span class="number">1</span>)</span><br><span class="line">	<span class="keyword">return</span> fibonacci_rec(<span class="number">1</span>, <span class="number">1</span>, n)</span><br></pre></td></tr></table></figure>
+<p>Tail recursion usually needs one or more new arguments to memorize the temporary value in the function instead of storing it as a local variable in the stack. So we usually needs to define a new function to accepts more arguments. Then the initial function calls the new function at last, after the recursion job has been done by the new function.</p>
+<h1 id="Future">Future</h1><p>I think functional programming is the future of programming languages, since it can do parallel computing, and we can see the developing speed of scala. But who knows? I only know with these tools, I can write the codes more efficiently.</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/note/tags/CS/" rel="tag">#CS</a>
+          
+            <a href="/note/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/note/tags/R/" rel="tag">#R</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/note/2015/10/16/20151016/" rel="next">Neural Network Algorithm</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/note/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">categories</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/note/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">tags</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Functional_Programming_(FP)"><span class="nav-number">1.</span> <span class="nav-text">Functional Programming (FP)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Functionals"><span class="nav-number">2.</span> <span class="nav-text">Functionals</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anonymous_function"><span class="nav-number">2.1.</span> <span class="nav-text">Anonymous function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Looping"><span class="nav-number">2.2.</span> <span class="nav-text">Looping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dimension_Reduction"><span class="nav-number">2.3.</span> <span class="nav-text">Dimension Reduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map,_Reduce_and_Filter"><span class="nav-number">2.4.</span> <span class="nav-text">Map, Reduce and Filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Limitations"><span class="nav-number">2.5.</span> <span class="nav-text">Limitations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Compare_between_OOP_and_FP"><span class="nav-number">2.6.</span> <span class="nav-text">Compare between OOP and FP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Function_Operators"><span class="nav-number">3.</span> <span class="nav-text">Function Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Return_a_function"><span class="nav-number">3.1.</span> <span class="nav-text">Return a function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Closures"><span class="nav-number">3.2.</span> <span class="nav-text">Closures</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List_of_functions"><span class="nav-number">3.2.1.</span> <span class="nav-text">List of functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutable_State"><span class="nav-number">3.2.2.</span> <span class="nav-text">Mutable State</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Partial"><span class="nav-number">3.3.</span> <span class="nav-text">Partial</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Currying"><span class="nav-number">3.4.</span> <span class="nav-text">Currying</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decorator"><span class="nav-number">3.5.</span> <span class="nav-text">Decorator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Decorator_without_arguments"><span class="nav-number">3.5.1.</span> <span class="nav-text">Decorator without arguments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decorator_with_arguments"><span class="nav-number">3.5.2.</span> <span class="nav-text">Decorator with arguments</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tail_Recursion"><span class="nav-number">4.</span> <span class="nav-text">Tail Recursion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tail_call"><span class="nav-number">4.1.</span> <span class="nav-text">tail call</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recursion"><span class="nav-number">4.2.</span> <span class="nav-text">Recursion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Future"><span class="nav-number">5.</span> <span class="nav-text">Future</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/note/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/note/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
