@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,27 +23,65 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-
-  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-
-<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="學須靜也 才須學也" />
-
-
-
-  <meta name="keywords" content="Map,R,Stat," />
 
 
 
 
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="R,Stat,Map," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/note/favicon.ico?v=5.1.0" />
+
+
+
+
 
 
 <meta name="description" content="这几天在学习R绘制中国地图以供数据分析之用，然而Mac上R作图的默认设备是Quartz，如果不进行中文字体的设置，是无法出现中文汉字的，会出现诸如框框的情况。为此，我查询了一些资料，主要参考两篇文章，讲了如何进行字体的设置。我把他们列在了最后的参考文献中。
@@ -59,14 +102,37 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
 <meta name="twitter:title" content="Mac上R作图中文字体的处理">
 <meta name="twitter:description" content="这几天在学习R绘制中国地图以供数据分析之用，然而Mac上R作图的默认设备是Quartz，如果不进行中文字体的设置，是无法出现中文汉字的，会出现诸如框框的情况。为此，我查询了一些资料，主要参考两篇文章，讲了如何进行字体的设置。我把他们列在了最后的参考文献中。
 Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong”, “STHeiti”, “STKaiti”, “STSong”">
+<meta name="twitter:image" content="http://imzhen.com/note/note/img/20150818/fontBook.png">
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/note/',
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
+
+
+
+  <link rel="canonical" href="http://imzhen.com/note/2015/08/18/20150818/"/>
+
+
 
 
 
@@ -75,15 +141,6 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -91,20 +148,31 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/note/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/note/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">Zhen Zhang's Blog</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -118,28 +186,24 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/note/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            About
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/note/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
             Archives
           </a>
         </li>
@@ -147,13 +211,25 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
         
         <li class="menu-item menu-item-tags">
           <a href="/note/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
             Tags
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
@@ -161,11 +237,9 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -182,73 +256,119 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
   
 </nav>
 
+
+
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/08/18/20150818/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Mac上R作图中文字体的处理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-18T17:21:39-07:00">
+                2015-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+
           
             
-              Mac上R作图中文字体的处理
-            
           
-        </h1>
-      
 
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-08-18T17:21:39-07:00" content="2015-08-18">
-            2015-08-18
-          </time>
-        </span>
-
-        
-
-        
           
-        
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><p>这几天在学习R绘制中国地图以供数据分析之用，然而Mac上R作图的默认设备是Quartz，如果不进行中文字体的设置，是无法出现中文汉字的，会出现诸如框框的情况。为此，我查询了一些资料，主要参考两篇文章，讲了如何进行字体的设置。我把他们列在了最后的参考文献中。</p>
+        <p>这几天在学习R绘制中国地图以供数据分析之用，然而Mac上R作图的默认设备是Quartz，如果不进行中文字体的设置，是无法出现中文汉字的，会出现诸如框框的情况。为此，我查询了一些资料，主要参考两篇文章，讲了如何进行字体的设置。我把他们列在了最后的参考文献中。</p>
 <h1 id="Mac上字体的查看">Mac上字体的查看</h1><p>Mac上安装了一些中文字体，包括: “STFangsong”, “STHeiti”, “STKaiti”, “STSong”等。他们可以通过Font Book查看。</p>
 <p><img src="/note/img/20150818/fontBook.png" alt="fontBook"></p>
 <p>在本文中，我主要使用”STKaiti”。</p>
 <h1 id="普通作图函数的设置">普通作图函数的设置</h1><p>有如下三种方式：</p>
 <ol>
 <li><p>在打开Quartz的时候指定：</p>
- <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quartz(family=<span class="string">'STKaiti'</span>)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">quartz(family=<span class="string">'STKaiti'</span>)</div></pre></td></tr></table></figure>
 </li>
 <li><p>在作图之前指定全局作图参数：</p>
- <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">par(family=<span class="string">"STKaiti"</span>)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">par(family=<span class="string">"STKaiti"</span>)</div></pre></td></tr></table></figure>
 </li>
 <li><p>在每次作图的时候指定。</p>
 <p> 这里我将会用我在学习画中国地图的时候遇到的实例来说明，包括下面对于ggplot的设置也是如此。</p>
- <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plot(mydat, ylim = c(<span class="number">18</span>, <span class="number">54</span>), panel.first = grid()) <span class="comment"># I have already read the map data as mydat</span></span><br><span class="line">points(city$Jd, city$Wd, pch = <span class="number">19</span>, col = rgb(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>))</span><br><span class="line">pointLabel(city$Jd, city$Wd, labels = city[,<span class="number">1</span>], cex = <span class="number">0.5</span>) <span class="comment"># pointLabel is a function in the package of maptool. It facilitate us to add the label in the best position. For more information, please refer to that package</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">plot(mydat, ylim = c(<span class="number">18</span>, <span class="number">54</span>), panel.first = grid()) <span class="comment"># I have already read the map data as mydat</span></div><div class="line">points(city$Jd, city$Wd, pch = <span class="number">19</span>, col = rgb(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>))</div><div class="line">pointLabel(city$Jd, city$Wd, labels = city[,<span class="number">1</span>], cex = <span class="number">0.5</span>) <span class="comment"># pointLabel is a function in the package of maptool. It facilitate us to add the label in the best position. For more information, please refer to that package</span></div></pre></td></tr></table></figure>
 <p> 这里没有设定参数，所以作出来的图有框框。</p>
 <p> <img src="/note/img/20150818/plot1.png" alt="plotCHN1"></p>
 <p> 正确的作图命令应该把上述代码的最后一行替换为：</p>
- <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pointLabel(city$Jd,city$Wd,labels = city[,<span class="number">1</span>], cex = <span class="number">0.5</span>, family = <span class="string">"STKaiti"</span>)</span><br></pre></td></tr></table></figure>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pointLabel(city$Jd,city$Wd,labels = city[,<span class="number">1</span>], cex = <span class="number">0.5</span>, family = <span class="string">"STKaiti"</span>)</div></pre></td></tr></table></figure>
 <p> 这里在添加中文字符的地方指定了<code>family = &quot;STKaiti&quot;</code>。</p>
 <p> <img src="/note/img/20150818/plot2.png" alt="plotCHN2"></p>
 </li>
@@ -256,11 +376,11 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
 <h1 id="ggplot中文字体的设置">ggplot中文字体的设置</h1><p>在ggplot中，上面所讲述的方法都不适用，这是因为ggplot有自己的作图方式。有些网站（比如下文的参考文献1）所讲的<code>theme_text(family=&#39;STKaiti&#39;)</code>也不可以，这是因为ggplot最新版对其进行了改动。具体的配置请看下文：</p>
 <ol>
 <li><p>如果是加入的label之类的，可以直接在相应的函数中加入<code>family = &quot;STKaiti&quot;</code>：</p>
- <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggplot(zhejiang,aes(x=long,y=lat,group=id,fill=<span class="string">"beige"</span>)) + geom_polygon(fill=<span class="string">"beige"</span>) + geom_path(color=<span class="string">"grey40"</span>) + geom_point(x=<span class="number">120.12</span>,y=<span class="number">30.16</span>,fill=<span class="literal">NA</span>) + annotate(<span class="string">"text"</span>,x=<span class="number">120.3</span>,y=<span class="number">30</span>,label=<span class="string">"杭州市"</span> ,family=<span class="string">"STKaiti"</span>) <span class="comment"># Here I am drawing the map of Zhejiang Province</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(zhejiang,aes(x=long,y=lat,group=id,fill=<span class="string">"beige"</span>)) + geom_polygon(fill=<span class="string">"beige"</span>) + geom_path(color=<span class="string">"grey40"</span>) + geom_point(x=<span class="number">120.12</span>,y=<span class="number">30.16</span>,fill=<span class="literal">NA</span>) + annotate(<span class="string">"text"</span>,x=<span class="number">120.3</span>,y=<span class="number">30</span>,label=<span class="string">"杭州市"</span> ,family=<span class="string">"STKaiti"</span>) <span class="comment"># Here I am drawing the map of Zhejiang Province</span></div></pre></td></tr></table></figure>
 <p> <img src="/note/img/20150818/ggplot1.png" alt="ggplotCHN1"></p>
 </li>
 <li><p>如果需要改变全局变量，比如下文演示的图例（注：这里由于没有调整大小，图例没有显示全），则需要加入图层<code>theme(text=element_text(family=&quot;STKaiti&quot;))</code>：</p>
- <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggplot(z, aes(x = long, y = lat, group = group,fill=NAME)) + geom_polygon( ) + geom_path(colour = <span class="string">"grey40"</span>) + coord_map() + theme(text=element_text(family=<span class="string">"STKaiti"</span>)) <span class="comment"># z is the data frame I use. If you want to see more 	information, please see my next blog, talking about how to draw map in R.</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ggplot(z, aes(x = long, y = lat, group = group,fill=NAME)) + geom_polygon( ) + geom_path(colour = <span class="string">"grey40"</span>) + coord_map() + theme(text=element_text(family=<span class="string">"STKaiti"</span>)) <span class="comment"># z is the data frame I use. If you want to see more 	information, please see my next blog, talking about how to draw map in R.</span></div></pre></td></tr></table></figure>
 <p> <img src="/note/img/20150818/ggplot2.png" alt="ggplotCHN2"></p>
 </li>
 </ol>
@@ -270,34 +390,55 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
 <li><p><a href="http://zhanghonglun.cn/blog/?p=293" target="_blank" rel="external">R绘图中文问题</a></p>
 </li>
 </ol>
-</span>
+
       
     </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/note/tags/Map/" rel="tag">#Map</a>
+            <a href="/note/tags/R/" rel="tag"># R</a>
           
-            <a href="/note/tags/R/" rel="tag">#R</a>
+            <a href="/note/tags/Stat/" rel="tag"># Stat</a>
           
-            <a href="/note/tags/Stat/" rel="tag">#Stat</a>
+            <a href="/note/tags/Map/" rel="tag"># Map</a>
           
         </div>
       
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/note/2015/09/14/20150914/" rel="prev">R map part 1 -- introduction</a>
+              <a href="/note/2015/08/16/20150816/" rel="next" title="Shiny Introduction Summary">
+                <i class="fa fa-chevron-left"></i> Shiny Introduction Summary
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/note/2015/08/16/20150816/" rel="next">Shiny Introduction Summary</a>
+              <a href="/note/2015/09/14/20150914/" rel="prev" title="R map part 1 -- introduction">
+                R map part 1 -- introduction <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -315,18 +456,20 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -340,9 +483,11 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table Of Contents
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
             Overview
@@ -350,12 +495,14 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/note/note/uploads/avatar.jpeg"
+               alt="Zhen Zhang" />
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+          <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/note/archives">
@@ -364,19 +511,16 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
-              
-          </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/note/tags">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">tags</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/note/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -386,11 +530,21 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+                <a href="https://github.com/imzhen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Linkedin
+                </a>
               </span>
             
           
@@ -399,44 +553,55 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
+              
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac上字体的查看"><span class="nav-number">1.</span> <span class="nav-text">Mac上字体的查看</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#普通作图函数的设置"><span class="nav-number">2.</span> <span class="nav-text">普通作图函数的设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ggplot中文字体的设置"><span class="nav-number">3.</span> <span class="nav-text">ggplot中文字体的设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
             
+
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
         </section>
+      <!--/noindex-->
       
 
     </div>
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
 </div>
 
+
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -447,250 +612,106 @@ Mac上字体的查看Mac上安装了一些中文字体，包括: “STFangsong�
 </div>
 
 
- </div>
+        
+
+        
+      </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
-  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    
-    
-
   
 
-
-  
-  
-  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  
-<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
-      }
-    }
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
   
+
+
+
+  
+  <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
   
 
   
-  <script type="text/javascript" src="/note/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/note/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>

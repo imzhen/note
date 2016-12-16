@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,18 +23,49 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
-  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
-<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
 
 
-    <meta name="description" content="學須靜也 才須學也" />
+  
+  
+  
+  
 
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="CS,self-study," />
@@ -38,7 +74,14 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/note/favicon.ico?v=5.1.0" />
+
+
+
+
 
 
 <meta name="description" content="作为一个著名的反汇编语言实验，他的享（作）受（死）程度令我心向往很久。终于，我也悄悄的从CMU官网上下载了这个实验，here we go!
@@ -64,14 +107,37 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 GDB 基本知识首先，我们需要将目录切换到准备调试的文件所在目录下，然后打开gdb调试工具。我们这里假设文件名称叫做bomb，那么我们应该在gdb中输入
 1(gdb)file bomb
 下面是几个最常用">
+<meta name="twitter:image" content="http://imzhen.com/note/note/img/20150723/bomb.png">
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/note/',
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
+
+
+
+  <link rel="canonical" href="http://imzhen.com/note/2015/07/23/20150723/"/>
+
+
 
 
 
@@ -80,15 +146,6 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -96,20 +153,31 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/note/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/note/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">Zhen Zhang's Blog</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -123,28 +191,24 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/note/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            About
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/note/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
             Archives
           </a>
         </li>
@@ -152,13 +216,25 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
         
         <li class="menu-item menu-item-tags">
           <a href="/note/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
             Tags
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
@@ -166,11 +242,9 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -187,58 +261,104 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
   
 </nav>
 
+
+
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/07/23/20150723/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSAPP 拆弹之旅
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-23T16:02:52-07:00">
+                2015-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+
           
             
-              CSAPP 拆弹之旅
-            
           
-        </h1>
-      
 
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-07-23T16:02:52-07:00" content="2015-07-23">
-            2015-07-23
-          </time>
-        </span>
-
-        
-
-        
           
-        
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><p>作为一个著名的反汇编语言实验，他的享（作）受（死）程度令我心向往很久。终于，我也悄悄的从CMU官网上下载了这个实验，here we go!</p>
+        <p>作为一个著名的反汇编语言实验，他的享（作）受（死）程度令我心向往很久。终于，我也悄悄的从CMU官网上下载了这个实验，here we go!</p>
 <p>本文将首先讨论一些gdb的基础操作，然后就来逐个拆炸弹。</p>
 <h1 id="GDB_基本知识">GDB 基本知识</h1><p>首先，我们需要将目录切换到准备调试的文件所在目录下，然后打开gdb调试工具。我们这里假设文件名称叫做bomb，那么我们应该在gdb中输入</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">gdb</span>)</span>file bomb</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(gdb)file bomb</div></pre></td></tr></table></figure>
 <p>下面是几个最常用的命令：</p>
 <p><strong>运行至断点</strong>（如果没有设置断点就运行到程序结束）：run (r)</p>
 <p><strong>继续至下一个断点</strong>（如果没有则运行到程序结束）：continue (c)</p>
@@ -271,12 +391,12 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 <p>基本知识大概就是这么多，现在，炸弹我来也~</p>
 <h1 id="拆弹过程">拆弹过程</h1><p>首先我们把bomb文件通过objdump反汇编成汇编语言，之后在每个炸弹的讨论过程中我会分别把相应的汇编代码贴出来。</p>
 <h2 id="Phase_1">Phase_1</h2><p>首先是第一关的汇编代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">08048</span>b20 &lt;phase_1&gt;:</span><br><span class="line"> <span class="number">8048</span>b20:	<span class="number">55</span>                   	push   %ebp</span><br><span class="line"> <span class="number">8048</span>b21:	<span class="number">89</span> e5                	mov    %esp,%ebp</span><br><span class="line"> <span class="number">8048</span>b23:	<span class="number">83</span> ec <span class="number">08</span>             	sub    $<span class="number">0x8</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b26:	<span class="number">8</span>b <span class="number">45</span> <span class="number">08</span>             	mov    <span class="number">0x8</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>b29:	<span class="number">83</span> c4 f8             	add    $<span class="number">0xfffffff8</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b2c:	<span class="number">68</span> c0 <span class="number">97</span> <span class="number">04</span> <span class="number">08</span>       	push   $<span class="number">0x80497c0</span></span><br><span class="line"> <span class="number">8048</span>b31:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>b32:	e8 f9 <span class="number">04</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">8049030</span> &lt;strings_not_equal&gt;</span><br><span class="line"> <span class="number">8048</span>b37:	<span class="number">83</span> c4 <span class="number">10</span>             	add    $<span class="number">0x10</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b3a:	<span class="number">85</span> c0                	test   %eax,%eax</span><br><span class="line"> <span class="number">8048</span>b3c:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>b43 &lt;phase_1+<span class="number">0x23</span>&gt;</span><br><span class="line"> <span class="number">8048</span>b3e:	e8 b9 <span class="number">09</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>b43:	<span class="number">89</span> ec                	mov    %ebp,%esp</span><br><span class="line"> <span class="number">8048</span>b45:	<span class="number">5</span>d                   	pop    %ebp</span><br><span class="line"> <span class="number">8048</span>b46:	c3                   	ret    </span><br><span class="line"> <span class="number">8048</span>b47:	<span class="number">90</span>                   	nop</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">08048b20 &lt;phase_1&gt;:</div><div class="line"> 8048b20:	55                   	push   %ebp</div><div class="line"> 8048b21:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048b23:	83 ec 08             	sub    $0x8,%esp</div><div class="line"> 8048b26:	8b 45 08             	mov    0x8(%ebp),%eax</div><div class="line"> 8048b29:	83 c4 f8             	add    $0xfffffff8,%esp</div><div class="line"> 8048b2c:	68 c0 97 04 08       	push   $0x80497c0</div><div class="line"> 8048b31:	50                   	push   %eax</div><div class="line"> 8048b32:	e8 f9 04 00 00       	call   8049030 &lt;strings_not_equal&gt;</div><div class="line"> 8048b37:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048b3a:	85 c0                	test   %eax,%eax</div><div class="line"> 8048b3c:	74 05                	je     8048b43 &lt;phase_1+0x23&gt;</div><div class="line"> 8048b3e:	e8 b9 09 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048b43:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048b45:	5d                   	pop    %ebp</div><div class="line"> 8048b46:	c3                   	ret    </div><div class="line"> 8048b47:	90                   	nop</div></pre></td></tr></table></figure>
 <p>这应该是一个热身关卡，蛮简单的，主要是让我们学会gdb的基本调试命令，以及熟悉出题人的一些思路。根据0x8048b32那里的string_not_equal函数，我们可以猜测到，应该是让输入的值(%eax)和指定的值(0x80497c0)进行比较，如果相等就进入下一关，如果不相等就调用explode_bomb函数，也就是炸弹爆炸。为此，我们只需要知道0x80497c0中的string到底是什么就可以了：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(gdb) <span class="type">file</span> bomb</span><br><span class="line">Reading symbols <span class="keyword">from</span> bomb...done.</span><br><span class="line">(gdb) b phase_1</span><br><span class="line">Breakpoint <span class="number">1</span> <span class="keyword">at</span> <span class="number">0x8048b26</span></span><br><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/elliot/Desktop/bomb</span><br><span class="line">Welcome <span class="keyword">to</span> <span class="keyword">my</span> fiendish little bomb. You have <span class="number">6</span> phases <span class="keyword">with</span></span><br><span class="line">which <span class="keyword">to</span> blow yourself up. Have a nice <span class="property">day</span>!</span><br><span class="line">qqq</span><br><span class="line"></span><br><span class="line">Breakpoint <span class="number">1</span>, <span class="number">0x08048b26</span> <span class="keyword">in</span> phase_1 ()</span><br><span class="line">(gdb) p/s (char*) <span class="number">0x80497c0</span></span><br><span class="line">$<span class="number">1</span> = <span class="number">0x80497c0</span> <span class="string">"Public speaking is very easy."</span></span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">(gdb) file bomb</div><div class="line">Reading symbols from bomb...done.</div><div class="line">(gdb) b phase_1</div><div class="line">Breakpoint 1 at 0x8048b26</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/elliot/Desktop/bomb</div><div class="line">Welcome to my fiendish little bomb. You have 6 phases with</div><div class="line">which to blow yourself up. Have a nice day!</div><div class="line">qqq</div><div class="line"></div><div class="line">Breakpoint 1, 0x08048b26 in phase_1 ()</div><div class="line">(gdb) p/s (char*) 0x80497c0</div><div class="line">$1 = 0x80497c0 &quot;Public speaking is very easy.&quot;</div><div class="line">(gdb)</div></pre></td></tr></table></figure>
 <p>很明显，这里的字符串是”Public speaking is very easy”（真的吗，出题人你出来我保证不打死你）。为此，我们进行测试，发现进入了第二关~</p>
 <h2 id="Phase_2">Phase_2</h2><p>首先还是汇编代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">08048</span>b48 &lt;phase_2&gt;:</span><br><span class="line"> <span class="number">8048</span>b48:	<span class="number">55</span>                   	push   %ebp</span><br><span class="line"> <span class="number">8048</span>b49:	<span class="number">89</span> e5                	mov    %esp,%ebp</span><br><span class="line"> <span class="number">8048</span>b4b:	<span class="number">83</span> ec <span class="number">20</span>             	sub    $<span class="number">0x20</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b4e:	<span class="number">56</span>                   	push   %esi</span><br><span class="line"> <span class="number">8048</span>b4f:	<span class="number">53</span>                   	push   %ebx</span><br><span class="line"> <span class="number">8048</span>b50:	<span class="number">8</span>b <span class="number">55</span> <span class="number">08</span>             	mov    <span class="number">0x8</span>(%ebp),%edx</span><br><span class="line"> <span class="number">8048</span>b53:	<span class="number">83</span> c4 f8             	add    $<span class="number">0xfffffff8</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b56:	<span class="number">8</span>d <span class="number">45</span> e8             	lea    -<span class="number">0x18</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>b59:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>b5a:	<span class="number">52</span>                   	push   %edx</span><br><span class="line"> <span class="number">8048</span>b5b:	e8 <span class="number">78</span> <span class="number">04</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">8048f</span>d8 &lt;read_six_numbers&gt;</span><br><span class="line"> <span class="number">8048</span>b60:	<span class="number">83</span> c4 <span class="number">10</span>             	add    $<span class="number">0x10</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b63:	<span class="number">83</span> <span class="number">7</span>d e8 <span class="number">01</span>          	cmpl   $<span class="number">0x1</span>,-<span class="number">0x18</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>b67:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>b6e &lt;phase_2+<span class="number">0x26</span>&gt;</span><br><span class="line"> <span class="number">8048</span>b69:	e8 <span class="number">8</span>e <span class="number">09</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>b6e:	bb <span class="number">01</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       	mov    $<span class="number">0x1</span>,%ebx</span><br><span class="line"> <span class="number">8048</span>b73:	<span class="number">8</span>d <span class="number">75</span> e8             	lea    -<span class="number">0x18</span>(%ebp),%esi</span><br><span class="line"> <span class="number">8048</span>b76:	<span class="number">8</span>d <span class="number">43</span> <span class="number">01</span>             	lea    <span class="number">0x1</span>(%ebx),%eax</span><br><span class="line"> <span class="number">8048</span>b79:	<span class="number">0f</span> af <span class="number">44</span> <span class="number">9</span>e fc       	imul   -<span class="number">0x4</span>(%esi,%ebx,<span class="number">4</span>),%eax</span><br><span class="line"> <span class="number">8048</span>b7e:	<span class="number">39</span> <span class="number">04</span> <span class="number">9</span>e             	cmp    %eax,(%esi,%ebx,<span class="number">4</span>)</span><br><span class="line"> <span class="number">8048</span>b81:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>b88 &lt;phase_2+<span class="number">0x40</span>&gt;</span><br><span class="line"> <span class="number">8048</span>b83:	e8 <span class="number">74</span> <span class="number">09</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>b88:	<span class="number">43</span>                   	inc    %ebx</span><br><span class="line"> <span class="number">8048</span>b89:	<span class="number">83</span> fb <span class="number">05</span>             	cmp    $<span class="number">0x5</span>,%ebx</span><br><span class="line"> <span class="number">8048</span>b8c:	<span class="number">7</span>e e8                	jle    <span class="number">8048</span>b76 &lt;phase_2+<span class="number">0x2e</span>&gt;</span><br><span class="line"> <span class="number">8048</span>b8e:	<span class="number">8</span>d <span class="number">65</span> d8             	lea    -<span class="number">0x28</span>(%ebp),%esp</span><br><span class="line"> <span class="number">8048</span>b91:	<span class="number">5</span>b                   	pop    %ebx</span><br><span class="line"> <span class="number">8048</span>b92:	<span class="number">5</span>e                   	pop    %esi</span><br><span class="line"> <span class="number">8048</span>b93:	<span class="number">89</span> ec                	mov    %ebp,%esp</span><br><span class="line"> <span class="number">8048</span>b95:	<span class="number">5</span>d                   	pop    %ebp</span><br><span class="line"> <span class="number">8048</span>b96:	c3                   	ret    </span><br><span class="line"> <span class="number">8048</span>b97:	<span class="number">90</span>                   	nop</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">08048b48 &lt;phase_2&gt;:</div><div class="line"> 8048b48:	55                   	push   %ebp</div><div class="line"> 8048b49:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048b4b:	83 ec 20             	sub    $0x20,%esp</div><div class="line"> 8048b4e:	56                   	push   %esi</div><div class="line"> 8048b4f:	53                   	push   %ebx</div><div class="line"> 8048b50:	8b 55 08             	mov    0x8(%ebp),%edx</div><div class="line"> 8048b53:	83 c4 f8             	add    $0xfffffff8,%esp</div><div class="line"> 8048b56:	8d 45 e8             	lea    -0x18(%ebp),%eax</div><div class="line"> 8048b59:	50                   	push   %eax</div><div class="line"> 8048b5a:	52                   	push   %edx</div><div class="line"> 8048b5b:	e8 78 04 00 00       	call   8048fd8 &lt;read_six_numbers&gt;</div><div class="line"> 8048b60:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048b63:	83 7d e8 01          	cmpl   $0x1,-0x18(%ebp)</div><div class="line"> 8048b67:	74 05                	je     8048b6e &lt;phase_2+0x26&gt;</div><div class="line"> 8048b69:	e8 8e 09 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048b6e:	bb 01 00 00 00       	mov    $0x1,%ebx</div><div class="line"> 8048b73:	8d 75 e8             	lea    -0x18(%ebp),%esi</div><div class="line"> 8048b76:	8d 43 01             	lea    0x1(%ebx),%eax</div><div class="line"> 8048b79:	0f af 44 9e fc       	imul   -0x4(%esi,%ebx,4),%eax</div><div class="line"> 8048b7e:	39 04 9e             	cmp    %eax,(%esi,%ebx,4)</div><div class="line"> 8048b81:	74 05                	je     8048b88 &lt;phase_2+0x40&gt;</div><div class="line"> 8048b83:	e8 74 09 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048b88:	43                   	inc    %ebx</div><div class="line"> 8048b89:	83 fb 05             	cmp    $0x5,%ebx</div><div class="line"> 8048b8c:	7e e8                	jle    8048b76 &lt;phase_2+0x2e&gt;</div><div class="line"> 8048b8e:	8d 65 d8             	lea    -0x28(%ebp),%esp</div><div class="line"> 8048b91:	5b                   	pop    %ebx</div><div class="line"> 8048b92:	5e                   	pop    %esi</div><div class="line"> 8048b93:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048b95:	5d                   	pop    %ebp</div><div class="line"> 8048b96:	c3                   	ret    </div><div class="line"> 8048b97:	90                   	nop</div></pre></td></tr></table></figure>
 <p>这个比刚才的长了好多（然而我想多了，后面的一个比一个长）。下面我会分条写出我的思考过程：</p>
 <ol>
 <li><p>注意到0x8048b5b那里调用了read_six_numbers这个函数，所以我们的Input一定要是六个数。</p>
@@ -288,57 +408,57 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 <li><p>首先可以看出，0x8048b63的cmpl指令告诉我们第一个数必须是1。</p>
 </li>
 <li><p>下面的过程我用java代码写了一下：</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNumber</span> <span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">if</span> (nums[<span class="number">0</span>] != <span class="number">1</span>) explode();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line"> 			temp = (i + <span class="number">1</span>) * nums[i - <span class="number">1</span>];</span><br><span class="line">       	<span class="keyword">if</span> (nums[i] != temp) explode();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testNumber</span> <span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">   	<span class="keyword">if</span> (nums[<span class="number">0</span>] != <span class="number">1</span>) explode();</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</div><div class="line"> 			temp = (i + <span class="number">1</span>) * nums[i - <span class="number">1</span>];</div><div class="line">       	<span class="keyword">if</span> (nums[i] != temp) explode();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>因此我们发现，最终要求输入的数字是1 2 6 24 120 720.</p>
 </li>
 </ol>
 <h2 id="Phase_3">Phase_3</h2><p>老规矩，先上代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">08048</span>b98 &lt;phase_3&gt;:</span><br><span class="line"> <span class="number">8048</span>b98:	<span class="number">55</span>                   	push   %ebp</span><br><span class="line"> <span class="number">8048</span>b99:	<span class="number">89</span> e5                	mov    %esp,%ebp</span><br><span class="line"> <span class="number">8048</span>b9b:	<span class="number">83</span> ec <span class="number">14</span>             	sub    $<span class="number">0x14</span>,%esp</span><br><span class="line"> <span class="number">8048</span>b9e:	<span class="number">53</span>                   	push   %ebx</span><br><span class="line"> <span class="number">8048</span>b9f:	<span class="number">8</span>b <span class="number">55</span> <span class="number">08</span>             	mov    <span class="number">0x8</span>(%ebp),%edx</span><br><span class="line"> <span class="number">8048</span>ba2:	<span class="number">83</span> c4 f4             	add    $<span class="number">0xfffffff4</span>,%esp</span><br><span class="line"> <span class="number">8048</span>ba5:	<span class="number">8</span>d <span class="number">45</span> fc             	lea    -<span class="number">0x4</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>ba8:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>ba9:	<span class="number">8</span>d <span class="number">45</span> fb             	lea    -<span class="number">0x5</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>bac:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>bad:	<span class="number">8</span>d <span class="number">45</span> f4             	lea    -<span class="number">0xc</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>bb0:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>bb1:	<span class="number">68</span> de <span class="number">97</span> <span class="number">04</span> <span class="number">08</span>       	push   $<span class="number">0x80497de</span></span><br><span class="line"> <span class="number">8048</span>bb6:	<span class="number">52</span>                   	push   %edx</span><br><span class="line"> <span class="number">8048</span>bb7:	e8 a4 fc ff ff       	call   <span class="number">8048860</span> &lt;<span class="built_in">sscanf</span>@plt&gt;</span><br><span class="line"></span><br><span class="line"> <span class="number">8048</span>bbc:	<span class="number">83</span> c4 <span class="number">20</span>             	add    $<span class="number">0x20</span>,%esp</span><br><span class="line"> <span class="number">8048</span>bbf:	<span class="number">83</span> f8 <span class="number">02</span>             	cmp    $<span class="number">0x2</span>,%eax</span><br><span class="line"> <span class="number">8048</span>bc2:	<span class="number">7f</span> <span class="number">05</span>                	jg     <span class="number">8048</span>bc9 &lt;phase_3+<span class="number">0x31</span>&gt;</span><br><span class="line"> <span class="number">8048</span>bc4:	e8 <span class="number">33</span> <span class="number">09</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>bc9:	<span class="number">83</span> <span class="number">7</span>d f4 <span class="number">07</span>          	cmpl   $<span class="number">0x7</span>,-<span class="number">0xc</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>bcd:	<span class="number">0f</span> <span class="number">87</span> b5 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    	ja     <span class="number">8048</span>c88 &lt;phase_3+<span class="number">0xf0</span>&gt;</span><br><span class="line"></span><br><span class="line"> <span class="number">8048</span>bd3:	<span class="number">8</span>b <span class="number">45</span> f4             	mov    -<span class="number">0xc</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>bd6:	ff <span class="number">24</span> <span class="number">85</span> e8 <span class="number">97</span> <span class="number">04</span> <span class="number">08</span> 	jmp    *<span class="number">0x80497e8</span>(,%eax,<span class="number">4</span>)</span><br><span class="line"> <span class="number">8048</span>bdd:	<span class="number">8</span>d <span class="number">76</span> <span class="number">00</span>             	lea    <span class="number">0x0</span>(%esi),%esi</span><br><span class="line"> <span class="number">8048</span>be0:	b3 <span class="number">71</span>                	mov    $<span class="number">0x71</span>,%bl</span><br><span class="line"> <span class="number">8048</span>be2:	<span class="number">81</span> <span class="number">7</span>d fc <span class="number">09</span> <span class="number">03</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0x309</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>be9:	<span class="number">0f</span> <span class="number">84</span> a0 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>bef:	e8 <span class="number">08</span> <span class="number">09</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>bf4:	e9 <span class="number">96</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>bf9:	<span class="number">8</span>d b4 <span class="number">26</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	lea    <span class="number">0x0</span>(%esi,%eiz,<span class="number">1</span>),%esi</span><br><span class="line"> <span class="number">8048</span>c00:	b3 <span class="number">62</span>                	mov    $<span class="number">0x62</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c02:	<span class="number">81</span> <span class="number">7</span>d fc d6 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0xd6</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c09:	<span class="number">0f</span> <span class="number">84</span> <span class="number">80</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c0f:	e8 e8 <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c14:	eb <span class="number">79</span>                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c16:	b3 <span class="number">62</span>                	mov    $<span class="number">0x62</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c18:	<span class="number">81</span> <span class="number">7</span>d fc f3 <span class="number">02</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0x2f3</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c1f:	<span class="number">74</span> <span class="number">6</span>e                	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c21:	e8 d6 <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c26:	eb <span class="number">67</span>                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c28:	b3 <span class="number">6</span>b                	mov    $<span class="number">0x6b</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c2a:	<span class="number">81</span> <span class="number">7</span>d fc fb <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0xfb</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c31:	<span class="number">74</span> <span class="number">5</span>c                	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c33:	e8 c4 <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c38:	eb <span class="number">55</span>                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c3a:	<span class="number">8</span>d b6 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>    	lea    <span class="number">0x0</span>(%esi),%esi</span><br><span class="line"> <span class="number">8048</span>c40:	b3 <span class="number">6f</span>                	mov    $<span class="number">0x6f</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c42:	<span class="number">81</span> <span class="number">7</span>d fc a0 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0xa0</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c49:	<span class="number">74</span> <span class="number">44</span>                	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c4b:	e8 ac <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c50:	eb <span class="number">3</span>d                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c52:	b3 <span class="number">74</span>                	mov    $<span class="number">0x74</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c54:	<span class="number">81</span> <span class="number">7</span>d fc ca <span class="number">01</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0x1ca</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c5b:	<span class="number">74</span> <span class="number">32</span>                	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c5d:	e8 <span class="number">9</span>a <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c62:	eb <span class="number">2</span>b                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c64:	b3 <span class="number">76</span>                	mov    $<span class="number">0x76</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c66:	<span class="number">81</span> <span class="number">7</span>d fc <span class="number">0</span>c <span class="number">03</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0x30c</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c6d:	<span class="number">74</span> <span class="number">20</span>                	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c6f:	e8 <span class="number">88</span> <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c74:	eb <span class="number">19</span>                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c76:	b3 <span class="number">62</span>                	mov    $<span class="number">0x62</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c78:	<span class="number">81</span> <span class="number">7</span>d fc <span class="number">0</span>c <span class="number">02</span> <span class="number">00</span> <span class="number">00</span> 	cmpl   $<span class="number">0x20c</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>c7f:	<span class="number">74</span> <span class="number">0</span>e                	je     <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c81:	e8 <span class="number">76</span> <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c86:	eb <span class="number">07</span>                	jmp    <span class="number">8048</span>c8f &lt;phase_3+<span class="number">0xf7</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c88:	b3 <span class="number">78</span>                	mov    $<span class="number">0x78</span>,%bl</span><br><span class="line"> <span class="number">8048</span>c8a:	e8 <span class="number">6</span>d <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c8f:	<span class="number">3</span>a <span class="number">5</span>d fb             	cmp    -<span class="number">0x5</span>(%ebp),%bl</span><br><span class="line"> <span class="number">8048</span>c92:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>c99 &lt;phase_3+<span class="number">0x101</span>&gt;</span><br><span class="line"> <span class="number">8048</span>c94:	e8 <span class="number">63</span> <span class="number">08</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>c99:	<span class="number">8</span>b <span class="number">5</span>d e8             	mov    -<span class="number">0x18</span>(%ebp),%ebx</span><br><span class="line"> <span class="number">8048</span>c9c:	<span class="number">89</span> ec                	mov    %ebp,%esp</span><br><span class="line"> <span class="number">8048</span>c9e:	<span class="number">5</span>d                   	pop    %ebp</span><br><span class="line"> <span class="number">8048</span>c9f:	c3                   	ret</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line">08048b98 &lt;phase_3&gt;:</div><div class="line"> 8048b98:	55                   	push   %ebp</div><div class="line"> 8048b99:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048b9b:	83 ec 14             	sub    $0x14,%esp</div><div class="line"> 8048b9e:	53                   	push   %ebx</div><div class="line"> 8048b9f:	8b 55 08             	mov    0x8(%ebp),%edx</div><div class="line"> 8048ba2:	83 c4 f4             	add    $0xfffffff4,%esp</div><div class="line"> 8048ba5:	8d 45 fc             	lea    -0x4(%ebp),%eax</div><div class="line"> 8048ba8:	50                   	push   %eax</div><div class="line"> 8048ba9:	8d 45 fb             	lea    -0x5(%ebp),%eax</div><div class="line"> 8048bac:	50                   	push   %eax</div><div class="line"> 8048bad:	8d 45 f4             	lea    -0xc(%ebp),%eax</div><div class="line"> 8048bb0:	50                   	push   %eax</div><div class="line"> 8048bb1:	68 de 97 04 08       	push   $0x80497de</div><div class="line"> 8048bb6:	52                   	push   %edx</div><div class="line"> 8048bb7:	e8 a4 fc ff ff       	call   8048860 &lt;sscanf@plt&gt;</div><div class="line"></div><div class="line"> 8048bbc:	83 c4 20             	add    $0x20,%esp</div><div class="line"> 8048bbf:	83 f8 02             	cmp    $0x2,%eax</div><div class="line"> 8048bc2:	7f 05                	jg     8048bc9 &lt;phase_3+0x31&gt;</div><div class="line"> 8048bc4:	e8 33 09 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048bc9:	83 7d f4 07          	cmpl   $0x7,-0xc(%ebp)</div><div class="line"> 8048bcd:	0f 87 b5 00 00 00    	ja     8048c88 &lt;phase_3+0xf0&gt;</div><div class="line"></div><div class="line"> 8048bd3:	8b 45 f4             	mov    -0xc(%ebp),%eax</div><div class="line"> 8048bd6:	ff 24 85 e8 97 04 08 	jmp    *0x80497e8(,%eax,4)</div><div class="line"> 8048bdd:	8d 76 00             	lea    0x0(%esi),%esi</div><div class="line"> 8048be0:	b3 71                	mov    $0x71,%bl</div><div class="line"> 8048be2:	81 7d fc 09 03 00 00 	cmpl   $0x309,-0x4(%ebp)</div><div class="line"> 8048be9:	0f 84 a0 00 00 00    	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048bef:	e8 08 09 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048bf4:	e9 96 00 00 00       	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048bf9:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi</div><div class="line"> 8048c00:	b3 62                	mov    $0x62,%bl</div><div class="line"> 8048c02:	81 7d fc d6 00 00 00 	cmpl   $0xd6,-0x4(%ebp)</div><div class="line"> 8048c09:	0f 84 80 00 00 00    	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c0f:	e8 e8 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c14:	eb 79                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c16:	b3 62                	mov    $0x62,%bl</div><div class="line"> 8048c18:	81 7d fc f3 02 00 00 	cmpl   $0x2f3,-0x4(%ebp)</div><div class="line"> 8048c1f:	74 6e                	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c21:	e8 d6 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c26:	eb 67                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c28:	b3 6b                	mov    $0x6b,%bl</div><div class="line"> 8048c2a:	81 7d fc fb 00 00 00 	cmpl   $0xfb,-0x4(%ebp)</div><div class="line"> 8048c31:	74 5c                	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c33:	e8 c4 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c38:	eb 55                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c3a:	8d b6 00 00 00 00    	lea    0x0(%esi),%esi</div><div class="line"> 8048c40:	b3 6f                	mov    $0x6f,%bl</div><div class="line"> 8048c42:	81 7d fc a0 00 00 00 	cmpl   $0xa0,-0x4(%ebp)</div><div class="line"> 8048c49:	74 44                	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c4b:	e8 ac 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c50:	eb 3d                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c52:	b3 74                	mov    $0x74,%bl</div><div class="line"> 8048c54:	81 7d fc ca 01 00 00 	cmpl   $0x1ca,-0x4(%ebp)</div><div class="line"> 8048c5b:	74 32                	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c5d:	e8 9a 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c62:	eb 2b                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c64:	b3 76                	mov    $0x76,%bl</div><div class="line"> 8048c66:	81 7d fc 0c 03 00 00 	cmpl   $0x30c,-0x4(%ebp)</div><div class="line"> 8048c6d:	74 20                	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c6f:	e8 88 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c74:	eb 19                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c76:	b3 62                	mov    $0x62,%bl</div><div class="line"> 8048c78:	81 7d fc 0c 02 00 00 	cmpl   $0x20c,-0x4(%ebp)</div><div class="line"> 8048c7f:	74 0e                	je     8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c81:	e8 76 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c86:	eb 07                	jmp    8048c8f &lt;phase_3+0xf7&gt;</div><div class="line"> 8048c88:	b3 78                	mov    $0x78,%bl</div><div class="line"> 8048c8a:	e8 6d 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c8f:	3a 5d fb             	cmp    -0x5(%ebp),%bl</div><div class="line"> 8048c92:	74 05                	je     8048c99 &lt;phase_3+0x101&gt;</div><div class="line"> 8048c94:	e8 63 08 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048c99:	8b 5d e8             	mov    -0x18(%ebp),%ebx</div><div class="line"> 8048c9c:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048c9e:	5d                   	pop    %ebp</div><div class="line"> 8048c9f:	c3                   	ret</div></pre></td></tr></table></figure>
 <p>我把代码在一些位置断了行，方便阅读。</p>
 <ol>
 <li><p>我们首先看part1, 从三个leal发现，加载了三个有效地址，因而我们猜测是三个输入输入。通过0x8048bb7我们发现三个input的格式是要通过检测的，因而我们打印0x80497de来看看究竟让我们输入什么样的格式：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b phase_3</span><br><span class="line">Breakpoint <span class="number">3</span> at <span class="number">0</span>x8048b9f</span><br><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/elliot/Desktop/bomb</span><br><span class="line">Welcome to my fiendish little bomb. You have <span class="number">6</span> phases with</span><br><span class="line"><span class="built_in">which</span> to blow yourself up. Have a nice day!</span><br><span class="line">Public speaking is very easy.</span><br><span class="line">Phase <span class="number">1</span> defused. How about the next one?</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">6</span> <span class="number">24</span> <span class="number">120</span> <span class="number">720</span></span><br><span class="line">That\<span class="string">'s number 2.  Keep going!</span><br><span class="line">1 w 3</span><br><span class="line"></span><br><span class="line">Breakpoint 3, 0x08048b9f in phase_3 ()</span><br><span class="line">(gdb) p/s (char*) 0x80497de</span><br><span class="line">$2 = 0x80497de "%d %c %d"</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">(gdb) b phase_3</div><div class="line">Breakpoint 3 at 0x8048b9f</div><div class="line">(gdb) r</div><div class="line">Starting program: /home/elliot/Desktop/bomb</div><div class="line">Welcome to my fiendish little bomb. You have 6 phases with</div><div class="line"><span class="built_in">which</span> to blow yourself up. Have a nice day!</div><div class="line">Public speaking is very easy.</div><div class="line">Phase 1 defused. How about the next one?</div><div class="line">1 2 6 24 120 720</div><div class="line">That\<span class="string">'s number 2.  Keep going!</span></div><div class="line">1 w 3</div><div class="line"></div><div class="line">Breakpoint 3, 0x08048b9f in phase_3 ()</div><div class="line">(gdb) p/s (char*) 0x80497de</div><div class="line">$2 = 0x80497de "%d %c %d"</div></pre></td></tr></table></figure>
 <p> 清楚的我们发现，需要输入数字，字符，数字一组。这里需要注意的是，我们在调试的时候不能随意输入，因为如果随意输入就不能进入之后的调试环节，因为不能通过sscanf检测。</p>
 </li>
 <li><p>part2告诉我们，需要让我们的第一个输入大于2并且小于等于7，也就是在3–7之间。</p>
 </li>
 <li><p>part3中0x8048bd6的 <strong>jmp *0x80497e8(,%eax,4)</strong> 是这个题目中最关键的一条指令，它告诉了我们这是一个switch函数，并且这个就是跳转表的地址。因此，如果我们第一个输入的是3的话，我们的跳转地址应该是(0x80497e8+0xc)</p>
- <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/<span class="number">4</span> <span class="number">0x80497e8</span></span><br><span class="line"><span class="number">0x80497e8</span>:	<span class="number">0x08048be0</span>	<span class="number">0x08048c00</span> <span class="number">0x08048c16</span> <span class="number">0x08048c28</span></span><br><span class="line">(gdb) p/s (<span class="keyword">char</span>) <span class="number">0x6b</span></span><br><span class="line">$<span class="number">8</span> = <span class="number">107</span> <span class="string">'k'</span></span><br><span class="line">(gdb) p/d <span class="number">0xfb</span></span><br><span class="line">$<span class="number">10</span> = <span class="number">251</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(gdb) x/4 0x80497e8</div><div class="line">0x80497e8:	0x08048be0	0x08048c00 0x08048c16 0x08048c28</div><div class="line">(gdb) p/s (char) 0x6b</div><div class="line">$8 = 107 &apos;k&apos;</div><div class="line">(gdb) p/d 0xfb</div><div class="line">$10 = 251</div></pre></td></tr></table></figure>
 </li>
 <li><p>通过gdb的输出，我们可以发现需要跳转到地址0x08048c28，进而我们发现了0x6b和0xfb，分别用他们适当的格式打印他们，就能得到他们对应的输出。因为这是一个switch语句，所以答案并不唯一，这里我们找到的答案是3 k 251</p>
 </li>
 </ol>
 <h2 id="Phase_4">Phase_4</h2><p>已经经过了三关了，相信我们已经对汇编代码有了很深（晕）的理（大）解（脑），所以我们当然不会休息，继续！</p>
 <p>首先还是汇编代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">08048</span>ca0 &lt;func4&gt;:</span><br><span class="line"> <span class="number">8048</span>ca0:	<span class="number">55</span>                   	push   %ebp</span><br><span class="line"> <span class="number">8048</span>ca1:	<span class="number">89</span> e5                	mov    %esp,%ebp</span><br><span class="line"> <span class="number">8048</span>ca3:	<span class="number">83</span> ec <span class="number">10</span>             	sub    $<span class="number">0x10</span>,%esp</span><br><span class="line"> <span class="number">8048</span>ca6:	<span class="number">56</span>                   	push   %esi</span><br><span class="line"> <span class="number">8048</span>ca7:	<span class="number">53</span>                   	push   %ebx</span><br><span class="line"> <span class="number">8048</span>ca8:	<span class="number">8</span>b <span class="number">5</span>d <span class="number">08</span>             	mov    <span class="number">0x8</span>(%ebp),%ebx</span><br><span class="line"> <span class="number">8048</span>cab:	<span class="number">83</span> fb <span class="number">01</span>             	cmp    $<span class="number">0x1</span>,%ebx</span><br><span class="line"> <span class="number">8048</span>cae:	<span class="number">7</span>e <span class="number">20</span>                	jle    <span class="number">8048</span>cd0 &lt;func4+<span class="number">0x30</span>&gt;</span><br><span class="line"> <span class="number">8048</span>cb0:	<span class="number">83</span> c4 f4             	add    $<span class="number">0xfffffff4</span>,%esp</span><br><span class="line"> <span class="number">8048</span>cb3:	<span class="number">8</span>d <span class="number">43</span> ff             	lea    -<span class="number">0x1</span>(%ebx),%eax</span><br><span class="line"> <span class="number">8048</span>cb6:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>cb7:	e8 e4 ff ff ff       	call   <span class="number">8048</span>ca0 &lt;func4&gt;</span><br><span class="line"> <span class="number">8048</span>cbc:	<span class="number">89</span> c6                	mov    %eax,%esi</span><br><span class="line"> <span class="number">8048</span>cbe:	<span class="number">83</span> c4 f4             	add    $<span class="number">0xfffffff4</span>,%esp</span><br><span class="line"> <span class="number">8048</span>cc1:	<span class="number">8</span>d <span class="number">43</span> fe             	lea    -<span class="number">0x2</span>(%ebx),%eax</span><br><span class="line"> <span class="number">8048</span>cc4:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>cc5:	e8 d6 ff ff ff       	call   <span class="number">8048</span>ca0 &lt;func4&gt;</span><br><span class="line"> <span class="number">8048</span>cca:	<span class="number">01</span> f0                	add    %esi,%eax</span><br><span class="line"> <span class="number">8048</span>ccc:	eb <span class="number">07</span>                	jmp    <span class="number">8048</span>cd5 &lt;func4+<span class="number">0x35</span>&gt;</span><br><span class="line"> <span class="number">8048</span>cce:	<span class="number">89</span> f6                	mov    %esi,%esi</span><br><span class="line"> <span class="number">8048</span>cd0:	b8 <span class="number">01</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       	mov    $<span class="number">0x1</span>,%eax</span><br><span class="line"> <span class="number">8048</span>cd5:	<span class="number">8</span>d <span class="number">65</span> e8             	lea    -<span class="number">0x18</span>(%ebp),%esp</span><br><span class="line"> <span class="number">8048</span>cd8:	<span class="number">5</span>b                   	pop    %ebx</span><br><span class="line"> <span class="number">8048</span>cd9:	<span class="number">5</span>e                   	pop    %esi</span><br><span class="line"> <span class="number">8048</span>cda:	<span class="number">89</span> ec                	mov    %ebp,%esp</span><br><span class="line"> <span class="number">8048</span>cdc:	<span class="number">5</span>d                   	pop    %ebp</span><br><span class="line"> <span class="number">8048</span>cdd:	c3                   	ret    </span><br><span class="line"> <span class="number">8048</span>cde:	<span class="number">89</span> f6                	mov    %esi,%esi</span><br><span class="line"></span><br><span class="line"><span class="number">08048</span>ce0 &lt;phase_4&gt;:</span><br><span class="line"> <span class="number">8048</span>ce0:	<span class="number">55</span>                   	push   %ebp</span><br><span class="line"> <span class="number">8048</span>ce1:	<span class="number">89</span> e5                	mov    %esp,%ebp</span><br><span class="line"> <span class="number">8048</span>ce3:	<span class="number">83</span> ec <span class="number">18</span>             	sub    $<span class="number">0x18</span>,%esp</span><br><span class="line"> <span class="number">8048</span>ce6:	<span class="number">8</span>b <span class="number">55</span> <span class="number">08</span>             	mov    <span class="number">0x8</span>(%ebp),%edx</span><br><span class="line"> <span class="number">8048</span>ce9:	<span class="number">83</span> c4 fc             	add    $<span class="number">0xfffffffc</span>,%esp</span><br><span class="line"> <span class="number">8048</span>cec:	<span class="number">8</span>d <span class="number">45</span> fc             	lea    -<span class="number">0x4</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>cef:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>cf0:	<span class="number">68</span> <span class="number">08</span> <span class="number">98</span> <span class="number">04</span> <span class="number">08</span>       	push   $<span class="number">0x8049808</span></span><br><span class="line"> <span class="number">8048</span>cf5:	<span class="number">52</span>                   	push   %edx</span><br><span class="line"> <span class="number">8048</span>cf6:	e8 <span class="number">65</span> fb ff ff       	call   <span class="number">8048860</span> &lt;<span class="built_in">sscanf</span>@plt&gt;</span><br><span class="line"> <span class="number">8048</span>cfb:	<span class="number">83</span> c4 <span class="number">10</span>             	add    $<span class="number">0x10</span>,%esp</span><br><span class="line"> <span class="number">8048</span>cfe:	<span class="number">83</span> f8 <span class="number">01</span>             	cmp    $<span class="number">0x1</span>,%eax</span><br><span class="line"> <span class="number">8048</span>d01:	<span class="number">75</span> <span class="number">06</span>                	jne    <span class="number">8048</span>d09 &lt;phase_4+<span class="number">0x29</span>&gt;</span><br><span class="line"> <span class="number">8048</span>d03:	<span class="number">83</span> <span class="number">7</span>d fc <span class="number">00</span>          	cmpl   $<span class="number">0x0</span>,-<span class="number">0x4</span>(%ebp)</span><br><span class="line"> <span class="number">8048</span>d07:	<span class="number">7f</span> <span class="number">05</span>                	jg     <span class="number">8048</span>d0e &lt;phase_4+<span class="number">0x2e</span>&gt;</span><br><span class="line"> <span class="number">8048</span>d09:	e8 ee <span class="number">07</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>d0e:	<span class="number">83</span> c4 f4             	add    $<span class="number">0xfffffff4</span>,%esp</span><br><span class="line"> <span class="number">8048</span>d11:	<span class="number">8</span>b <span class="number">45</span> fc             	mov    -<span class="number">0x4</span>(%ebp),%eax</span><br><span class="line"> <span class="number">8048</span>d14:	<span class="number">50</span>                   	push   %eax</span><br><span class="line"> <span class="number">8048</span>d15:	e8 <span class="number">86</span> ff ff ff       	call   <span class="number">8048</span>ca0 &lt;func4&gt;</span><br><span class="line"> <span class="number">8048</span>d1a:	<span class="number">83</span> c4 <span class="number">10</span>             	add    $<span class="number">0x10</span>,%esp</span><br><span class="line"> <span class="number">8048</span>d1d:	<span class="number">83</span> f8 <span class="number">37</span>             	cmp    $<span class="number">0x37</span>,%eax</span><br><span class="line"> <span class="number">8048</span>d20:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>d27 &lt;phase_4+<span class="number">0x47</span>&gt;</span><br><span class="line"> <span class="number">8048</span>d22:	e8 d5 <span class="number">07</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494f</span>c &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>d27:	<span class="number">89</span> ec                	mov    %ebp,%esp</span><br><span class="line"> <span class="number">8048</span>d29:	<span class="number">5</span>d                   	pop    %ebp</span><br><span class="line"> <span class="number">8048</span>d2a:	c3                   	ret    </span><br><span class="line"> <span class="number">8048</span>d2b:	<span class="number">90</span>                   	nop</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">08048ca0 &lt;func4&gt;:</div><div class="line"> 8048ca0:	55                   	push   %ebp</div><div class="line"> 8048ca1:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048ca3:	83 ec 10             	sub    $0x10,%esp</div><div class="line"> 8048ca6:	56                   	push   %esi</div><div class="line"> 8048ca7:	53                   	push   %ebx</div><div class="line"> 8048ca8:	8b 5d 08             	mov    0x8(%ebp),%ebx</div><div class="line"> 8048cab:	83 fb 01             	cmp    $0x1,%ebx</div><div class="line"> 8048cae:	7e 20                	jle    8048cd0 &lt;func4+0x30&gt;</div><div class="line"> 8048cb0:	83 c4 f4             	add    $0xfffffff4,%esp</div><div class="line"> 8048cb3:	8d 43 ff             	lea    -0x1(%ebx),%eax</div><div class="line"> 8048cb6:	50                   	push   %eax</div><div class="line"> 8048cb7:	e8 e4 ff ff ff       	call   8048ca0 &lt;func4&gt;</div><div class="line"> 8048cbc:	89 c6                	mov    %eax,%esi</div><div class="line"> 8048cbe:	83 c4 f4             	add    $0xfffffff4,%esp</div><div class="line"> 8048cc1:	8d 43 fe             	lea    -0x2(%ebx),%eax</div><div class="line"> 8048cc4:	50                   	push   %eax</div><div class="line"> 8048cc5:	e8 d6 ff ff ff       	call   8048ca0 &lt;func4&gt;</div><div class="line"> 8048cca:	01 f0                	add    %esi,%eax</div><div class="line"> 8048ccc:	eb 07                	jmp    8048cd5 &lt;func4+0x35&gt;</div><div class="line"> 8048cce:	89 f6                	mov    %esi,%esi</div><div class="line"> 8048cd0:	b8 01 00 00 00       	mov    $0x1,%eax</div><div class="line"> 8048cd5:	8d 65 e8             	lea    -0x18(%ebp),%esp</div><div class="line"> 8048cd8:	5b                   	pop    %ebx</div><div class="line"> 8048cd9:	5e                   	pop    %esi</div><div class="line"> 8048cda:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048cdc:	5d                   	pop    %ebp</div><div class="line"> 8048cdd:	c3                   	ret    </div><div class="line"> 8048cde:	89 f6                	mov    %esi,%esi</div><div class="line"></div><div class="line">08048ce0 &lt;phase_4&gt;:</div><div class="line"> 8048ce0:	55                   	push   %ebp</div><div class="line"> 8048ce1:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048ce3:	83 ec 18             	sub    $0x18,%esp</div><div class="line"> 8048ce6:	8b 55 08             	mov    0x8(%ebp),%edx</div><div class="line"> 8048ce9:	83 c4 fc             	add    $0xfffffffc,%esp</div><div class="line"> 8048cec:	8d 45 fc             	lea    -0x4(%ebp),%eax</div><div class="line"> 8048cef:	50                   	push   %eax</div><div class="line"> 8048cf0:	68 08 98 04 08       	push   $0x8049808</div><div class="line"> 8048cf5:	52                   	push   %edx</div><div class="line"> 8048cf6:	e8 65 fb ff ff       	call   8048860 &lt;sscanf@plt&gt;</div><div class="line"> 8048cfb:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048cfe:	83 f8 01             	cmp    $0x1,%eax</div><div class="line"> 8048d01:	75 06                	jne    8048d09 &lt;phase_4+0x29&gt;</div><div class="line"> 8048d03:	83 7d fc 00          	cmpl   $0x0,-0x4(%ebp)</div><div class="line"> 8048d07:	7f 05                	jg     8048d0e &lt;phase_4+0x2e&gt;</div><div class="line"> 8048d09:	e8 ee 07 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048d0e:	83 c4 f4             	add    $0xfffffff4,%esp</div><div class="line"> 8048d11:	8b 45 fc             	mov    -0x4(%ebp),%eax</div><div class="line"> 8048d14:	50                   	push   %eax</div><div class="line"> 8048d15:	e8 86 ff ff ff       	call   8048ca0 &lt;func4&gt;</div><div class="line"> 8048d1a:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048d1d:	83 f8 37             	cmp    $0x37,%eax</div><div class="line"> 8048d20:	74 05                	je     8048d27 &lt;phase_4+0x47&gt;</div><div class="line"> 8048d22:	e8 d5 07 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048d27:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048d29:	5d                   	pop    %ebp</div><div class="line"> 8048d2a:	c3                   	ret    </div><div class="line"> 8048d2b:	90                   	nop</div></pre></td></tr></table></figure>
 <ol>
 <li><p>这个很明显的是 phase_4 调用了 func4 ，因而我们先研究phase_4:</p>
 </li>
 <li><p>phase_4的0x8048cf6同样调用了sscanf函数，因而通过对前面0x8049808的分析我们发现需要输入的是一个数字，它经过func4的输出结果必须为0x37(55).</p>
 </li>
 <li><p>func4是一个递归函数，当初始值为1的时候直接输出结果为1，当不为1的时候他会进行递归：</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">func4</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (x == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> func4(x-<span class="number">1</span>) + func4(x-<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">func4</span> <span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (x == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">	<span class="keyword">return</span> func4(x-<span class="number">1</span>) + func4(x-<span class="number">2</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 通过带入计算，发现 func4(9) = 55。所以此处的答案应该为9。</p>
 </li>
 </ol>
 <h2 id="Phase_5">Phase_5</h2><p>乍一看第五关的代码好少，但是其实这是一个迷惑，这一关比前面任何一关都要有难度的。准备好了吗，我们开始吧。</p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">08048d2c &lt;phase_5&gt;:</span><br><span class="line"> <span class="number">8048</span>d2c:	<span class="number">55</span>                   	push   <span class="decorator">%ebp</span></span><br><span class="line"> <span class="number">8048</span>d2d:	<span class="number">89</span> e5                	mov    <span class="decorator">%esp</span>,<span class="decorator">%ebp</span></span><br><span class="line"> <span class="number">8048</span>d2f:	<span class="number">83</span> ec <span class="number">10</span>             	sub    <span class="variable">$0x10</span>,<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d32:	<span class="number">56</span>                   	push   <span class="decorator">%esi</span></span><br><span class="line"> <span class="number">8048</span>d33:	<span class="number">53</span>                   	push   <span class="decorator">%ebx</span></span><br><span class="line"> <span class="number">8048</span>d34:	<span class="number">8</span>b <span class="number">5</span>d 08             	mov    <span class="number">0x8</span>(<span class="decorator">%ebp</span>),<span class="decorator">%ebx</span></span><br><span class="line"> <span class="number">8048</span>d37:	<span class="number">83</span> c4 f4             	add    <span class="variable">$0xfffffff4</span>,<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d3a:	<span class="number">53</span>                   	push   <span class="decorator">%ebx</span></span><br><span class="line"> <span class="number">8048</span>d3b:	e8 d8 <span class="number">02</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">8049018</span> &lt;string_length&gt;</span><br><span class="line"> <span class="number">8048</span>d4<span class="number">0</span>:	<span class="number">83</span> c4 <span class="number">10</span>             	add    <span class="variable">$0x10</span>,<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d43:	<span class="number">83</span> f8 <span class="number">06</span>             	cmp    <span class="variable">$0x6</span>,<span class="decorator">%eax</span></span><br><span class="line"> <span class="number">8048</span>d46:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>d4d &lt;phase_5+<span class="number">0x21</span>&gt;</span><br><span class="line"> <span class="number">8048</span>d48:	e8 af <span class="number">07</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494</span>fc &lt;explode_bomb&gt;</span><br><span class="line"></span><br><span class="line"> <span class="number">8048</span>d4d:	<span class="number">31</span> d2                	xor    <span class="decorator">%edx</span>,<span class="decorator">%edx</span></span><br><span class="line"> <span class="number">8048</span>d4f:	<span class="number">8</span>d <span class="number">4</span>d f8             	lea    -<span class="number">0x8</span>(<span class="decorator">%ebp</span>),<span class="decorator">%ecx</span></span><br><span class="line"> <span class="number">8048</span>d52:	be <span class="number">20</span> b2 <span class="number">04</span> 08       	mov    <span class="variable">$0x804b220</span>,<span class="decorator">%esi</span></span><br><span class="line"> <span class="number">8048</span>d57:	<span class="number">8</span>a <span class="number">04</span> <span class="number">1</span>a             	mov    (<span class="decorator">%edx</span>,<span class="decorator">%ebx</span>,<span class="number">1</span>),<span class="decorator">%al</span></span><br><span class="line"></span><br><span class="line"> <span class="number">8048</span>d5a:	<span class="number">24</span> 0f                	and    <span class="variable">$0xf</span>,<span class="decorator">%al</span></span><br><span class="line"> <span class="number">8048</span>d5c:	0f be c<span class="number">0</span>             	movsbl <span class="decorator">%al</span>,<span class="decorator">%eax</span></span><br><span class="line"> <span class="number">8048</span>d5f:	<span class="number">8</span>a <span class="number">04</span> <span class="number">30</span>             	mov    (<span class="decorator">%eax</span>,<span class="decorator">%esi</span>,<span class="number">1</span>),<span class="decorator">%al</span></span><br><span class="line"> <span class="number">8048</span>d62:	<span class="number">88</span> <span class="number">04</span> 0a             	mov    <span class="decorator">%al</span>,(<span class="decorator">%edx</span>,<span class="decorator">%ecx</span>,<span class="number">1</span>)</span><br><span class="line"> <span class="number">8048</span>d65:	<span class="number">42</span>                   	inc    <span class="decorator">%edx</span></span><br><span class="line"> <span class="number">8048</span>d66:	<span class="number">83</span> fa <span class="number">05</span>             	cmp    <span class="variable">$0x5</span>,<span class="decorator">%edx</span></span><br><span class="line"> <span class="number">8048</span>d69:	<span class="number">7</span>e ec                	jle    <span class="number">8048</span>d57 &lt;phase_5+<span class="number">0x2b</span>&gt;</span><br><span class="line"></span><br><span class="line"> <span class="number">8048</span>d6b:	c6 <span class="number">45</span> fe <span class="number">00</span>          	movb   <span class="variable">$0x0</span>,-<span class="number">0x2</span>(<span class="decorator">%ebp</span>)</span><br><span class="line"> <span class="number">8048</span>d6f:	<span class="number">83</span> c4 f8             	add    <span class="variable">$0xfffffff8</span>,<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d72:	<span class="number">68</span> 0b <span class="number">98</span> <span class="number">04</span> 08       	push   <span class="variable">$0x804980b</span></span><br><span class="line"> <span class="number">8048</span>d77:	<span class="number">8</span>d <span class="number">45</span> f8             	lea    -<span class="number">0x8</span>(<span class="decorator">%ebp</span>),<span class="decorator">%eax</span></span><br><span class="line"> <span class="number">8048</span>d7a:	<span class="number">50</span>                   	push   <span class="decorator">%eax</span></span><br><span class="line"> <span class="number">8048</span>d7b:	e8 b<span class="number">0</span> <span class="number">02</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">8049030</span> &lt;strings_not_equal&gt;</span><br><span class="line"> <span class="number">8048</span>d8<span class="number">0</span>:	<span class="number">83</span> c4 <span class="number">10</span>             	add    <span class="variable">$0x10</span>,<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d83:	<span class="number">85</span> c<span class="number">0</span>                	test   <span class="decorator">%eax</span>,<span class="decorator">%eax</span></span><br><span class="line"> <span class="number">8048</span>d85:	<span class="number">74</span> <span class="number">05</span>                	je     <span class="number">8048</span>d8c &lt;phase_5+<span class="number">0x60</span>&gt;</span><br><span class="line"> <span class="number">8048</span>d87:	e8 <span class="number">70</span> <span class="number">07</span> <span class="number">00</span> <span class="number">00</span>       	call   <span class="number">80494</span>fc &lt;explode_bomb&gt;</span><br><span class="line"> <span class="number">8048</span>d8c:	<span class="number">8</span>d <span class="number">65</span> e8             	lea    -<span class="number">0x18</span>(<span class="decorator">%ebp</span>),<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d8f:	<span class="number">5</span>b                   	pop    <span class="decorator">%ebx</span></span><br><span class="line"> <span class="number">8048</span>d9<span class="number">0</span>:	<span class="number">5</span>e                   	pop    <span class="decorator">%esi</span></span><br><span class="line"> <span class="number">8048</span>d91:	<span class="number">89</span> ec                	mov    <span class="decorator">%ebp</span>,<span class="decorator">%esp</span></span><br><span class="line"> <span class="number">8048</span>d93:	<span class="number">5</span>d                   	pop    <span class="decorator">%ebp</span></span><br><span class="line"> <span class="number">8048</span>d94:	c3                   	ret    </span><br><span class="line"> <span class="number">8048</span>d95:	<span class="number">8</span>d <span class="number">76</span> <span class="number">00</span>             	lea    <span class="number">0x0</span>(<span class="decorator">%esi</span>),<span class="decorator">%esi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">08048d2c &lt;phase_5&gt;:</div><div class="line"> 8048d2c:	55                   	push   %ebp</div><div class="line"> 8048d2d:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048d2f:	83 ec 10             	sub    $0x10,%esp</div><div class="line"> 8048d32:	56                   	push   %esi</div><div class="line"> 8048d33:	53                   	push   %ebx</div><div class="line"> 8048d34:	8b 5d 08             	mov    0x8(%ebp),%ebx</div><div class="line"> 8048d37:	83 c4 f4             	add    $0xfffffff4,%esp</div><div class="line"> 8048d3a:	53                   	push   %ebx</div><div class="line"> 8048d3b:	e8 d8 02 00 00       	call   8049018 &lt;string_length&gt;</div><div class="line"> 8048d40:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048d43:	83 f8 06             	cmp    $0x6,%eax</div><div class="line"> 8048d46:	74 05                	je     8048d4d &lt;phase_5+0x21&gt;</div><div class="line"> 8048d48:	e8 af 07 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"></div><div class="line"> 8048d4d:	31 d2                	xor    %edx,%edx</div><div class="line"> 8048d4f:	8d 4d f8             	lea    -0x8(%ebp),%ecx</div><div class="line"> 8048d52:	be 20 b2 04 08       	mov    $0x804b220,%esi</div><div class="line"> 8048d57:	8a 04 1a             	mov    (%edx,%ebx,1),%al</div><div class="line"></div><div class="line"> 8048d5a:	24 0f                	and    $0xf,%al</div><div class="line"> 8048d5c:	0f be c0             	movsbl %al,%eax</div><div class="line"> 8048d5f:	8a 04 30             	mov    (%eax,%esi,1),%al</div><div class="line"> 8048d62:	88 04 0a             	mov    %al,(%edx,%ecx,1)</div><div class="line"> 8048d65:	42                   	inc    %edx</div><div class="line"> 8048d66:	83 fa 05             	cmp    $0x5,%edx</div><div class="line"> 8048d69:	7e ec                	jle    8048d57 &lt;phase_5+0x2b&gt;</div><div class="line"></div><div class="line"> 8048d6b:	c6 45 fe 00          	movb   $0x0,-0x2(%ebp)</div><div class="line"> 8048d6f:	83 c4 f8             	add    $0xfffffff8,%esp</div><div class="line"> 8048d72:	68 0b 98 04 08       	push   $0x804980b</div><div class="line"> 8048d77:	8d 45 f8             	lea    -0x8(%ebp),%eax</div><div class="line"> 8048d7a:	50                   	push   %eax</div><div class="line"> 8048d7b:	e8 b0 02 00 00       	call   8049030 &lt;strings_not_equal&gt;</div><div class="line"> 8048d80:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048d83:	85 c0                	test   %eax,%eax</div><div class="line"> 8048d85:	74 05                	je     8048d8c &lt;phase_5+0x60&gt;</div><div class="line"> 8048d87:	e8 70 07 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048d8c:	8d 65 e8             	lea    -0x18(%ebp),%esp</div><div class="line"> 8048d8f:	5b                   	pop    %ebx</div><div class="line"> 8048d90:	5e                   	pop    %esi</div><div class="line"> 8048d91:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048d93:	5d                   	pop    %ebp</div><div class="line"> 8048d94:	c3                   	ret    </div><div class="line"> 8048d95:	8d 76 00             	lea    0x0(%esi),%esi</div></pre></td></tr></table></figure>
 <ol>
 <li><p>part1有一个function是string_length，后面有一个比较，如果不为6就会引爆炸弹。这意味着，我们的input需要是一个包含6个字节的string。</p>
 </li>
 <li><p>part2中有一个0x804b220被移入了esi register，因而我们打印这个地址：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) p/s (char*) <span class="number">0</span>x804b220</span><br><span class="line"><span class="variable">$12</span> = <span class="number">0</span>x804b220 <span class="string">"isrveawhobpnutfg\260\001"</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(gdb) p/s (char*) 0x804b220</div><div class="line"><span class="variable">$12</span> = 0x804b220 <span class="string">"isrveawhobpnutfg\260\001"</span></div></pre></td></tr></table></figure>
 <p> 发现这是一串莫名其妙的数字，后面还有\260\001也不知道是什么鬼。前面的“isrveawhobpnutfg”一共是16个字符，我们姑且叫他string1吧。</p>
 </li>
 <li><p>part3是这个题目的核心部分，它表示，我们的输入字符作为偏移量，对刚才的string1进行一个变换。具体的变换方法是，通过把我们的字符转化为ASCII码，取出其中的最后一位(&amp;0xF)，假设为5，那么我们就像对应的取出string1[5]。具体的java代码是这样的：</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase5</span> <span class="params">(string inputString)</span> </span>&#123;</span><br><span class="line">	String[] strings = <span class="keyword">new</span> String[<span class="number">6</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">		strings[i] = string1[(inputString[i] &amp; <span class="number">0xF</span>)];</span><br><span class="line">	<span class="keyword">return</span> strings;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase5</span> <span class="params">(string inputString)</span> </span>&#123;</div><div class="line">	String[] strings = <span class="keyword">new</span> String[<span class="number">6</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</div><div class="line">		strings[i] = string1[(inputString[i] &amp; <span class="number">0xF</span>)];</div><div class="line">	<span class="keyword">return</span> strings;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>我们在part3中得到的字符串需要与part4中题目要求的字符串相同。题目要求的字符串在0x0x804980b中，通过print我们发现他是”giants”，因而通过查询ASCII table我们可以得到一组字符串作为偏移量：opekmq。注意，这里的答案并不唯一，甚至于他们不是字母而是其他的之类的符号都是可以的，但是他们的ASCII码的最后一位必须符合题意。</p>
 </li>
 </ol>
 <h2 id="Phase_6">Phase_6</h2><p>这是CMU老师声称 “The last phase will even challenge the best students”。 我觉得像我这种学霸（渣）那是一定会被虐的体无完肤的，不过没有困难也要创造困难，何况现在就有困难呢。</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">08048d98 &lt;phase_6&gt;:</span><br><span class="line"> 8048d98:	<span class="number">55</span>                   	<span class="keyword">push</span>   %<span class="literal">ebp</span></span><br><span class="line"> 8048d99:	<span class="number">89</span> e5                	<span class="keyword">mov</span>    %<span class="literal">esp</span>,%<span class="literal">ebp</span></span><br><span class="line"> 8048d9b:	<span class="number">83</span> ec 4c             	<span class="keyword">sub</span>    <span class="number">$0</span>x4c,%<span class="literal">esp</span></span><br><span class="line"> 8048d9e:	<span class="number">57</span>                   	<span class="keyword">push</span>   %<span class="literal">edi</span></span><br><span class="line"> 8048d9f:	<span class="number">56</span>                   	<span class="keyword">push</span>   %<span class="literal">esi</span></span><br><span class="line"> 8048da0:	<span class="number">53</span>                   	<span class="keyword">push</span>   %<span class="literal">ebx</span></span><br><span class="line"> 8048da1:	8b <span class="number">55</span> <span class="number">08</span>             	<span class="keyword">mov</span>    <span class="number">0x8</span>(%<span class="literal">ebp</span>),%<span class="literal">edx</span></span><br><span class="line"> 8048da4:	c7 <span class="number">45</span> cc 6c b2 <span class="number">04</span> <span class="number">08</span> 	movl   <span class="number">$0</span>x804b26c,-<span class="number">0x34</span>(%<span class="literal">ebp</span>)</span><br><span class="line"> 8048dab:	<span class="number">83</span> c4 f8             	<span class="keyword">add</span>    <span class="number">$0</span>xfffffff8,%<span class="literal">esp</span></span><br><span class="line"> 8048dae:	<span class="number">8d</span> <span class="number">45</span> e8             	<span class="keyword">lea</span>    -<span class="number">0x18</span>(%<span class="literal">ebp</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048db1:	<span class="number">50</span>                   	<span class="keyword">push</span>   %<span class="literal">eax</span></span><br><span class="line"> 8048db2:	<span class="number">52</span>                   	<span class="keyword">push</span>   %<span class="literal">edx</span></span><br><span class="line"> 8048db3:	e8 <span class="number">20</span> <span class="number">02</span> <span class="number">00</span> <span class="number">00</span>       	<span class="keyword">call</span>   8048fd8 &lt;read_six_numbers&gt;</span><br><span class="line"> 8048db8:	<span class="number">31</span> ff                	<span class="keyword">xor</span>    %<span class="literal">edi</span>,%<span class="literal">edi</span></span><br><span class="line"> 8048dba:	<span class="number">83</span> c4 <span class="number">10</span>             	<span class="keyword">add</span>    <span class="number">$0</span>x10,%<span class="literal">esp</span></span><br><span class="line"> 8048dbd:	<span class="number">8d</span> <span class="number">76</span> <span class="number">00</span>             	<span class="keyword">lea</span>    <span class="number">0x0</span>(%<span class="literal">esi</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048dc0:	<span class="number">8d</span> <span class="number">45</span> e8             	<span class="keyword">lea</span>    -<span class="number">0x18</span>(%<span class="literal">ebp</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048dc3:	8b <span class="number">04</span> b8             	<span class="keyword">mov</span>    (%<span class="literal">eax</span>,%<span class="literal">edi</span>,<span class="number">4</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048dc6:	<span class="number">48</span>                   	<span class="keyword">dec</span>    %<span class="literal">eax</span></span><br><span class="line"> 8048dc7:	<span class="number">83</span> f8 <span class="number">05</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x5,%<span class="literal">eax</span></span><br><span class="line"> 8048dca:	<span class="number">76</span> <span class="number">05</span>                	<span class="keyword">jbe</span>    8048dd1 &lt;phase_6+<span class="number">0x39</span>&gt;</span><br><span class="line"> 8048dcc:	e8 2b <span class="number">07</span> <span class="number">00</span> <span class="number">00</span>       	<span class="keyword">call</span>   80494fc &lt;explode_bomb&gt;</span><br><span class="line"> 8048dd1:	<span class="number">8d</span> 5f <span class="number">01</span>             	<span class="keyword">lea</span>    <span class="number">0x1</span>(%<span class="literal">edi</span>),%<span class="literal">ebx</span></span><br><span class="line"> 8048dd4:	<span class="number">83</span> fb <span class="number">05</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x5,%<span class="literal">ebx</span></span><br><span class="line"> 8048dd7:	7f <span class="number">23</span>                	<span class="keyword">jg</span>     8048dfc &lt;phase_6+<span class="number">0x64</span>&gt;</span><br><span class="line"> 8048dd9:	<span class="number">8d</span> <span class="number">04</span> bd <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	<span class="keyword">lea</span>    <span class="number">0x0</span>(,%<span class="literal">edi</span>,<span class="number">4</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048de0:	<span class="number">89</span> <span class="number">45</span> c8             	<span class="keyword">mov</span>    %<span class="literal">eax</span>,-<span class="number">0x38</span>(%<span class="literal">ebp</span>)</span><br><span class="line"> 8048de3:	<span class="number">8d</span> <span class="number">75</span> e8             	<span class="keyword">lea</span>    -<span class="number">0x18</span>(%<span class="literal">ebp</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048de6:	8b <span class="number">55</span> c8             	<span class="keyword">mov</span>    -<span class="number">0x38</span>(%<span class="literal">ebp</span>),%<span class="literal">edx</span></span><br><span class="line"> 8048de9:	8b <span class="number">04</span> <span class="number">32</span>             	<span class="keyword">mov</span>    (%<span class="literal">edx</span>,%<span class="literal">esi</span>,<span class="number">1</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048<span class="keyword">dec</span>:	3b <span class="number">04</span> 9e             	<span class="keyword">cmp</span>    (%<span class="literal">esi</span>,%<span class="literal">ebx</span>,<span class="number">4</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048def:	<span class="number">75</span> <span class="number">05</span>                	<span class="keyword">jne</span>    8048df6 &lt;phase_6+<span class="number">0x5e</span>&gt;</span><br><span class="line"> 8048df1:	e8 <span class="number">06</span> <span class="number">07</span> <span class="number">00</span> <span class="number">00</span>       	<span class="keyword">call</span>   80494fc &lt;explode_bomb&gt;</span><br><span class="line"> 8048df6:	<span class="number">43</span>                   	<span class="keyword">inc</span>    %<span class="literal">ebx</span></span><br><span class="line"> 8048df7:	<span class="number">83</span> fb <span class="number">05</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x5,%<span class="literal">ebx</span></span><br><span class="line"> 8048dfa:	7e ea                	<span class="keyword">jle</span>    8048de6 &lt;phase_6+<span class="number">0x4e</span>&gt;</span><br><span class="line"> 8048dfc:	<span class="number">47</span>                   	<span class="keyword">inc</span>    %<span class="literal">edi</span></span><br><span class="line"> 8048dfd:	<span class="number">83</span> ff <span class="number">05</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x5,%<span class="literal">edi</span></span><br><span class="line"> 8048e00:	7e be                	<span class="keyword">jle</span>    8048dc0 &lt;phase_6+<span class="number">0x28</span>&gt;</span><br><span class="line"></span><br><span class="line"> 8048e02:	<span class="number">31</span> ff                	<span class="keyword">xor</span>    %<span class="literal">edi</span>,%<span class="literal">edi</span></span><br><span class="line"> 8048e04:	<span class="number">8d</span> <span class="number">4d</span> e8             	<span class="keyword">lea</span>    -<span class="number">0x18</span>(%<span class="literal">ebp</span>),%<span class="literal">ecx</span></span><br><span class="line"> 8048e07:	<span class="number">8d</span> <span class="number">45</span> d0             	<span class="keyword">lea</span>    -<span class="number">0x30</span>(%<span class="literal">ebp</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048e0a:	<span class="number">89</span> <span class="number">45</span> c4             	<span class="keyword">mov</span>    %<span class="literal">eax</span>,-<span class="number">0x3c</span>(%<span class="literal">ebp</span>)</span><br><span class="line"> 8048e0d:	<span class="number">8d</span> <span class="number">76</span> <span class="number">00</span>             	<span class="keyword">lea</span>    <span class="number">0x0</span>(%<span class="literal">esi</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e10:	8b <span class="number">75</span> cc             	<span class="keyword">mov</span>    -<span class="number">0x34</span>(%<span class="literal">ebp</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e13:	bb <span class="number">01</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       	<span class="keyword">mov</span>    <span class="number">$0</span>x1,%<span class="literal">ebx</span></span><br><span class="line"> 8048e18:	<span class="number">8d</span> <span class="number">04</span> bd <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	<span class="keyword">lea</span>    <span class="number">0x0</span>(,%<span class="literal">edi</span>,<span class="number">4</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048e1f:	<span class="number">89</span> c2                	<span class="keyword">mov</span>    %<span class="literal">eax</span>,%<span class="literal">edx</span></span><br><span class="line"> 8048e21:	3b 1c <span class="number">08</span>             	<span class="keyword">cmp</span>    (%<span class="literal">eax</span>,%<span class="literal">ecx</span>,<span class="number">1</span>),%<span class="literal">ebx</span></span><br><span class="line"> 8048e24:	<span class="number">7d</span> <span class="number">12</span>                	<span class="keyword">jge</span>    8048e38 &lt;phase_6+<span class="number">0xa0</span>&gt;</span><br><span class="line"> 8048e26:	8b <span class="number">04</span> 0a             	<span class="keyword">mov</span>    (%<span class="literal">edx</span>,%<span class="literal">ecx</span>,<span class="number">1</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048e29:	<span class="number">8d</span> b4 <span class="number">26</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	<span class="keyword">lea</span>    <span class="number">0x0</span>(%<span class="literal">esi</span>,%eiz,<span class="number">1</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e30:	8b <span class="number">76</span> <span class="number">08</span>             	<span class="keyword">mov</span>    <span class="number">0x8</span>(%<span class="literal">esi</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e33:	<span class="number">43</span>                   	<span class="keyword">inc</span>    %<span class="literal">ebx</span></span><br><span class="line"> 8048e34:	<span class="number">39</span> c3                	<span class="keyword">cmp</span>    %<span class="literal">eax</span>,%<span class="literal">ebx</span></span><br><span class="line"> 8048e36:	7c f8                	<span class="keyword">jl</span>     8048e30 &lt;phase_6+<span class="number">0x98</span>&gt;</span><br><span class="line"> 8048e38:	8b <span class="number">55</span> c4             	<span class="keyword">mov</span>    -<span class="number">0x3c</span>(%<span class="literal">ebp</span>),%<span class="literal">edx</span></span><br><span class="line"> 8048e3b:	<span class="number">89</span> <span class="number">34</span> ba             	<span class="keyword">mov</span>    %<span class="literal">esi</span>,(%<span class="literal">edx</span>,%<span class="literal">edi</span>,<span class="number">4</span>)</span><br><span class="line"> 8048e3e:	<span class="number">47</span>                   	<span class="keyword">inc</span>    %<span class="literal">edi</span></span><br><span class="line"> 8048e3f:	<span class="number">83</span> ff <span class="number">05</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x5,%<span class="literal">edi</span></span><br><span class="line"> 8048e42:	7e cc                	<span class="keyword">jle</span>    8048e10 &lt;phase_6+<span class="number">0x78</span>&gt;</span><br><span class="line"></span><br><span class="line"> 8048e44:	8b <span class="number">75</span> d0             	<span class="keyword">mov</span>    -<span class="number">0x30</span>(%<span class="literal">ebp</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e47:	<span class="number">89</span> <span class="number">75</span> cc             	<span class="keyword">mov</span>    %<span class="literal">esi</span>,-<span class="number">0x34</span>(%<span class="literal">ebp</span>)</span><br><span class="line"> 8048e4a:	bf <span class="number">01</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       	<span class="keyword">mov</span>    <span class="number">$0</span>x1,%<span class="literal">edi</span></span><br><span class="line"> 8048e4f:	<span class="number">8d</span> <span class="number">55</span> d0             	<span class="keyword">lea</span>    -<span class="number">0x30</span>(%<span class="literal">ebp</span>),%<span class="literal">edx</span></span><br><span class="line"> 8048e52:	8b <span class="number">04</span> ba             	<span class="keyword">mov</span>    (%<span class="literal">edx</span>,%<span class="literal">edi</span>,<span class="number">4</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048e55:	<span class="number">89</span> <span class="number">46</span> <span class="number">08</span>             	<span class="keyword">mov</span>    %<span class="literal">eax</span>,<span class="number">0x8</span>(%<span class="literal">esi</span>)</span><br><span class="line"> 8048e58:	<span class="number">89</span> c6                	<span class="keyword">mov</span>    %<span class="literal">eax</span>,%<span class="literal">esi</span></span><br><span class="line"> 8048e5a:	<span class="number">47</span>                   	<span class="keyword">inc</span>    %<span class="literal">edi</span></span><br><span class="line"> 8048e5b:	<span class="number">83</span> ff <span class="number">05</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x5,%<span class="literal">edi</span></span><br><span class="line"> 8048e5e:	7e f2                	<span class="keyword">jle</span>    8048e52 &lt;phase_6+<span class="number">0xba</span>&gt;</span><br><span class="line"> 8048e60:	c7 <span class="number">46</span> <span class="number">08</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> 	movl   <span class="number">$0</span>x0,<span class="number">0x8</span>(%<span class="literal">esi</span>)</span><br><span class="line"> 8048e67:	8b <span class="number">75</span> cc             	<span class="keyword">mov</span>    -<span class="number">0x34</span>(%<span class="literal">ebp</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e6a:	<span class="number">31</span> ff                	<span class="keyword">xor</span>    %<span class="literal">edi</span>,%<span class="literal">edi</span></span><br><span class="line"> 8048e6c:	<span class="number">8d</span> <span class="number">74</span> <span class="number">26</span> <span class="number">00</span>          	<span class="keyword">lea</span>    <span class="number">0x0</span>(%<span class="literal">esi</span>,%eiz,<span class="number">1</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e70:	8b <span class="number">56</span> <span class="number">08</span>             	<span class="keyword">mov</span>    <span class="number">0x8</span>(%<span class="literal">esi</span>),%<span class="literal">edx</span></span><br><span class="line"> 8048e73:	8b <span class="number">06</span>                	<span class="keyword">mov</span>    (%<span class="literal">esi</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048e75:	3b <span class="number">02</span>                	<span class="keyword">cmp</span>    (%<span class="literal">edx</span>),%<span class="literal">eax</span></span><br><span class="line"> 8048e77:	<span class="number">7d</span> <span class="number">05</span>                	<span class="keyword">jge</span>    8048e7e &lt;phase_6+<span class="number">0xe6</span>&gt;</span><br><span class="line"> 8048e79:	e8 7e <span class="number">06</span> <span class="number">00</span> <span class="number">00</span>       	<span class="keyword">call</span>   80494fc &lt;explode_bomb&gt;</span><br><span class="line"> 8048e7e:	8b <span class="number">76</span> <span class="number">08</span>             	<span class="keyword">mov</span>    <span class="number">0x8</span>(%<span class="literal">esi</span>),%<span class="literal">esi</span></span><br><span class="line"> 8048e81:	<span class="number">47</span>                   	<span class="keyword">inc</span>    %<span class="literal">edi</span></span><br><span class="line"> 8048e82:	<span class="number">83</span> ff <span class="number">04</span>             	<span class="keyword">cmp</span>    <span class="number">$0</span>x4,%<span class="literal">edi</span></span><br><span class="line"> 8048e85:	7e e9                	<span class="keyword">jle</span>    8048e70 &lt;phase_6+<span class="number">0xd8</span>&gt;</span><br><span class="line"> 8048e87:	<span class="number">8d</span> <span class="number">65</span> a8             	<span class="keyword">lea</span>    -<span class="number">0x58</span>(%<span class="literal">ebp</span>),%<span class="literal">esp</span></span><br><span class="line"> 8048e8a:	5b                   	<span class="keyword">pop</span>    %<span class="literal">ebx</span></span><br><span class="line"> 8048e8b:	5e                   	<span class="keyword">pop</span>    %<span class="literal">esi</span></span><br><span class="line"> 8048e8c:	5f                   	<span class="keyword">pop</span>    %<span class="literal">edi</span></span><br><span class="line"> 8048e8d:	<span class="number">89</span> ec                	<span class="keyword">mov</span>    %<span class="literal">ebp</span>,%<span class="literal">esp</span></span><br><span class="line"> 8048e8f:	<span class="number">5d</span>                   	<span class="keyword">pop</span>    %<span class="literal">ebp</span></span><br><span class="line"> 8048e90:	c3                   	<span class="keyword">ret</span>    </span><br><span class="line"> 8048e91:	<span class="number">8d</span> <span class="number">76</span> <span class="number">00</span>             	<span class="keyword">lea</span>    <span class="number">0x0</span>(%<span class="literal">esi</span>),%<span class="literal">esi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line">08048d98 &lt;phase_6&gt;:</div><div class="line"> 8048d98:	55                   	push   %ebp</div><div class="line"> 8048d99:	89 e5                	mov    %esp,%ebp</div><div class="line"> 8048d9b:	83 ec 4c             	sub    $0x4c,%esp</div><div class="line"> 8048d9e:	57                   	push   %edi</div><div class="line"> 8048d9f:	56                   	push   %esi</div><div class="line"> 8048da0:	53                   	push   %ebx</div><div class="line"> 8048da1:	8b 55 08             	mov    0x8(%ebp),%edx</div><div class="line"> 8048da4:	c7 45 cc 6c b2 04 08 	movl   $0x804b26c,-0x34(%ebp)</div><div class="line"> 8048dab:	83 c4 f8             	add    $0xfffffff8,%esp</div><div class="line"> 8048dae:	8d 45 e8             	lea    -0x18(%ebp),%eax</div><div class="line"> 8048db1:	50                   	push   %eax</div><div class="line"> 8048db2:	52                   	push   %edx</div><div class="line"> 8048db3:	e8 20 02 00 00       	call   8048fd8 &lt;read_six_numbers&gt;</div><div class="line"> 8048db8:	31 ff                	xor    %edi,%edi</div><div class="line"> 8048dba:	83 c4 10             	add    $0x10,%esp</div><div class="line"> 8048dbd:	8d 76 00             	lea    0x0(%esi),%esi</div><div class="line"> 8048dc0:	8d 45 e8             	lea    -0x18(%ebp),%eax</div><div class="line"> 8048dc3:	8b 04 b8             	mov    (%eax,%edi,4),%eax</div><div class="line"> 8048dc6:	48                   	dec    %eax</div><div class="line"> 8048dc7:	83 f8 05             	cmp    $0x5,%eax</div><div class="line"> 8048dca:	76 05                	jbe    8048dd1 &lt;phase_6+0x39&gt;</div><div class="line"> 8048dcc:	e8 2b 07 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048dd1:	8d 5f 01             	lea    0x1(%edi),%ebx</div><div class="line"> 8048dd4:	83 fb 05             	cmp    $0x5,%ebx</div><div class="line"> 8048dd7:	7f 23                	jg     8048dfc &lt;phase_6+0x64&gt;</div><div class="line"> 8048dd9:	8d 04 bd 00 00 00 00 	lea    0x0(,%edi,4),%eax</div><div class="line"> 8048de0:	89 45 c8             	mov    %eax,-0x38(%ebp)</div><div class="line"> 8048de3:	8d 75 e8             	lea    -0x18(%ebp),%esi</div><div class="line"> 8048de6:	8b 55 c8             	mov    -0x38(%ebp),%edx</div><div class="line"> 8048de9:	8b 04 32             	mov    (%edx,%esi,1),%eax</div><div class="line"> 8048dec:	3b 04 9e             	cmp    (%esi,%ebx,4),%eax</div><div class="line"> 8048def:	75 05                	jne    8048df6 &lt;phase_6+0x5e&gt;</div><div class="line"> 8048df1:	e8 06 07 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048df6:	43                   	inc    %ebx</div><div class="line"> 8048df7:	83 fb 05             	cmp    $0x5,%ebx</div><div class="line"> 8048dfa:	7e ea                	jle    8048de6 &lt;phase_6+0x4e&gt;</div><div class="line"> 8048dfc:	47                   	inc    %edi</div><div class="line"> 8048dfd:	83 ff 05             	cmp    $0x5,%edi</div><div class="line"> 8048e00:	7e be                	jle    8048dc0 &lt;phase_6+0x28&gt;</div><div class="line"></div><div class="line"> 8048e02:	31 ff                	xor    %edi,%edi</div><div class="line"> 8048e04:	8d 4d e8             	lea    -0x18(%ebp),%ecx</div><div class="line"> 8048e07:	8d 45 d0             	lea    -0x30(%ebp),%eax</div><div class="line"> 8048e0a:	89 45 c4             	mov    %eax,-0x3c(%ebp)</div><div class="line"> 8048e0d:	8d 76 00             	lea    0x0(%esi),%esi</div><div class="line"> 8048e10:	8b 75 cc             	mov    -0x34(%ebp),%esi</div><div class="line"> 8048e13:	bb 01 00 00 00       	mov    $0x1,%ebx</div><div class="line"> 8048e18:	8d 04 bd 00 00 00 00 	lea    0x0(,%edi,4),%eax</div><div class="line"> 8048e1f:	89 c2                	mov    %eax,%edx</div><div class="line"> 8048e21:	3b 1c 08             	cmp    (%eax,%ecx,1),%ebx</div><div class="line"> 8048e24:	7d 12                	jge    8048e38 &lt;phase_6+0xa0&gt;</div><div class="line"> 8048e26:	8b 04 0a             	mov    (%edx,%ecx,1),%eax</div><div class="line"> 8048e29:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi</div><div class="line"> 8048e30:	8b 76 08             	mov    0x8(%esi),%esi</div><div class="line"> 8048e33:	43                   	inc    %ebx</div><div class="line"> 8048e34:	39 c3                	cmp    %eax,%ebx</div><div class="line"> 8048e36:	7c f8                	jl     8048e30 &lt;phase_6+0x98&gt;</div><div class="line"> 8048e38:	8b 55 c4             	mov    -0x3c(%ebp),%edx</div><div class="line"> 8048e3b:	89 34 ba             	mov    %esi,(%edx,%edi,4)</div><div class="line"> 8048e3e:	47                   	inc    %edi</div><div class="line"> 8048e3f:	83 ff 05             	cmp    $0x5,%edi</div><div class="line"> 8048e42:	7e cc                	jle    8048e10 &lt;phase_6+0x78&gt;</div><div class="line"></div><div class="line"> 8048e44:	8b 75 d0             	mov    -0x30(%ebp),%esi</div><div class="line"> 8048e47:	89 75 cc             	mov    %esi,-0x34(%ebp)</div><div class="line"> 8048e4a:	bf 01 00 00 00       	mov    $0x1,%edi</div><div class="line"> 8048e4f:	8d 55 d0             	lea    -0x30(%ebp),%edx</div><div class="line"> 8048e52:	8b 04 ba             	mov    (%edx,%edi,4),%eax</div><div class="line"> 8048e55:	89 46 08             	mov    %eax,0x8(%esi)</div><div class="line"> 8048e58:	89 c6                	mov    %eax,%esi</div><div class="line"> 8048e5a:	47                   	inc    %edi</div><div class="line"> 8048e5b:	83 ff 05             	cmp    $0x5,%edi</div><div class="line"> 8048e5e:	7e f2                	jle    8048e52 &lt;phase_6+0xba&gt;</div><div class="line"> 8048e60:	c7 46 08 00 00 00 00 	movl   $0x0,0x8(%esi)</div><div class="line"> 8048e67:	8b 75 cc             	mov    -0x34(%ebp),%esi</div><div class="line"> 8048e6a:	31 ff                	xor    %edi,%edi</div><div class="line"> 8048e6c:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi</div><div class="line"> 8048e70:	8b 56 08             	mov    0x8(%esi),%edx</div><div class="line"> 8048e73:	8b 06                	mov    (%esi),%eax</div><div class="line"> 8048e75:	3b 02                	cmp    (%edx),%eax</div><div class="line"> 8048e77:	7d 05                	jge    8048e7e &lt;phase_6+0xe6&gt;</div><div class="line"> 8048e79:	e8 7e 06 00 00       	call   80494fc &lt;explode_bomb&gt;</div><div class="line"> 8048e7e:	8b 76 08             	mov    0x8(%esi),%esi</div><div class="line"> 8048e81:	47                   	inc    %edi</div><div class="line"> 8048e82:	83 ff 04             	cmp    $0x4,%edi</div><div class="line"> 8048e85:	7e e9                	jle    8048e70 &lt;phase_6+0xd8&gt;</div><div class="line"> 8048e87:	8d 65 a8             	lea    -0x58(%ebp),%esp</div><div class="line"> 8048e8a:	5b                   	pop    %ebx</div><div class="line"> 8048e8b:	5e                   	pop    %esi</div><div class="line"> 8048e8c:	5f                   	pop    %edi</div><div class="line"> 8048e8d:	89 ec                	mov    %ebp,%esp</div><div class="line"> 8048e8f:	5d                   	pop    %ebp</div><div class="line"> 8048e90:	c3                   	ret    </div><div class="line"> 8048e91:	8d 76 00             	lea    0x0(%esi),%esi</div></pre></td></tr></table></figure>
 <p>这个题目的代码应该也是这个lab中最长的了，不过不要着急，我们一步步来看。</p>
 <ol>
 <li><p>这里的part1就很复杂，首先，0x8048da4中将一个0x804b26c移动到-0x34(%ebp)中，不过这个家伙和我们现在还没什么关系，等会儿part2和part3的时候才会用到它。</p>
@@ -346,18 +466,18 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 <li><p>继续往下看part1，可以发现它需要我们输入六个数字，这六个数字都必须位于&lt;6的范围内，否则就会爆炸。</p>
 </li>
 <li><p>同时，这六个数字每一个都不能相等。</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase6_1</span> <span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (nums[i] &gt; <span class="number">6</span>) explode();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; <span class="number">6</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (nums[i] == nums[j]) explode();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase6_1</span> <span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (nums[i] &gt; <span class="number">6</span>) explode();</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; <span class="number">6</span>; j++) &#123;</div><div class="line">			<span class="keyword">if</span> (nums[i] == nums[j]) explode();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 至此，part1分析完毕，我们进入part2。</p>
 </li>
 <li><p>part2揭露了这个问题的本质：刚才我们放过的0x804b26c我们重新回头来看他，发现这个货很奇怪：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/d <span class="number">0</span>x804b26c</span><br><span class="line"><span class="number">0</span>x804b26c &lt;node1&gt;:	<span class="number">253</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(gdb) x/d 0x804b26c</div><div class="line">0x804b26c &lt;node1&gt;:	253</div></pre></td></tr></table></figure>
 <p> 奇怪就在，它的前面有一个tag：node1，这是什么，这不是传说中的链表吗！因而我们使用x/3d打印他的连续三个相关字节的内容：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/<span class="number">3</span>d <span class="number">0</span>x804b26c</span><br><span class="line"><span class="number">0</span>x804b26c &lt;node1&gt;:	<span class="number">253</span>	<span class="number">1</span> <span class="number">134525536</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(gdb) x/3d 0x804b26c</div><div class="line">0x804b26c &lt;node1&gt;:	253	1 134525536</div></pre></td></tr></table></figure>
 <p> 结果表明，这确实是一个链表。那么part2的代码就好理解了：他的主要目的是根据我们所提供的六个数字，并以我们的数字为索引进行链表的重新排序，组成一个全新的链表：</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase6_sort</span> <span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">	\\ <span class="string">"nodes"</span> is the nodes that we already have in our memory</span><br><span class="line">	\\ We assume we already have the node data structure</span><br><span class="line">	Node[] nodesSorted = <span class="keyword">new</span> Node[<span class="number">6</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">		Node node = nodes[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; nums[i]; j++) &#123;</span><br><span class="line">			node = node.next;</span><br><span class="line">		&#125;</span><br><span class="line">		nodesSorted[i] = node;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase6_sort</span> <span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">	\\ <span class="string">"nodes"</span> is the nodes that we already have in our memory</div><div class="line">	\\ We assume we already have the node data structure</div><div class="line">	Node[] nodesSorted = <span class="keyword">new</span> Node[<span class="number">6</span>];</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</div><div class="line">		Node node = nodes[<span class="number">0</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; nums[i]; j++) &#123;</div><div class="line">			node = node.next;</div><div class="line">		&#125;</div><div class="line">		nodesSorted[i] = node;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>在part3中，我们则对我们刚才已经重排序的链表进行重新组织和测试，他们必须满足前一个node的值都比后面的要大：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase6_test</span> <span class="params">(node[] nodes)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (nodes[i] &lt; nodes[i+<span class="number">1</span>]) explode();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">phase6_test</span> <span class="params">(node[] nodes)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (nodes[i] &lt; nodes[i+<span class="number">1</span>]) explode();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>现在我们需要做什么？我们需要做的就是把这6个node的值全部找出来（通过p node1/node2/…），然后把他们按照从大到小排序，提取他们的索引，就是我们最后需要的答案。这六个数字分别是：253,725,301,997,212,432, 所以我们最终的次序应该是4 2 6 3 1 5。</p>
 </li>
@@ -365,32 +485,53 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 <p>至此，6个炸弹全部排解完毕。</p>
 <p>关于隐藏关的炸弹，我会在后续的博文中讨论。当然，也有可能直接更新在这里。附上一个通关截图~</p>
 <p><img src="/note/img/20150723/bomb.png" alt="bomb complete"></p>
-</span>
+
       
     </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/note/tags/CS/" rel="tag">#CS</a>
+            <a href="/note/tags/CS/" rel="tag"># CS</a>
           
-            <a href="/note/tags/self-study/" rel="tag">#self-study</a>
+            <a href="/note/tags/self-study/" rel="tag"># self-study</a>
           
         </div>
       
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/note/2015/08/05/20150805/" rel="prev">Static Website build and DNS Record Configuration</a>
+              <a href="/note/2015/07/14/20150714/" rel="next" title="Python Environment Configuration">
+                <i class="fa fa-chevron-left"></i> Python Environment Configuration
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/note/2015/07/14/20150714/" rel="next">Python Environment Configuration</a>
+              <a href="/note/2015/08/05/20150805/" rel="prev" title="Static Website build and DNS Record Configuration">
+                Static Website build and DNS Record Configuration <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -408,18 +549,20 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -433,9 +576,11 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table Of Contents
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
             Overview
@@ -443,12 +588,14 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/note/note/uploads/avatar.jpeg"
+               alt="Zhen Zhang" />
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+          <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/note/archives">
@@ -457,19 +604,16 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
-              
-          </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/note/tags">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">tags</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/note/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -479,11 +623,21 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+                <a href="https://github.com/imzhen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Linkedin
+                </a>
               </span>
             
           
@@ -492,44 +646,55 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
+              
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GDB_基本知识"><span class="nav-number">1.</span> <span class="nav-text">GDB 基本知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拆弹过程"><span class="nav-number">2.</span> <span class="nav-text">拆弹过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Phase_1"><span class="nav-number">2.1.</span> <span class="nav-text">Phase_1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phase_2"><span class="nav-number">2.2.</span> <span class="nav-text">Phase_2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phase_3"><span class="nav-number">2.3.</span> <span class="nav-text">Phase_3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phase_4"><span class="nav-number">2.4.</span> <span class="nav-text">Phase_4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phase_5"><span class="nav-number">2.5.</span> <span class="nav-text">Phase_5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Phase_6"><span class="nav-number">2.6.</span> <span class="nav-text">Phase_6</span></a></li></ol></li></ol></div>
             
+
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
         </section>
+      <!--/noindex-->
       
 
     </div>
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
 </div>
 
+
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -540,250 +705,106 @@ GDB 基本知识首先，我们需要将目录切换到准备调试的文件所�
 </div>
 
 
- </div>
+        
+
+        
+      </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
-  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    
-    
-
   
 
-
-  
-  
-  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  
-<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
-      }
-    }
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
   
+
+
+
+  
+  <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
   
 
   
-  <script type="text/javascript" src="/note/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/note/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>

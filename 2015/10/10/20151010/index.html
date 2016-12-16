@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,18 +23,49 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
 
 
 
-  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
-<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
 
 
-    <meta name="description" content="學須靜也 才須學也" />
+  
+  
+  
+  
 
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="CS,Machine Learning,Matlab," />
@@ -38,7 +74,14 @@
 
 
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/note/favicon.ico?v=5.1.0" />
+
+
+
+
 
 
 <meta name="description" content="Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression a">
@@ -53,12 +96,34 @@
 <meta name="twitter:description" content="Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression a">
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/note/',
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
+
+
+
+  <link rel="canonical" href="http://imzhen.com/note/2015/10/10/20151010/"/>
+
+
 
 
 
@@ -67,15 +132,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -83,20 +139,31 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/note/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/note/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">Zhen Zhang's Blog</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -110,28 +177,24 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/note/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            About
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/note/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
             Archives
           </a>
         </li>
@@ -139,13 +202,25 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/note/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
             Tags
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
@@ -153,11 +228,9 @@
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -174,61 +247,107 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/10/10/20151010/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Logistic Regression
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-10T00:51:20-07:00">
+                2015-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+
           
             
-              Logistic Regression
-            
           
-        </h1>
-      
 
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-10-10T00:51:20-07:00" content="2015-10-10">
-            2015-10-10
-          </time>
-        </span>
-
-        
-
-        
           
-        
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><p>Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression and PLA (perceptron learning algorithm)</p>
+        <p>Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementation and the comparison between logistic regression and PLA (perceptron learning algorithm)</p>
 <h1 id="Simple_Linear_Regression">Simple Linear Regression</h1><h2 id="Method">Method</h2><p>First let’s see simple linear regression. The formula is:</p>
 <p>$$Y = X * \beta$$</p>
 <p>Where $Y$, $X$ are all matrix here. I incorporate the intercept into this formula by adding a $(1, 1, …., 1)^T$ column at the left most part of matrix $X$. So the $X$ here is a augmented matrix, and the column from 2 to the end is the variables it will use.</p>
 <p>Of course, we can use as many variables as we want, for instance, we can have interaction terms like $X_1X_2$.</p>
 <h2 id="Implementation">Implementation</h2><p>Here is the matlab code that implements this simple algorithm.</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">matrix</span> = <span class="title">dimExpand</span><span class="params">(x,order)</span></span></span><br><span class="line"><span class="comment">% This is one of the core function in regression. Indeed, what this</span></span><br><span class="line"><span class="comment">% function does is transform the X (independent value) to the desired</span></span><br><span class="line"><span class="comment">% matrix we need to do the regression based on the order. For example, with</span></span><br><span class="line"><span class="comment">% order 0, it will give a vector with ones; with order 1, it will append</span></span><br><span class="line"><span class="comment">% the X itself append to order 0, and so on so forth for higher orders.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% To note, this function has been optimized for matrix calculation, which</span></span><br><span class="line"><span class="comment">% means you can give either an array or a matrix as the input of X.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% This functions maintains two pointers: one for the augment power (t1), and</span></span><br><span class="line"><span class="comment">% the other one for the order we need. By calculating them at an appropriate</span></span><br><span class="line"><span class="comment">% order, we can give this function the magic of accetping a matrix and give an</span></span><br><span class="line"><span class="comment">% augmented matrix as the output.</span></span><br><span class="line">	t1 = <span class="number">0</span>;</span><br><span class="line">	t2 = order;</span><br><span class="line">	<span class="matrix">[r,n]</span> = <span class="built_in">size</span>(x);</span><br><span class="line">	z = <span class="built_in">ones</span>(r, <span class="number">1</span> + n * order);</span><br><span class="line">	<span class="keyword">while</span> t2 &gt; <span class="number">0</span>;</span><br><span class="line">		t1 = t1 + n;</span><br><span class="line">		z(:,t1-n+<span class="number">2</span>:t1+<span class="number">1</span>) = x.^(t1/n);</span><br><span class="line">		t2 = t2 - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line">	matrix = z;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">coefficient</span> = <span class="title">singlePolyReg</span><span class="params">(x,y,order)</span></span></span><br><span class="line"><span class="comment">% This function implements the algorithm for polynomial regression.</span></span><br><span class="line">	z = dimExpand(x,order);</span><br><span class="line">	coefficient = (transpose(z) * z) \ (transpose(z) * y);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">matrix</span> = <span class="title">dimExpand</span><span class="params">(x,order)</span></span></div><div class="line"><span class="comment">% This is one of the core function in regression. Indeed, what this</span></div><div class="line"><span class="comment">% function does is transform the X (independent value) to the desired</span></div><div class="line"><span class="comment">% matrix we need to do the regression based on the order. For example, with</span></div><div class="line"><span class="comment">% order 0, it will give a vector with ones; with order 1, it will append</span></div><div class="line"><span class="comment">% the X itself append to order 0, and so on so forth for higher orders.</span></div><div class="line"></div><div class="line"><span class="comment">% To note, this function has been optimized for matrix calculation, which</span></div><div class="line"><span class="comment">% means you can give either an array or a matrix as the input of X.</span></div><div class="line"></div><div class="line"><span class="comment">% This functions maintains two pointers: one for the augment power (t1), and</span></div><div class="line"><span class="comment">% the other one for the order we need. By calculating them at an appropriate</span></div><div class="line"><span class="comment">% order, we can give this function the magic of accetping a matrix and give an</span></div><div class="line"><span class="comment">% augmented matrix as the output.</span></div><div class="line">	t1 = <span class="number">0</span>;</div><div class="line">	t2 = order;</div><div class="line">	[r,n] = <span class="built_in">size</span>(x);</div><div class="line">	z = <span class="built_in">ones</span>(r, <span class="number">1</span> + n * order);</div><div class="line">	<span class="keyword">while</span> t2 &gt; <span class="number">0</span>;</div><div class="line">		t1 = t1 + n;</div><div class="line">		z(:,t1-n+<span class="number">2</span>:t1+<span class="number">1</span>) = x.^(t1/n);</div><div class="line">		t2 = t2 - <span class="number">1</span>;</div><div class="line">	<span class="keyword">end</span></div><div class="line">	matrix = z;</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">coefficient</span> = <span class="title">singlePolyReg</span><span class="params">(x,y,order)</span></span></div><div class="line"><span class="comment">% This function implements the algorithm for polynomial regression.</span></div><div class="line">	z = dimExpand(x,order);</div><div class="line">	coefficient = (transpose(z) * z) \ (transpose(z) * y);</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <h1 id="Logistic_regression">Logistic regression</h1><h2 id="Method-1">Method</h2><p>While simple linear regression can produce the predicted value, sometimes we do not need the actual result. We only need to separate the predicted value into two categories, which is a binary classfication problem.</p>
 <p>To achieve, we need a simple transformation, which transforms our value to a new value that falls in [0,1] accurately:</p>
 <p>$$y = \frac{1}{1+e^{xw}}$$</p>
@@ -247,38 +366,59 @@
 <p>$$ \mathbf{w} = \mathbf{w} - \alpha * (\mathbf{y} - sigmoid(\mathbf{X}\mathbf{w}))^T\mathbf{X} $$</p>
 <p>Where $\alpha$ is learning rate.</p>
 <p>There are two thresholds to stop this optimization. One is, we can define a finite number of times, say 2000 times, then after that the algorithm will stop automatically. Or, we can set the format of RSS or cost function, if the error rate reduced for the cost function is small enough, we will stop either.</p>
-<h2 id="Implementation-1">Implementation</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">sigmoid</span><span class="params">(x,w)</span></span></span><br><span class="line"><span class="comment">% This is the sigmoid function designed for logistic regression.</span></span><br><span class="line">    result = <span class="number">1</span> ./ (<span class="number">1</span> + <span class="built_in">exp</span>(- x * w));</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">costFun</span><span class="params">(x,y,w)</span></span></span><br><span class="line"><span class="comment">% This function calculates the cost function related to the logistic</span></span><br><span class="line"><span class="comment">% regression. The definition of cost function is well known, so I will not</span></span><br><span class="line"><span class="comment">% explain it here.</span></span><br><span class="line">    result = <span class="number">0</span>;</span><br><span class="line">    x = dimExpand(x,<span class="number">1</span>);</span><br><span class="line">    <span class="matrix">[n, ~]</span> = <span class="built_in">size</span>(x);</span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:n</span><br><span class="line">        temp = sigmoid(x,w);</span><br><span class="line">        <span class="keyword">if</span> y(k) == <span class="number">1</span></span><br><span class="line">            result = result - <span class="built_in">log</span>(temp);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            result = result - <span class="built_in">log</span>(<span class="number">1</span>-temp);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">categorizeY</span><span class="params">(threshold,y)</span></span></span><br><span class="line"><span class="comment">% This function transforms the Y (dependent value) into two categories</span></span><br><span class="line"><span class="comment">% based on the threshold value given to the function.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% It creates a new array, and will evaluate the value based</span></span><br><span class="line"><span class="comment">% on the corresponding Y value.</span></span><br><span class="line">    <span class="built_in">i</span> = <span class="built_in">length</span>(y);</span><br><span class="line">    result = <span class="built_in">zeros</span>(<span class="built_in">i</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> n = <span class="number">1</span>:<span class="built_in">i</span></span><br><span class="line">        <span class="keyword">if</span> y(n) &gt; threshold</span><br><span class="line">            result(n) = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            result(n) = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">graDescent</span><span class="params">(x,y,w,learnRate)</span></span></span><br><span class="line"><span class="comment">% This is the core function for gradient descent and use it to do logistic</span></span><br><span class="line"><span class="comment">% regression. It main logic is, keep looping, until the error rate is less</span></span><br><span class="line"><span class="comment">% than 0.0001. While looping, it will update the weight vector in all</span></span><br><span class="line"><span class="comment">% dimensions simultaneously, based on the gradient descent algorithm. Then</span></span><br><span class="line"><span class="comment">% at last, return the weight vector.</span></span><br><span class="line">    <span class="matrix">[~,r]</span> = <span class="built_in">size</span>(x);</span><br><span class="line">    z = dimExpand(x,<span class="number">1</span>);</span><br><span class="line">    keep = true;</span><br><span class="line">    cost = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> keep</span><br><span class="line">        temp = <span class="built_in">zeros</span>(r+<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">        temp = temp + z<span class="operator">'</span> * (sigmoid(z,w) - y);</span><br><span class="line">        w = w - learnRate * temp;</span><br><span class="line">        cost\_new = costFun(x,y,w);</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(cost\_new - cost) / cost &lt;= <span class="number">0.0001</span></span><br><span class="line">            keep = false;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        cost = cost\_new;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    result = w;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Implementation-1">Implementation</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">sigmoid</span><span class="params">(x,w)</span></span></div><div class="line"><span class="comment">% This is the sigmoid function designed for logistic regression.</span></div><div class="line">    result = <span class="number">1</span> ./ (<span class="number">1</span> + <span class="built_in">exp</span>(- x * w));</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">costFun</span><span class="params">(x,y,w)</span></span></div><div class="line"><span class="comment">% This function calculates the cost function related to the logistic</span></div><div class="line"><span class="comment">% regression. The definition of cost function is well known, so I will not</span></div><div class="line"><span class="comment">% explain it here.</span></div><div class="line">    result = <span class="number">0</span>;</div><div class="line">    x = dimExpand(x,<span class="number">1</span>);</div><div class="line">    [n, ~] = <span class="built_in">size</span>(x);</div><div class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:n</div><div class="line">        temp = sigmoid(x,w);</div><div class="line">        <span class="keyword">if</span> y(k) == <span class="number">1</span></div><div class="line">            result = result - <span class="built_in">log</span>(temp);</div><div class="line">        <span class="keyword">else</span></div><div class="line">            result = result - <span class="built_in">log</span>(<span class="number">1</span>-temp);</div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">categorizeY</span><span class="params">(threshold,y)</span></span></div><div class="line"><span class="comment">% This function transforms the Y (dependent value) into two categories</span></div><div class="line"><span class="comment">% based on the threshold value given to the function.</span></div><div class="line"></div><div class="line"><span class="comment">% It creates a new array, and will evaluate the value based</span></div><div class="line"><span class="comment">% on the corresponding Y value.</span></div><div class="line">    <span class="built_in">i</span> = <span class="built_in">length</span>(y);</div><div class="line">    result = <span class="built_in">zeros</span>(<span class="built_in">i</span>,<span class="number">1</span>);</div><div class="line">    <span class="keyword">for</span> n = <span class="number">1</span>:<span class="built_in">i</span></div><div class="line">        <span class="keyword">if</span> y(n) &gt; threshold</div><div class="line">            result(n) = <span class="number">1</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            result(n) = <span class="number">0</span>;</div><div class="line">        <span class="keyword">end</span></div><div class="line">    <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">result</span> = <span class="title">graDescent</span><span class="params">(x,y,w,learnRate)</span></span></div><div class="line"><span class="comment">% This is the core function for gradient descent and use it to do logistic</span></div><div class="line"><span class="comment">% regression. It main logic is, keep looping, until the error rate is less</span></div><div class="line"><span class="comment">% than 0.0001. While looping, it will update the weight vector in all</span></div><div class="line"><span class="comment">% dimensions simultaneously, based on the gradient descent algorithm. Then</span></div><div class="line"><span class="comment">% at last, return the weight vector.</span></div><div class="line">    [~,r] = <span class="built_in">size</span>(x);</div><div class="line">    z = dimExpand(x,<span class="number">1</span>);</div><div class="line">    keep = true;</div><div class="line">    cost = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> keep</div><div class="line">        temp = <span class="built_in">zeros</span>(r+<span class="number">1</span>,<span class="number">1</span>);</div><div class="line">        temp = temp + z' * (sigmoid(z,w) - y);</div><div class="line">        w = w - learnRate * temp;</div><div class="line">        cost\_new = costFun(x,y,w);</div><div class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(cost\_new - cost) / cost &lt;= <span class="number">0.0001</span></div><div class="line">            keep = false;</div><div class="line">        <span class="keyword">end</span></div><div class="line">        cost = cost\_new;</div><div class="line">    <span class="keyword">end</span></div><div class="line">    result = w;</div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <h1 id="Comparison_between_logistic_regression_and_PLA">Comparison between logistic regression and PLA</h1><p>When looking at this formula:</p>
 <p>$$ \mathbf{w} = \mathbf{w} - \alpha * (\mathbf{y} - sigmoid(\mathbf{X}\mathbf{w}))^T\mathbf{X} $$</p>
 <p>It reminds us of the previous PLA algorithm. The difference is, first, the learning rate is 1, and second, there is only $(\mathbf{y} - \mathbf{\hat{y}})^T\mathbf{X}$, instead of $(\mathbf{y} - sigmoid(\mathbf{X}\mathbf{w}))^T\mathbf{X}$, and the only difference is, in PLA, the predicted result is either 0 or 1, but in logistic regression, the result can be any value in [0,1], and we set a threshold to determine which category it belongs to (usually 0.5 as the threshold).</p>
-</span>
+
       
     </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/note/tags/CS/" rel="tag">#CS</a>
+            <a href="/note/tags/CS/" rel="tag"># CS</a>
           
-            <a href="/note/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+            <a href="/note/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
-            <a href="/note/tags/Matlab/" rel="tag">#Matlab</a>
+            <a href="/note/tags/Matlab/" rel="tag"># Matlab</a>
           
         </div>
       
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/note/2015/10/16/20151016/" rel="prev">Neural Network Algorithm</a>
+              <a href="/note/2015/09/28/20150928/" rel="next" title="Some thoughts on PLA algorithm">
+                <i class="fa fa-chevron-left"></i> Some thoughts on PLA algorithm
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/note/2015/09/28/20150928/" rel="next">Some thoughts on PLA algorithm</a>
+              <a href="/note/2015/10/16/20151016/" rel="prev" title="Neural Network Algorithm">
+                Neural Network Algorithm <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -296,18 +436,20 @@
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -321,9 +463,11 @@
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table Of Contents
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
             Overview
@@ -331,12 +475,14 @@
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/note/note/uploads/avatar.jpeg"
+               alt="Zhen Zhang" />
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+          <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/note/archives">
@@ -345,19 +491,16 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
-              
-          </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/note/tags">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">tags</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/note/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -367,11 +510,21 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+                <a href="https://github.com/imzhen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Linkedin
+                </a>
               </span>
             
           
@@ -380,44 +533,55 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
+              
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Simple_Linear_Regression"><span class="nav-number">1.</span> <span class="nav-text">Simple Linear Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">1.1.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic_regression"><span class="nav-number">2.</span> <span class="nav-text">Logistic regression</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-1"><span class="nav-number">2.1.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization"><span class="nav-number">2.2.</span> <span class="nav-text">Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-1"><span class="nav-number">2.3.</span> <span class="nav-text">Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Comparison_between_logistic_regression_and_PLA"><span class="nav-number">3.</span> <span class="nav-text">Comparison between logistic regression and PLA</span></a></li></ol></div>
             
+
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
         </section>
+      <!--/noindex-->
       
 
     </div>
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
 </div>
 
+
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -428,250 +592,106 @@
 </div>
 
 
- </div>
+        
+
+        
+      </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
-  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    
-    
-
   
 
-
-  
-  
-  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  
-<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
-      }
-    }
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
   
+
+
+
+  
+  <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
   
 
   
-  <script type="text/javascript" src="/note/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/note/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>

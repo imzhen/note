@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,27 +23,65 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-
-  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-
-<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="學須靜也 才須學也" />
-
-
-
-  <meta name="keywords" content="CS,Machine Learning,R," />
 
 
 
 
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CS,R,Machine Learning," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/note/favicon.ico?v=5.1.0" />
+
+
+
+
 
 
 <meta name="description" content="PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post, I will first introduce the basic logic, then tal">
@@ -55,14 +98,37 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Some thoughts on PLA algorithm">
 <meta name="twitter:description" content="PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post, I will first introduce the basic logic, then tal">
+<meta name="twitter:image" content="http://imzhen.com/note/note/img/20150928/blog-perceptron-update.png">
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/note/',
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
+
+
+
+  <link rel="canonical" href="http://imzhen.com/note/2015/09/28/20150928/"/>
+
+
 
 
 
@@ -71,15 +137,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -87,20 +144,31 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/note/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/note/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">Zhen Zhang's Blog</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -114,28 +182,24 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/note/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            About
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/note/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
             Archives
           </a>
         </li>
@@ -143,13 +207,25 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/note/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
             Tags
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
@@ -157,11 +233,9 @@
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -178,55 +252,101 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/09/28/20150928/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Some thoughts on PLA algorithm
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-28T22:15:40-07:00">
+                2015-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+
           
             
-              Some thoughts on PLA algorithm
-            
           
-        </h1>
-      
 
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-28T22:15:40-07:00" content="2015-09-28">
-            2015-09-28
-          </time>
-        </span>
-
-        
-
-        
           
-        
-        
-      </div>
-    </header>
 
-    <div class="post-body">
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><p>PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post, I will first introduce the basic logic, then talk about the difficulties I encountered when implementing this algorithm.</p>
+        <p>PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post, I will first introduce the basic logic, then talk about the difficulties I encountered when implementing this algorithm.</p>
 <h1 id="Algorithm_Summary">Algorithm Summary</h1><h2 id="Theory">Theory</h2><p>I learnt this algorithm from the course of “Machine learning algorithm” on the platform of coursera.</p>
 <p>For the input $(x_i,y_i)$ (here we take $x_i$ as a vector, and the dimension is d), we will give a weight vector $w_i$ and a threshold such that:</p>
 <p>$$ t_i = \sum^d_{j=1}w_{ij}x_{ij} $$</p>
@@ -241,50 +361,71 @@
 <p>The essence of this approach is that, we will always make our weight vector to be nearer to the mistake classified observation. The best case will be they are overlapped, since our weight vector is served as the normal vector to the region it defines separately.</p>
 <p>But there will come up with one problem: the order to correct the mistakes. By default, after we correct one mistake, we will go on to the next observation, not from the first one.</p>
 <h1 id="R_implementation">R implementation</h1><p>Here is the R code I write:</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"></span><br><span class="line">plaAnalysis &lt;- <span class="keyword">function</span>(dataset, eta = <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="comment">## preprocessing the basic attributes of the data</span></span><br><span class="line">  data_collen &lt;- dim(dataset)[<span class="number">2</span>] - <span class="number">1</span></span><br><span class="line">  data_len &lt;- dim(dataset)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  w_init &lt;- rep(<span class="number">0</span>, data_collen) <span class="comment"># initialize w as w = 0</span></span><br><span class="line">  mistakes &lt;- list() <span class="comment"># initialize the mistake list</span></span><br><span class="line">  num_mis &lt;- <span class="number">1</span> <span class="comment"># initialize the mistake indicator</span></span><br><span class="line">  num_update &lt;- <span class="number">0</span> <span class="comment"># track the number of loop</span></span><br><span class="line"></span><br><span class="line">  w &lt;- w_init</span><br><span class="line"></span><br><span class="line">  <span class="comment"># the main loop</span></span><br><span class="line">  <span class="keyword">while</span> (num_mis == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment"># loop preparation</span></span><br><span class="line">    num_mis &lt;- <span class="number">0</span> <span class="comment"># set it to zero so if no mistake found the loop will end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:data_len) &#123;</span><br><span class="line">      x_here &lt;- unlist(dataset[i, <span class="number">1</span>:data_collen])</span><br><span class="line">      y_here &lt;- as.numeric(dataset[i, data_collen+<span class="number">1</span>])</span><br><span class="line">      test &lt;- planeSide(data_collen,x_here,w)</span><br><span class="line">      <span class="keyword">if</span> (signx(test) != y_here) &#123;</span><br><span class="line">        w &lt;- w + x_here * y_here * eta <span class="comment"># update w</span></span><br><span class="line">        w &lt;- unlist(w)</span><br><span class="line">        names(w) &lt;- <span class="literal">NULL</span></span><br><span class="line">        num_mis &lt;- <span class="number">1</span> <span class="comment"># change it to 1 to show there is some mistake so we need to follow the loop again</span></span><br><span class="line">        num_update &lt;- num_update + <span class="number">1</span></span><br><span class="line">        w_data &lt;- data.frame(x = c(<span class="number">3</span>, <span class="number">1</span>), y = c(p_norm[<span class="number">2</span>] + (p_norm[<span class="number">1</span>] - <span class="number">3</span>) * w[<span class="number">1</span>] / w[<span class="number">2</span>], p_norm[<span class="number">2</span>] + (p_norm[<span class="number">1</span>] - <span class="number">1</span>) * w[<span class="number">1</span>] / w[<span class="number">2</span>])) <span class="comment"># p_norm is the vector I define to be the middle point. More explanation is illustrated below</span></span><br><span class="line">        myplot &lt;- ggplot(dataset, aes(x = x, y = y)) + geom_point(aes(color = z)) + geom_line(data = w_data, aes(x = x, y = y))</span><br><span class="line">        print(myplot)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(list(num_update=num_update,w=w))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">signx &lt;- <span class="keyword">function</span>(x) &#123;</span><br><span class="line">  ifelse(x == <span class="number">0</span>, -<span class="number">1</span>, sign(x))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># This function is to determine which side the point belongs to</span></span><br><span class="line">planeSide &lt;- <span class="keyword">function</span>(n, x_here, w) &#123;</span><br><span class="line">  result &lt;- <span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:n) &#123;</span><br><span class="line">    result &lt;- (x_here[i] - p_norm[i]) * w[i] + result</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(result)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## This only applies if we want to use random orders to do multiple times</span></span><br><span class="line"><span class="comment"># randomPla &lt;- function(dataset, n) &#123;</span></span><br><span class="line"><span class="comment">#   total &lt;- 0</span></span><br><span class="line"><span class="comment">#   for (i in 1:n) &#123;</span></span><br><span class="line"><span class="comment">#     order &lt;- sample(400)</span></span><br><span class="line"><span class="comment">#     dataset_ran &lt;- dataset[order,]</span></span><br><span class="line"><span class="comment">#     result &lt;- plaAnalysis(dataset_ran, eta = 0.5)</span></span><br><span class="line"><span class="comment">#     total &lt;- total + result$num_update</span></span><br><span class="line"><span class="comment">#   &#125;</span></span><br><span class="line"><span class="comment">#   return (total/n)</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"></span><br><span class="line">print(plaAnalysis(plaData))</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">library</span>(ggplot2)</div><div class="line"></div><div class="line">plaAnalysis &lt;- <span class="keyword">function</span>(dataset, eta = <span class="number">1</span>) &#123;</div><div class="line">  <span class="comment">## preprocessing the basic attributes of the data</span></div><div class="line">  data_collen &lt;- dim(dataset)[<span class="number">2</span>] - <span class="number">1</span></div><div class="line">  data_len &lt;- dim(dataset)[<span class="number">1</span>]</div><div class="line"></div><div class="line">  w_init &lt;- rep(<span class="number">0</span>, data_collen) <span class="comment"># initialize w as w = 0</span></div><div class="line">  mistakes &lt;- list() <span class="comment"># initialize the mistake list</span></div><div class="line">  num_mis &lt;- <span class="number">1</span> <span class="comment"># initialize the mistake indicator</span></div><div class="line">  num_update &lt;- <span class="number">0</span> <span class="comment"># track the number of loop</span></div><div class="line"></div><div class="line">  w &lt;- w_init</div><div class="line"></div><div class="line">  <span class="comment"># the main loop</span></div><div class="line">  <span class="keyword">while</span> (num_mis == <span class="number">1</span>) &#123;</div><div class="line">    <span class="comment"># loop preparation</span></div><div class="line">    num_mis &lt;- <span class="number">0</span> <span class="comment"># set it to zero so if no mistake found the loop will end</span></div><div class="line"></div><div class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:data_len) &#123;</div><div class="line">      x_here &lt;- unlist(dataset[i, <span class="number">1</span>:data_collen])</div><div class="line">      y_here &lt;- as.numeric(dataset[i, data_collen+<span class="number">1</span>])</div><div class="line">      test &lt;- planeSide(data_collen,x_here,w)</div><div class="line">      <span class="keyword">if</span> (signx(test) != y_here) &#123;</div><div class="line">        w &lt;- w + x_here * y_here * eta <span class="comment"># update w</span></div><div class="line">        w &lt;- unlist(w)</div><div class="line">        names(w) &lt;- <span class="literal">NULL</span></div><div class="line">        num_mis &lt;- <span class="number">1</span> <span class="comment"># change it to 1 to show there is some mistake so we need to follow the loop again</span></div><div class="line">        num_update &lt;- num_update + <span class="number">1</span></div><div class="line">        w_data &lt;- data.frame(x = c(<span class="number">3</span>, <span class="number">1</span>), y = c(p_norm[<span class="number">2</span>] + (p_norm[<span class="number">1</span>] - <span class="number">3</span>) * w[<span class="number">1</span>] / w[<span class="number">2</span>], p_norm[<span class="number">2</span>] + (p_norm[<span class="number">1</span>] - <span class="number">1</span>) * w[<span class="number">1</span>] / w[<span class="number">2</span>])) <span class="comment"># p_norm is the vector I define to be the middle point. More explanation is illustrated below</span></div><div class="line">        myplot &lt;- ggplot(dataset, aes(x = x, y = y)) + geom_point(aes(color = z)) + geom_line(data = w_data, aes(x = x, y = y))</div><div class="line">        print(myplot)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span>(list(num_update=num_update,w=w))</div><div class="line">&#125;</div><div class="line"></div><div class="line">signx &lt;- <span class="keyword">function</span>(x) &#123;</div><div class="line">  ifelse(x == <span class="number">0</span>, -<span class="number">1</span>, sign(x))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># This function is to determine which side the point belongs to</span></div><div class="line">planeSide &lt;- <span class="keyword">function</span>(n, x_here, w) &#123;</div><div class="line">  result &lt;- <span class="number">0</span></div><div class="line">  <span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>:n) &#123;</div><div class="line">    result &lt;- (x_here[i] - p_norm[i]) * w[i] + result</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span>(result)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">## This only applies if we want to use random orders to do multiple times</span></div><div class="line"><span class="comment"># randomPla &lt;- function(dataset, n) &#123;</span></div><div class="line"><span class="comment">#   total &lt;- 0</span></div><div class="line"><span class="comment">#   for (i in 1:n) &#123;</span></div><div class="line"><span class="comment">#     order &lt;- sample(400)</span></div><div class="line"><span class="comment">#     dataset_ran &lt;- dataset[order,]</span></div><div class="line"><span class="comment">#     result &lt;- plaAnalysis(dataset_ran, eta = 0.5)</span></div><div class="line"><span class="comment">#     total &lt;- total + result$num_update</span></div><div class="line"><span class="comment">#   &#125;</span></div><div class="line"><span class="comment">#   return (total/n)</span></div><div class="line"><span class="comment"># &#125;</span></div><div class="line"></div><div class="line">print(plaAnalysis(plaData))</div></pre></td></tr></table></figure>
 <h1 id="My_thoughts">My thoughts</h1><p>But now here there is some confusion that puzzles me the most. We have already give the weight a initial value, but it only serves as a normal vector. To confirm the plane, no matter a line or a 3D-plane or higher plans, we need a point together with the normal vector to locate the position of the plane. The formula for a normal vector and a point to confirm a plane is (I illustrate it in the 3D-plane):</p>
 <p>$$ (x - x_0) * a_i + (y - y_0) * b_i + (z - z_0) * c_i = 0 $$</p>
 <p>where $(x_0, y_0, z_0)$ is the point and $(a_i, b_i, c_i)$ is the normal vector. If we just left the point with blank, the point we actually use is (0,0,0). But there are some circumstances that starting with the zero point will give us no answer. The picture for this point will be shown in the example part.</p>
 <p>So I think the most safe way to do is find two points that are different from each other in the output, then calculate the midder point of them as the initial point.</p>
 <h1 id="Example">Example</h1><p>Here I use <code>rnorm()</code> to generate five observations, and then generate some corresponding z to make them separable.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; plaData</span><br><span class="line"><span class="comment">#          x          y  z</span></span><br><span class="line"><span class="comment"># 1 2.742720 -2.4765163  1</span></span><br><span class="line"><span class="comment"># 2 1.374764 -0.3865385 -1</span></span><br><span class="line"><span class="comment"># 3 2.719462  0.9260654  1</span></span><br><span class="line"><span class="comment"># 4 2.595238 -3.2343898  1</span></span><br><span class="line"><span class="comment"># 5 1.503082 -0.4721146 -1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; plaData</div><div class="line"><span class="comment">#          x          y  z</span></div><div class="line"><span class="comment"># 1 2.742720 -2.4765163  1</span></div><div class="line"><span class="comment"># 2 1.374764 -0.3865385 -1</span></div><div class="line"><span class="comment"># 3 2.719462  0.9260654  1</span></div><div class="line"><span class="comment"># 4 2.595238 -3.2343898  1</span></div><div class="line"><span class="comment"># 5 1.503082 -0.4721146 -1</span></div></pre></td></tr></table></figure>
 <p>And the p_norm vector I chose is the middle point of the first two vectors.</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; p_norm</span><br><span class="line"><span class="comment"># [1]  2.058742 -1.431527</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; p_norm</div><div class="line"><span class="comment"># [1]  2.058742 -1.431527</span></div></pre></td></tr></table></figure>
 <p>Then the PLA will update for three times, if the initial vector is zero vector:</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># $num_update</span></span><br><span class="line"><span class="comment"># [1] 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># $w</span></span><br><span class="line"><span class="comment"># [1]  8.1816441 -0.6243856</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># $num_update</span></div><div class="line"><span class="comment"># [1] 3</span></div><div class="line"></div><div class="line"><span class="comment"># $w</span></div><div class="line"><span class="comment"># [1]  8.1816441 -0.6243856</span></div></pre></td></tr></table></figure>
 <p><img src="/note/img/20150928/PLA1.png" alt="PLA1"></p>
 <p><img src="/note/img/20150928/PLA2.png" alt="PLA2"></p>
 <p><img src="/note/img/20150928/PLA3.png" alt="PLA3"></p>
 <p>What if we start with point zero as the initial point? You can draw it, but the result is, the PLA will run for indefinite time, since it will never halt.</p>
 <h1 id="Pocket">Pocket</h1><p>Even if we run the right PLA, we may still cannot find the perfect classifier. That is due to the dataset is not separable. So in this circumstance, We might want to calculate a weight vector which minimize the error proportion. But this has been proved to be a NP problem, so the only way to do this is to try for a number of times, say 100 times, then calculate its error rate, and try another 100 times, calculate again and again…</p>
-</span>
+
       
     </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
 
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/note/tags/CS/" rel="tag">#CS</a>
+            <a href="/note/tags/CS/" rel="tag"># CS</a>
           
-            <a href="/note/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+            <a href="/note/tags/R/" rel="tag"># R</a>
           
-            <a href="/note/tags/R/" rel="tag">#R</a>
+            <a href="/note/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
         </div>
       
 
       
         <div class="post-nav">
-          <div class="post-nav-prev post-nav-item">
+          <div class="post-nav-next post-nav-item">
             
-              <a href="/note/2015/10/10/20151010/" rel="prev">Logistic Regression</a>
+              <a href="/note/2015/09/17/20150917/" rel="next" title="R map part 3 -- ggmap">
+                <i class="fa fa-chevron-left"></i> R map part 3 -- ggmap
+              </a>
             
           </div>
 
-          <div class="post-nav-next post-nav-item">
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-              <a href="/note/2015/09/17/20150917/" rel="next">R map part 3 -- ggmap</a>
+              <a href="/note/2015/10/10/20151010/" rel="prev" title="Logistic Regression">
+                Logistic Regression <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -302,18 +443,20 @@
     </div>
   </div>
 
- </div>
 
-        
-
-        
-          <div class="comments" id="comments">
-            
           </div>
-        
-      </div>
+          
 
-      
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -327,9 +470,11 @@
     <div class="sidebar-inner">
 
       
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table Of Contents
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
             Overview
@@ -337,12 +482,14 @@
         </ul>
       
 
-      <section class="site-overview">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/note/note/uploads/avatar.jpeg"
+               alt="Zhen Zhang" />
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+          <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/note/archives">
@@ -351,19 +498,16 @@
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
-              
-          </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/note/tags">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">tags</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/note/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -373,11 +517,21 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+                <a href="https://github.com/imzhen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Linkedin
+                </a>
               </span>
             
           
@@ -386,44 +540,55 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
       
-        <section class="post-toc-wrap sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator"></div>
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
+              
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm_Summary"><span class="nav-number">1.</span> <span class="nav-text">Algorithm Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Theory"><span class="nav-number">1.1.</span> <span class="nav-text">Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pictures"><span class="nav-number">1.2.</span> <span class="nav-text">Pictures</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#R_implementation"><span class="nav-number">2.</span> <span class="nav-text">R implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#My_thoughts"><span class="nav-number">3.</span> <span class="nav-text">My thoughts</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">4.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pocket"><span class="nav-number">5.</span> <span class="nav-text">Pocket</span></a></li></ol></div>
             
+
           </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
         </section>
+      <!--/noindex-->
       
 
     </div>
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
 </div>
 
+
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -434,250 +599,106 @@
 </div>
 
 
- </div>
+        
+
+        
+      </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
-  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    
-    
-
   
 
-
-  
-  
-  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  
-<script type="text/javascript" src="/note/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
-
-
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 0.4 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    var $tocContent = $('.post-toc-content');
-    if (isDesktop() && CONFIG.sidebar === 'post') {
-      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-        displaySidebar();
-      }
-    }
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
 
-  
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
   
+
+
+
+  
+  <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
   
 
   
-  <script type="text/javascript" src="/note/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/note/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+  <script type="text/javascript" src="/note/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/note/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>

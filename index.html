@@ -1,11 +1,16 @@
 <!doctype html>
-<html class="theme-next use-motion theme-next-mist">
-<head>
+
+
+
   
 
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
@@ -18,27 +23,65 @@
 
 
 
-  <link rel="stylesheet" type="text/css" href="/note/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
-
-
-
-  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-
-
-<link rel="stylesheet" type="text/css" href="/note/css/main.css?v=0.4.5.1"/>
-
-
-    <meta name="description" content="學須靜也 才須學也" />
-
-
-
-  <meta name="keywords" content="Hexo,next" />
 
 
 
 
+  
+  
+  <link href="/note/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-  <link rel="shorticon icon" type="image/x-icon" href="/favicon/1.ico?v=0.4.5.1" />
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/note/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/note/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/note/favicon.ico?v=5.1.0" />
+
+
+
+
 
 
 <meta name="description" content="學須靜也 才須學也">
@@ -52,12 +95,34 @@
 <meta name="twitter:description" content="學須靜也 才須學也">
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/note/',
     scheme: 'Mist',
-    sidebar: 'post'
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
   };
 </script>
+
+
+
+  <link rel="canonical" href="http://imzhen.com/note/"/>
+
+
 
 
 
@@ -66,15 +131,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -82,22 +138,33 @@
 
 
 
-  <div class="container one-column 
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><h1 class="site-meta">
-  <span class="logo-line-before"><i></i></span>
-  <a href="/note/" class="brand" rel="start">
-      <span class="logo">
-        <i class="icon-next-logo"></i>
-      </span>
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/note/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
       <span class="site-title">Zhen Zhang's Blog</span>
-  </a>
-  <span class="logo-line-after"><i></i></span>
-</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
 
 <div class="site-nav-toggle">
   <button>
@@ -111,28 +178,24 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            <i class="menu-item-icon icon-next-home"></i> <br />
+          <a href="/note/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/note/about" rel="section">
-            <i class="menu-item-icon icon-next-about"></i> <br />
-            About
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/note/archives" rel="section">
-            <i class="menu-item-icon icon-next-archives"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
             Archives
           </a>
         </li>
@@ -140,13 +203,25 @@
         
         <li class="menu-item menu-item-tags">
           <a href="/note/tags" rel="section">
-            <i class="menu-item-icon icon-next-tags"></i> <br />
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
             Tags
           </a>
         </li>
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
       
     </ul>
   
@@ -154,11 +229,9 @@
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -175,70 +248,126 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content"> 
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/10/22/20151022/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/10/22/20151022/" itemprop="url">
-                Functional Programming Introduction
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-10-22T00:44:41-07:00" content="2015-10-22">
-            2015-10-22
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/10/22/20151022/" itemprop="url">
+                  Functional Programming Introduction
+                </a>
+              
             
-            These days I read the “Advanced R” Book written by Hadley Wickham. I choose this book since I think I have mastered most of R’s intermediate commands,
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-22T00:44:41-07:00">
+                2015-10-22
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          These days I read the “Advanced R” Book written by Hadley Wickham. I choose this book since I think I have mastered most of R’s intermediate commands,
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/10/22/20151022/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -256,60 +385,112 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/10/16/20151016/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/10/16/20151016/" itemprop="url">
-                Neural Network Algorithm
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-10-16T00:51:25-07:00" content="2015-10-16">
-            2015-10-16
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/10/16/20151016/" itemprop="url">
+                  Neural Network Algorithm
+                </a>
+              
             
-            After logistic regression, it is time to move on the Neural Network Algorithm since we also need to use gradient descent here. So I will first introdu
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-16T00:51:25-07:00">
+                2015-10-16
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          After logistic regression, it is time to move on the Neural Network Algorithm since we also need to use gradient descent here. So I will first introdu
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/10/16/20151016/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -327,60 +508,112 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/10/10/20151010/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/10/10/20151010/" itemprop="url">
-                Logistic Regression
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-10-10T00:51:20-07:00" content="2015-10-10">
-            2015-10-10
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/10/10/20151010/" itemprop="url">
+                  Logistic Regression
+                </a>
+              
             
-            Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementatio
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-10T00:51:20-07:00">
+                2015-10-10
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Logistic is one of the most useful regression algorithm, and in this post, I will talk about the algorithm, its optimization method, its implementatio
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/10/10/20151010/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -398,60 +631,112 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/09/28/20150928/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/09/28/20150928/" itemprop="url">
-                Some thoughts on PLA algorithm
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-28T22:15:40-07:00" content="2015-09-28">
-            2015-09-28
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/09/28/20150928/" itemprop="url">
+                  Some thoughts on PLA algorithm
+                </a>
+              
             
-            PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-28T22:15:40-07:00">
+                2015-09-28
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          PLA (Perceptron Learning Algorithm) is a very basic machine learning algorithm. It serves as an approach to separate two class of staffs. In this post
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/09/28/20150928/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -469,60 +754,112 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/09/17/20150917/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/09/17/20150917/" itemprop="url">
-                R map part 3 -- ggmap
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-17T11:30:41-07:00" content="2015-09-17">
-            2015-09-17
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/09/17/20150917/" itemprop="url">
+                  R map part 3 -- ggmap
+                </a>
+              
             
-            Now here we will discuss a more fantastic package: ggmap. ggmap is a map implementation of ggplot. With this tool, we can use google map through its A
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-17T11:30:41-07:00">
+                2015-09-17
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Now here we will discuss a more fantastic package: ggmap. ggmap is a map implementation of ggplot. With this tool, we can use google map through its A
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/09/17/20150917/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -540,60 +877,112 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/09/16/20150916/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/09/16/20150916/" itemprop="url">
-                R map part 2 -- ggplot
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-16T20:54:04-07:00" content="2015-09-16">
-            2015-09-16
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/09/16/20150916/" itemprop="url">
+                  R map part 2 -- ggplot
+                </a>
+              
             
-            ggplot can draw the map in a more decent way. But the data ggplot deal with will not be our original data. Instead, it will first transform the data u
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-16T20:54:04-07:00">
+                2015-09-16
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          ggplot can draw the map in a more decent way. But the data ggplot deal with will not be our original data. Instead, it will first transform the data u
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/09/16/20150916/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -611,60 +1000,112 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/09/14/20150914/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/09/14/20150914/" itemprop="url">
-                R map part 1 -- introduction
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-09-14T15:47:10-07:00" content="2015-09-14">
-            2015-09-14
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/09/14/20150914/" itemprop="url">
+                  R map part 1 -- introduction
+                </a>
+              
             
-            It is very common for us to visualize our results using a map. We can put the data into the map to illuminate the audiences. In this post, I will talk
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-14T15:47:10-07:00">
+                2015-09-14
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          It is very common for us to visualize our results using a map. We can put the data into the map to illuminate the audiences. In this post, I will talk
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/09/14/20150914/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -682,61 +1123,113 @@
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/08/18/20150818/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/08/18/20150818/" itemprop="url">
-                Mac上R作图中文字体的处理
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-08-18T17:21:39-07:00" content="2015-08-18">
-            2015-08-18
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/08/18/20150818/" itemprop="url">
+                  Mac上R作图中文字体的处理
+                </a>
+              
             
-            这几天在学习R绘制中国地图以供数据分析之用，然而Mac上R作图的默认设备是Quartz，如果不进行中文字体的设置，是无法出现中文汉字的，会出现诸如框框的情况。为此，我查询了一些资料，主要参考两篇文章，讲了如何进行字体的设置。我把他们列在了最后的参考文献中。
-Mac上字体的查看Mac上安装了一些中文字
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-18T17:21:39-07:00">
+                2015-08-18
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          这几天在学习R绘制中国地图以供数据分析之用，然而Mac上R作图的默认设备是Quartz，如果不进行中文字体的设置，是无法出现中文汉字的，会出现诸如框框的情况。为此，我查询了一些资料，主要参考两篇文章，讲了如何进行字体的设置。我把他们列在了最后的参考文献中。
+Mac上字体的查看Mac上安装了一些中文字
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/08/18/20150818/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -754,60 +1247,112 @@ Mac上字体的查看Mac上安装了一些中文字
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/08/16/20150816/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
             
-              <a class="post-title-link" href="/note/2015/08/16/20150816/" itemprop="url">
-                Shiny Introduction Summary
-              </a>
             
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-08-16T20:09:33-07:00" content="2015-08-16">
-            2015-08-16
-          </time>
-        </span>
-
-        
-
-        
-          
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
+              
+                
+                <a class="post-title-link" href="/note/2015/08/16/20150816/" itemprop="url">
+                  Shiny Introduction Summary
+                </a>
+              
             
-            Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which
-            ...
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-16T20:09:33-07:00">
+                2015-08-16
+              </time>
+            
+
+            
+
+            
           </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Today I learned how to build a simple shiny app using the package of “shiny” developed by RStudio. I must admit that this is a wonderful package which
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/08/16/20150816/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -825,62 +1370,114 @@ Mac上字体的查看Mac上安装了一些中文字
     
       
 
+  
+
+  
+  
+  
+
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  <link itemprop="mainEntityOfPage" href="http://imzhen.com/note/note/2015/08/09/20150809/">
 
-      
-      
-        <h1 class="post-title" itemprop="name headline">
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Zhen Zhang">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/note/note/uploads/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Zhen Zhang's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Zhen Zhang's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/note/2015/08/09/20150809/" itemprop="url">
+                  VPS 折腾系列（二）-- mail server
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-09T22:07:44-07:00">
+                2015-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
+
           
             
-              <a class="post-title-link" href="/note/2015/08/09/20150809/" itemprop="url">
-                VPS 折腾系列（二）-- mail server
-              </a>
-            
           
-        </h1>
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-      <div class="post-meta">
-        <span class="post-time">
-          Posted on
-          <time itemprop="dateCreated" datetime="2015-08-09T22:07:44-07:00" content="2015-08-09">
-            2015-08-09
-          </time>
-        </span>
-
-        
-
+      
         
           
-        
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
+          这篇教程我们主要来讨论怎么利用VPS来搭建服务器。
 （本文主要是对这篇文章进行了一些解释、翻译和拓展，其中一些地方进行了更正，并且加入了一些digitalocean的特色设置，在此声明）
 原因我们为什么会有这样一个想法呢？当我们拥有了自己的域名以后，很显然的就会去想，如果我有一个以我的域名命名的邮箱
-            ...
-          </span>
+          ...
+          <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/note/2015/08/09/20150809/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
 
     <footer class="post-footer">
       
@@ -900,17 +1497,20 @@ Mac上字体的查看Mac上安装了一些中文字
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/note/page/2/">2</a><a class="extend next" rel="next" href="/note/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/note/page/2/">2</a><a class="extend next" rel="next" href="/note/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
- </div>
 
+
+          </div>
+          
+
+
+          
+
+        </div>
         
-
-        
-      </div>
-
-      
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -925,12 +1525,16 @@ Mac上字体的查看Mac上安装了一些中文字
 
       
 
-      <section class="site-overview">
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/note/uploads/avatar.jpeg" alt="Zhen Zhang" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/note/note/uploads/avatar.jpeg"
+               alt="Zhen Zhang" />
           <p class="site-author-name" itemprop="name">Zhen Zhang</p>
+          <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">學須靜也 才須學也</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/note/archives">
@@ -939,19 +1543,16 @@ Mac上字体的查看Mac上安装了一些中文字
             </a>
           </div>
 
-          <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">categories</span>
-              
-          </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            <a href="/note/tags">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">tags</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/note/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">tags</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -961,11 +1562,21 @@ Mac上字体的查看Mac上安装了一些中文字
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/imzhen" target="_blank">GitHub</a>
+                <a href="https://github.com/imzhen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.linkedin.com/in/imzhen" target="_blank">Linkedin</a>
+                <a href="http://www.linkedin.com/in/imzhen" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Linkedin
+                </a>
               </span>
             
           
@@ -974,9 +1585,11 @@ Mac上字体的查看Mac上安装了一些中文字
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
+
+        
+
 
       </section>
 
@@ -986,21 +1599,25 @@ Mac上字体的查看Mac上安装了一些中文字
   </aside>
 
 
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
-      <div class="footer-inner"> <div class="copyright" >
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  &copy; &nbsp; 
-  <span itemprop="copyrightYear">2015</span>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Zhen Zhang</span>
 </div>
 
+
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
@@ -1011,91 +1628,102 @@ Mac上字体的查看Mac上安装了一些中文字
 </div>
 
 
- </div>
+        
+
+        
+      </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
-  <script type="text/javascript" src="/note/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-    
-    
-
   
 
-
-  
-  
-  <script type="text/javascript" src="/note/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/note/js/fancy-box.js?v=0.4.5.1"></script>
-
-
-  <script type="text/javascript" src="/note/js/helpers.js?v=0.4.5.1"></script>
-  
-
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.min.js"></script>
-  <script type="text/javascript" src="/note/vendors/velocity/velocity.ui.min.js"></script>
-
-  <script type="text/javascript" src="/note/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
-
-
-
-
-  <script type="text/javascript" src="/note/js/nav-toggle.js?v=0.4.5.1"></script>
-  <script type="text/javascript" src="/note/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      if (CONFIG.sidebar === 'always') {
-        displaySidebar();
-      }
-      if (isMobile()) {
-        FastClick.attach(document.body);
-      }
-    });
-  </script>
-
-  
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
 
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/note/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/note/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/note/js/src/motion.js?v=5.1.0"></script>
+
 
 
   
   
 
   
-  <script type="text/javascript" src="/note/js/lazyload.js"></script>
-  <script type="text/javascript">
-    $(function () {
-      $("#posts").find('img').lazyload({
-        placeholder: "/note/images/loading.gif",
-        effect: "fadeIn"
-      });
-    });
-  </script>
+
+  
+
+
+  <script type="text/javascript" src="/note/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
 </body>
 </html>
